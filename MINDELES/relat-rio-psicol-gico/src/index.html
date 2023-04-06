@@ -1,0 +1,78 @@
+<html>
+<head>
+</head>
+<body>
+  <div id="box">
+    <h1>RELATÓRIO PSICOLÓGICO</h1>
+    <div id="box2">
+      <center>
+      <form>
+        <table>
+          <tr>
+            <th colspan="2">Dados de identificação</th>
+          </tr>
+          <tr>
+            <td>Nome:</td>
+            <td><input type="text" name="nome"></td>
+          </tr>
+          <tr>
+            <td>Idade:</td>
+            <td><input type="text" name="idade"></td>
+          </tr>
+          <tr>
+            <td>Gênero:</td>
+            <td><input type="text" name="genero"></td>
+          </tr>
+          <tr>
+            <td>Estado civil:</td>
+            <td><input type="text" name="estado_civil"></td>
+          </tr>
+          <tr>
+            <td>Escolaridade:</td>
+            <td><input type="text" name="escolaridade"></td>
+          </tr>
+          <tr>
+            <td>Profissão:</td>
+            <td><input type="text" name="profissao"></td>
+          </tr>
+        </table>
+        <label for="motivo">Motivo da avaliação:</label>
+        <br>
+        <textarea name="motivo" id="motivo"></textarea>
+        <br>
+        <label for="historia">História clínica:</label>
+        <br>
+        <textarea name="historia" id="historia"></textarea>
+        <br>
+        <label for="resultados">Resultados:</label>
+        <br>
+        <textarea name="resultados" id="resultados"></textarea>
+        <br>
+        <label for="conclusao">Conclusão:</label>
+        <br>
+        <textarea name="conclusao" id="conclusao"></textarea>
+        <br>
+        <label for="recomendacoes">Recomendações:</label>
+        <br>
+        <textarea name="recomendacoes" id="recomendacoes"></textarea>
+        <br>
+        <label for="assinatura">Atesto a veracidade dos dados apresentados neste relatório.</label>
+        <br>
+        <label for="crp">Assinatura, CRP:</label>
+        <input type="text" name="crp">
+        <br>
+        <label for="data">Data:</label>
+        <input type="date" name="data">
+        <br><br>
+        <input type="button" value="Imprimir" onclick="window.print()">
+      </form>
+      </center>
+    </div>
+    <br>
+    <div>
+      <button id="homer"><img src="https://cdn-icons-png.flaticon.com/512/60/60775.png" /></button>
+      <button id="homer"><img src="https://cdn-icons-png.flaticon.com/512/6097/6097220.png" /></button>
+    </div>
+  </div>
+</body>
+</html>

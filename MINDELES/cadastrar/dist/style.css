@@ -1,0 +1,46 @@
+#box {
+  width: 100vw;
+  min-width: 400px;
+  height: auto;
+  min-height:600px;
+  margin: 0 auto; /* Centralizar horizontalmente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #b9faf5;
+  background: #302a2a;
+}
+
+input {
+  width: 80%;
+  max-width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  background: #b9faf5;
+}
+
+input::placeholder {
+  text-align: center;
+   color:#000;
+   font-size:12pt;
+}
+#cadastrar{
+  background:#57e6d9;
+  height:60px;
+  font-size:20pt;
+}
+#cadastrar:hover{
+  background:#43b3a8;
+}
+h1{
+  font-size:30pt;
+  color:#57e6d9;
+}
+input[type="date" i] {
+   text-align: center;
+}
+a{
+  text-decoration: none;
+  color: #b9faf5;
+}
