@@ -1,0 +1,51 @@
+#box {
+  width: 100vw;
+  min-width: 400px;
+  height: auto;
+  min-height:600px;
+  margin: 0 auto; /* Centralizar horizontalmente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #b9faf5;
+  background: #302a2a;
+}
+#box2{
+  margin: 0 auto; /* Centralizar horizontalmente */
+  display: flex;  
+  justify-content: center;
+  align-items: center;
+  background:#57e6d9;
+  width: 80%;
+  height:400px;
+  max-width: 320px;  
+  border-radius:20px;
+  color:#101010;
+  margin:2px;
+}
+
+input::placeholder {
+  text-align: center;
+   color:#000;
+   font-size:12pt;
+}
+a{
+  text-decoration: none;
+  color:#101010;
+}
+img{
+  width:80px;
+}
+#homer img{
+  width:20px;
+}
+#homer{
+   width:50px;
+  height:50px;
+  background:#57e6d9;
+   border-radius:100%;
+}
+#myChart {
+  height: 600px;
+}

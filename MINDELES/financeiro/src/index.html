@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
+  <body>
+    <div id="box"> 
+      <h1>Financeiro</h1>      
+      <div id="box2">        
+  <table>
+    <th colspan="3">Quantidade de Consultas /Valor Recebido por período</th>
+    <tr>
+      <td rowspan="5" style="font-size:20pt; width: 3em; background:#302a2a;border-radius:10px;color:#57e6d9">20</td>
+       <td rowspan="5" style="font-size:15pt;background:#302a2a;border-radius:10px;color:#57e6d9">R$2000,00</td>
+      <td>Inicio do periodo</td>
+    </tr>
+    <tr>
+      <td><input type="date"/></td>
+    </tr>
+    <tr>
+      <td>Final do periodo</td>
+    </tr>
+    <tr>
+      <td><input type="date"/></td>
+    </tr>
+     <tr>
+       <td><button onclick="location.href='../../quantitativo/dist/index.html'">Confirmar</button></td>
+    </tr>
+        </table>
+      </div>
+      <div id="box2">        
+  <table>
+    <th colspan="2">Receitas</th>
+    <tr>
+      <td rowspan="5" >
+        <div style="width: 190px;">
+  <canvas id="myChart"></canvas>
+</div>
+      <td>Inicio do periodo</td>
+    </tr>
+    <tr>
+      <td><input type="date"/></td>
+    </tr>
+    <tr>
+      <td>Final do periodo</td>
+    </tr>
+    <tr>
+      <td><input type="date"/></td>
+    </tr>
+     <tr>
+       <td><button onclick="location.href='../../receitas/dist/index.html'">Confirmar</button></td>
+    </tr>
+        </table>
+      </div>
+      <div id="box2">        
+  <table>
+    <th colspan="2">Pagamentos Previstos</th>
+    <tr>
+      <td rowspan="5" >
+        <div style="width: 190px;">
+  <canvas id="myChart2"></canvas>
+</div>
+      <td>Inicio do periodo</td>
+    </tr>
+    <tr>
+      <td><input type="date"/></td>
+    </tr>
+    <tr>
+      <td>Final do periodo</td>
+    </tr>
+    <tr>
+      <td><input type="date"/></td>
+    </tr>
+     <tr>
+       <td><button onclick="location.href='../../previs-o/dist/index.html'">Confirmar</button></td>
+    </tr>
+        </table>
+      </div>    
+      <br>
+      <div>      
+      <button id="homer" onclick="location.href='../../menu/dist/index.html'"><img src="https://cdn-icons-png.flaticon.com/512/6097/6097220.png" /></button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </body>
+</html>
