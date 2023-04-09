@@ -135,7 +135,7 @@ function tela_config() {
   React.createElement("body", null, /*#__PURE__*/
   React.createElement("h1", null, "Configura\xE7\xF5es"), /*#__PURE__*/
   React.createElement("div", { id: "box2" }, /*#__PURE__*/
-  React.createElement("span", null, /*#__PURE__*/React.createElement("input", { type: "color", value: "#57e6d9" }), "Cor do Tema"), /*#__PURE__*/
+  React.createElement("span", null, /*#__PURE__*/React.createElement("input", { type: "color" }), "Cor do Tema"), /*#__PURE__*/
   React.createElement("span", null, /*#__PURE__*/React.createElement("input", { type: "checkbox" }), "Notifica\xE7\xF5es"), /*#__PURE__*/
   React.createElement("span", null, "CRM", /*#__PURE__*/React.createElement("input", { type: "number" })), /*#__PURE__*/
   React.createElement("span", null, "Idioma", /*#__PURE__*/
