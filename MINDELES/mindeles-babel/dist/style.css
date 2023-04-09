@@ -1,0 +1,281 @@
+:root {
+  --cor-principal: #57e6d9;
+  --cor-dark: #43b3a8;
+  --cor-light: #b9faf5;
+}
+body {
+  width: 100vw;
+  min-width: 400px;
+  height: auto;
+  min-height:600px;
+  margin: 0 auto; /* Centralizar horizontalmente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--cor-light);
+  background: #302a2a;
+}
+#box2{
+  margin: 0 auto; /* Centralizar horizontalmente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background:var(--cor-principal);
+  width: 80%;
+  max-width: 300px;
+  border-radius:20px;
+  color:#101010;
+}
+#box{
+  margin: 0 auto; /* Centralizar horizontalmente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:var(--cor-principal);
+  width: 80%;
+  max-width: 300px;
+  border-radius:20px;
+  color:#101010;
+  margin-bottom:2px;
+}
+#box3{
+  height:400px;
+  background:var(--cor-principal);
+  border-radius:20px;
+}
+#box span{
+  width:160px;
+}
+span input{
+  height: auto;
+}
+input {
+  width: 80%;
+  max-width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  background: var(--cor-light);
+}
+#bv{
+   width:180px;
+  border-radius:20px;
+  margin:10px;
+}
+span{
+  text-align: center;
+   color:#000;
+   font-size:15pt;
+  background: var(--cor-light);
+  width:80%;
+  height:45px;
+  border-radius:10px;
+  display: flex;  
+  justify-content: center;
+  align-items: center;
+  margin:10px;
+}
+input::placeholder {
+  text-align: center;
+   color:#000;
+   font-size:12pt;
+}
+#cadastrar,#entrar{
+  background:var(--cor-principal);
+  height:60px;
+  font-size:20pt;
+}
+#cadastrar:hover,#entrar:hover{
+   background:var(--cor-dark);
+}
+h1{
+  font-size:30pt;
+  color:var(--cor-principal);
+}
+input[type="date" i] {
+   text-align: center;
+}
+input[type="checkbox" i],input[type="color" i]{
+  width:20px;
+  height:20px;
+  position:relative;
+}
+select,input[type="number" i],input[type="time" i]{
+ margin:5px;
+}
+a{
+  text-decoration: none;
+  color: var(--cor-light);
+}
+button {
+  width: 80%;
+  max-width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  background: var(--cor-light);
+   font-size:15pt;
+}
+button:hover{
+  background:var(--cor-dark);
+}
+#sair{
+  background:var(--cor-principal);
+  height:35px;
+  width:60px;
+  font-size:10pt;
+  position:relative;
+  left:120px;
+}
+hr{
+  width: 80%;
+  max-width: 300px;
+}
+#config{
+  position:relative;
+  left:120px;
+}
+#homer{
+   width:50px;
+  height:50px;
+  background:var(--cor-principal);
+  border-radius:100%;
+}
+#homer img,#sim img, #nao img,#concluir-btn img,#cancelar-btn img{
+  width:20px;
+}
+#s_n  button{
+   border-radius:100%;
+  width:40px;
+  height:40px;
+  margin:5px;
+  background:#fff;
+}
+#sim:hover,#concluir-btn:hover{
+  background:#109010;
+}
+#nao:hover,#cancelar-btn:hover{
+  background:#901010;
+}
+#dia{
+ margin:0;
+  width:100px;
+  position:relative;
+  left:-100px;
+}
+#anot,.relatorio textarea{
+   width: 80%;
+  max-width: 300px;
+  height:45px;
+}
+#lista{
+  width: 95%;
+  
+}
+.calendar .tem-evento{
+  background:red;
+}
+.calendar td{
+  background:#fff;
+  color:#000;
+}
+.calendar td:hover{
+  background:var(--cor-principal);
+}
+.calendar-container{
+ width: 80%;
+  max-width: 300px;
+}
+.calendar-container table{
+  width:100%;
+}
+#perfil{
+  width:80px;
+}
+#pesquisa{
+  height:20px;
+   width: 80%;
+  max-width: 300px;
+  border-radius:5px;
+  margin:5px;
+}
+#pront td{
+  background-color:var(--cor-light);
+   text-align: center;    
+}
+#pront{
+    border-spacing: 10px; 
+}
+.cadp input,.relatorio input{
+  height:20px;
+  
+}
+.cadp td,.relatorio td{  
+  text-align: center;
+}
+.relatorio td{
+    text-align: center;
+}
+#file-input{
+  display:none;
+}
+ul a{
+  background: var(--cor-dark);
+  width:300px;  
+  height:30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration:none;
+  color:#000;
+  margin:2px;
+}
+ul{
+    padding:0;
+}
+.financeiro{
+  width:170px;
+}
+.financeiro input{
+   height:20px;
+}
+.financeiro button{
+   height:20px;
+  font-size:10pt;
+}
+.financeiro td{
+  text-align: center;
+ 
+}
+#myChart, #myChart2{
+  width:150px;
+}
+#qt,#vl{
+  width:75px;
+  height:90px;
+  background:#302a2a;
+  border-radius:10px;
+  color:var(--cor-principal);
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.receitas,.previsao {
+   margin:5px;
+  line-height: 2;
+  width:300px;
+  border-spacing:3px;
+}
+.receitas td,.previsao td{
+   text-align: center;
+ background:#fff;
+  color:#000;
+}
+.receitas th, .previsao th{
+  background:var(--cor-principal);
+  color:#000;
+}
+#data-atual{
+  width:190px;
+}
