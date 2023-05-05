@@ -2,6 +2,9 @@
   --cor-principal: #57e6d9;
   --cor-dark: #43b3a8;
   --cor-light: #b9faf5;
+  --branco:#fff;
+  --preto:#000;
+  
 }
 body {
   width: 100vw;
@@ -14,7 +17,7 @@ body {
   justify-content: center;
   align-items: center;
   color: var(--cor-dark);
-  background: linear-gradient(to bottom right, #fff, var(--cor-light));
+  background: linear-gradient(to bottom right, var(--branco), var(--cor-light));
 background-size: cover;
 
 }
@@ -24,28 +27,31 @@ background-size: cover;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(to bottom right, var(--cor-principal), #fff);
+  background-image: linear-gradient(to bottom right, var(--cor-principal), var(--branco));
   width: 80%;
   max-width: 300px;
   border-radius:20px;
-  color:#101010;
+  color:var(--preto);
 }
 #box{
   margin: 0 auto; /* Centralizar horizontalmente */
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(to bottom right, var(--cor-principal), #fff);
+  background-image: linear-gradient(to bottom right, var(--cor-principal), var(--branco));
   width: 80%;
   max-width: 300px;
   border-radius:20px;
-  color:#101010;
+  color:var(--preto);
   margin-bottom:2px;
 }
 #box3{
   height:400px;
-  background-image: linear-gradient(to bottom right, var(--cor-principal), #fff);
+  background-image: linear-gradient(to bottom right, var(--cor-principal), var(--branco));
   border-radius:20px;
+}
+button{
+  color:var(--preto);
 }
 #box span{
   width:160px;
@@ -58,7 +64,8 @@ input {
   max-width: 300px;
   height: 50px;
   border-radius: 10px;
-  background-image: linear-gradient(to bottom right, var(--cor-light), #fff);
+  background-image: linear-gradient(to bottom right, var(--cor-light), var(--branco));
+  color:var(--preto);
 }
 #bv{
    width:180px;
@@ -67,9 +74,9 @@ input {
 }
 span{
   text-align: center;
-   color:#000;
+   color:var(--preto);
    font-size:15pt;
-  background-image: linear-gradient(to bottom right, var(--cor-light), #fff);
+  background-image: linear-gradient(to bottom right, var(--cor-light), var(--branco));
   width:80%;
   height:45px;
   border-radius:10px;
@@ -90,27 +97,27 @@ span{
 }
 input::placeholder {
   text-align: center;
-   color:#000;
+   color:var(--preto);
    font-size:12pt;
 }
 #cadastrar,#entrar{
-  background-image: linear-gradient(to bottom right, var(--cor-principal), #fff);
+  background-image: linear-gradient(to bottom right, var(--cor-principal), var(--branco));
   height:60px;
   font-size:20pt;
 }
 #cadastrar:hover,#entrar:hover{
-   background-image: linear-gradient(to bottom right, var(--cor-dark), #fff);
+   background-image: linear-gradient(to bottom right, var(--cor-dark), var(--branco));
 }
 h1{
   font-size:30pt;
-  background: linear-gradient(to bottom, var(--cor-dark), #fff);
+  background: linear-gradient(to bottom, var(--cor-dark), var(--branco));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 input[type="date" i] {
    text-align: center;
 }
-input[type="checkbox" i],input[type="color" i]{
+input[type="checkbox" i]{
   width:20px;
   height:20px;
   position:relative;
@@ -127,14 +134,14 @@ button {
   max-width: 300px;
   height: 50px;
   border-radius: 10px;
-  background-image: linear-gradient(to bottom right, var(--cor-light), #fff);
+  background-image: linear-gradient(to bottom right, var(--cor-light), var(--branco));
    font-size:15pt;
 }
 button:hover{
-  background-image: linear-gradient(to bottom right, var(--cor-dark), #fff);
+  background-image: linear-gradient(to bottom right, var(--cor-dark), var(--branco));
 }
 #sair{
-  background-image: linear-gradient(to bottom right, var(--cor-principal), #fff);
+  background-image: linear-gradient(to bottom right, var(--cor-principal), var(--branco));
   height:35px;
   width:60px;
   font-size:10pt;
@@ -152,7 +159,7 @@ hr{
 #homer{
    width:50px;
   height:50px;
-  background-image: linear-gradient(to bottom right, var(--cor-principal), #fff);
+  background-image: linear-gradient(to bottom right, var(--cor-principal), var(--branco));
   border-radius:100%;
 }
 #homer img,#sim img, #nao img,#concluir-btn img,#cancelar-btn img{
@@ -163,13 +170,13 @@ hr{
   width:40px;
   height:40px;
   margin:5px;
-  background:#fff;
+  background:var(--branco);
 }
 #sim:hover,#concluir-btn:hover{
-  background-image: linear-gradient(to bottom right, #109010, #fff);
+  background-image: linear-gradient(to bottom right, #109010, var(--branco));
 }
 #nao:hover,#cancelar-btn:hover{
-  background-image: linear-gradient(to bottom right, #901010, #fff);
+  background-image: linear-gradient(to bottom right, #901010, var(--branco));
 }
 #dia{
  margin:0;
@@ -190,11 +197,11 @@ hr{
   background:red;
 }
 .calendar td{
-  background:#fff;
-  color:#000;
+  background:var(--branco);
+  color:var(--preto);
 }
 .calendar td:hover{
-  background-image: linear-gradient(to bottom right, var(--cor-principal), #fff);
+  background-image: linear-gradient(to bottom right, var(--cor-principal), var(--branco));
 }
 .calendar-container{
  width: 80%;
@@ -214,7 +221,7 @@ hr{
   margin:5px;
 }
 #pront td{
-  background-image: linear-gradient(to bottom right, var(--cor-light), #fff);
+  background-image: linear-gradient(to bottom right, var(--cor-light), var(--branco));
    text-align: center;    
 }
 #pront{
@@ -234,7 +241,7 @@ hr{
   display:none;
 }
 ul a{
-  background-image: linear-gradient(to bottom right, var(--cor-dark), #fff);
+  background-image: linear-gradient(to bottom right, var(--cor-dark), var(--branco));
   width:300px;  
   height:30px;
   display: flex;
@@ -242,7 +249,7 @@ ul a{
   justify-content: center;
   align-items: center;
   text-decoration:none;
-  color:#000;
+  color:var(--preto);
   margin:2px;
 }
 ul{
@@ -273,7 +280,7 @@ ul{
 #qt,#vl{
   width:75px;
   height:90px;
-  background: linear-gradient(to bottom right, #fff, var(--cor-light));
+  background: linear-gradient(to bottom right, var(--branco), var(--cor-light));
   border-radius:10px;
   color:var(--cor-principal);
     display: flex;
@@ -288,13 +295,20 @@ ul{
 }
 .receitas td,.previsao td{
    text-align: center;
- background:#fff;
-  color:#000;
+ background:var(--branco);
+  color:var(--preto);
 }
 .receitas th, .previsao th{
-  background-image: linear-gradient(to bottom right, var(--cor-principal), #fff);
-  color:#000;
+  background-image: linear-gradient(to bottom right, var(--cor-principal), var(--branco));
+  color:var(--preto);
 }
 #data-atual{
   width:190px;
+}
+#tema input{
+  width:auto;
+}
+#tema input[type="color" i]{
+  width:50px;
+  height:30px;
 }
