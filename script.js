@@ -135,7 +135,12 @@ function tela_config() {
   React.createElement("body", null, /*#__PURE__*/
   React.createElement("h1", null, "Configura\xE7\xF5es"), /*#__PURE__*/
   React.createElement("div", { id: "box2" }, /*#__PURE__*/
-  React.createElement("span", null, /*#__PURE__*/React.createElement("input", { type: "color" }), "Cor do Tema"), /*#__PURE__*/
+  React.createElement("span", { id: "tema" }, "Tema:", /*#__PURE__*/
+
+  React.createElement("input", { type: "color" }), "Light", /*#__PURE__*/
+  React.createElement("input", { type: "radio", name: "l_d", value: "l", checked: true }), "Dark", /*#__PURE__*/
+  React.createElement("input", { type: "radio", name: "l_d", value: "d" })), /*#__PURE__*/
+
   React.createElement("span", null, /*#__PURE__*/React.createElement("input", { type: "checkbox" }), "Notifica\xE7\xF5es"), /*#__PURE__*/
   React.createElement("span", null, "CRM", /*#__PURE__*/React.createElement("input", { type: "number" })), /*#__PURE__*/
   React.createElement("span", null, "Idioma", /*#__PURE__*/
@@ -194,12 +199,17 @@ function salvar_config() {
 
   // altera os valores dos demais campos
   configuracoes.tema = document.querySelector('input[type="color"]').value;
+  l_d = document.querySelector('input[type="radio"]').checked;
   configuracoes.notificacao = document.querySelector('input[type="checkbox"]').checked;
   configuracoes.crm = document.querySelector('input[type="number"]').value;
   configuracoes.idioma = document.querySelector('select').value;
   configuracoes.horarioE = document.querySelector('input[type="time"]:first-of-type').value;
   configuracoes.horarioS = document.querySelector('input[type="time"]:last-of-type').value;
-  tema(configuracoes.tema);
+  if (l_d == true) {
+    tema(configuracoes.tema);
+  } else {
+    alterarBrilho(configuracoes.tema);
+  }
   alert("configuração salva!");
 }
 function redefinir_config() {
@@ -221,9 +231,24 @@ function tema(cor) {
   const root = document.documentElement;
 
   // define o valor da variável CSS
+  root.style.setProperty('--branco', '#fff');
+  root.style.setProperty('--preto', '#000');
   root.style.setProperty('--cor-principal', cor);
   root.style.setProperty('--cor-dark', cor_escura);
   root.style.setProperty('--cor-light', cor_clara);
+}
+function alterarBrilho(cor) {
+  let cor_clara = getShades(cor)['900'].light;
+  let cor_escura = getShades(cor)['300'].dark;
+  // obtém a raiz do documento
+  const root = document.documentElement;
+  root.style.setProperty('--branco', '#000');
+  root.style.setProperty('--preto', '#fff');
+  root.style.setProperty('--cor-principal', cor);
+  root.style.setProperty('--cor-dark', cor_clara);
+  root.style.setProperty('--cor-light', cor_escura);
+  const tcolor = tinycolor(cor);
+  return tcolor.darken(20).toHexString();
 }
 
 function tela_agenda() {
