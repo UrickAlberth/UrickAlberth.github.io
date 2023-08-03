@@ -1,0 +1,65 @@
+body {
+  background-color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --brilho: 10px;
+}
+
+table {
+  color: #fff;
+  width: 100%;
+  table-layout: fixed; /* Definir o layout da tabela como fixo */
+}
+
+td {
+  padding: 8px;
+  text-align: center;
+
+  width: 100%;
+  white-space: nowrap; /* Evita que o conteúdo seja quebrado em várias linhas */
+  border-radius: 10px;
+}
+
+#nA {
+  display: flex;
+}
+
+#massa {
+  font-size: 7pt;
+}
+@media only screen and (max-width: 900px) {
+  table {
+    font-size: 10px;
+  }
+}
+@media only screen and (max-width: 750px) {
+  table {
+    font-size: 10px;
+  }
+  td {
+    padding: 2px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  label {
+    display: none;
+  }
+  :root {
+    --brilho: 0px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  table {
+    font-size: 5px;
+  }
+  #massa {
+    font-size: 3pt;
+  }
+  td {
+    padding: 0px;
+    border-radius: 0px;
+  }
+}
