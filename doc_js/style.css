@@ -1,0 +1,210 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Mukta&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap");
+:root{
+  --background:#f7f7f7;
+  --color:#1c1c1c;
+  --code_background:#e5e7e9;
+}
+body {
+  background: var(--background);
+  color: var(--color);
+}
+#Ltema{
+  font-size:10pt;
+  margin-left:15px;
+}
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  
+  height: 100%;
+  border-right: solid hsla(0, 0%, 11%, 0.7);
+}
+
+#main-doc header {
+  text-align: left;
+  margin: 0;
+  font-weight: bold;
+  cursor: default;
+  font-family: "Open Sans Condensed", sans-serif;
+}
+
+#main-doc header:hover {
+  text-decoration: underline;
+}
+
+.main-section header {
+  font-size: 32px;
+  padding: 20px 10px 10px 0;
+  letter-spacing: 3px;
+}
+
+.menu-icon {
+  position: fixed;
+  z-index: 10;
+  margin-left: 300px;
+}
+
+#titulo {
+  text-align: center;
+  padding: 20px;
+  font-size: 32px;
+  cursor: default;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-family: "Open Sans Condensed", sans-serif;
+  margin-left: 310px;
+}
+
+#navbar header:hover {
+  text-decoration: underline;
+}
+
+#navbar ul {
+  display: block;
+  width:300px;
+  height: 88%;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#navbar li {
+  border-top: 1px solid;
+  list-style: none;
+  position: relative;
+  width: 100%;
+  font-size: 18px;
+}
+
+#navbar a {
+  display: block;
+  text-align: justify;
+  padding: 18px;
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--color);
+  letter-spacing: 1px;
+  font-family: "Open Sans Condensed", sans-serif;
+}
+
+#navbar a:hover {
+  text-decoration: underline;
+}
+
+#main-doc {
+  position: absolute;
+  margin-left: 310px;
+  padding: 20px;
+  margin-bottom: 110px;
+  cursor: default;
+}
+
+#main-doc ul {
+  padding-left: 80px;
+}
+
+#main-doc li {
+  font-size: 20px;
+  line-height: 1.5;
+  padding-top: 15px;
+  text-align: justify;
+  letter-spacing: 1px;
+  font-family: "Mukta", sans-serif;
+}
+
+#main-doc p {
+  font-size: 20px;
+  line-height: 1.5;
+  text-align: justify;
+  padding-left: 30px;
+  letter-spacing: 1px;
+  font-family: "Mukta", sans-serif;
+}
+
+.main-section code {
+  display: block;
+  text-align: justify;
+  font-size: 15px;
+  margin-left: 60px;
+  margin-bottom: 30px;
+  background-color: var(--code_background);
+  padding: 10px 15px 10px 10px;
+  line-height: 3;
+  border-radius: 5px;
+}
+
+
+
+#navbar.show-menu ul {
+  display: block;
+}
+
+@media only screen and (max-width: 530px) {
+
+
+  code {   
+    padding: 15px;
+    padding-right: 45px;
+    min-width: 233px;
+  }
+}
+
+footer {
+  position: absolute;
+  margin-left: 35%;
+  font-family: "Gloria Hallelujah", cursive;
+  text-align: center;
+  color: var(--color);
+  font-size: 16px;
+}
+
+footer .credit {
+  cursor: default;
+  letter-spacing: 3px;
+  margin-bottom: 2px;
+}
+
+footer .credit:hover {
+  transform: scale(1.1);
+  transition-duration: 0.5s;
+  text-decoration: underline;
+}
+
+.linkedin,
+.github {
+  width: 40px;
+  opacity: 0.7;
+}
+
+.linkedin:hover,
+.github:hover,
+.discord:hover,
+.codepen:hover,
+.gmail:hover {
+  transform: scale(1.1);
+  transition-duration: 0.5s;
+  opacity: 1;
+}
+
+.gmail,
+.codepen,
+.discord {
+  width: 43px;
+  height: 40px;
+  opacity: 0.7;
+}
+
+.linkedin,
+.github,
+.discord,
+.codepen,
+.gmail {
+  padding-left: 12px;
+  padding-right: 12px;
+}
