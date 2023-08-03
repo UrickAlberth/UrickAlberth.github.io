@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Meu Bloco de Anotações</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <h1>Meu Bloco de Anotações</h1>
+  <div>
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo">
+  </div>
+  <div>
+    <label for="conteudo">Conteúdo:</label>
+    <textarea id="conteudo" rows="4"></textarea>
+  </div>
+  <button id="btnAdicionar">Adicionar Nota</button>
+   <button id="btnAlterar" style="display:none">Alterar</button>
+  <button id="btnApagar" >Apagar todas as notas</button>
+  <div id="notas">
+    <!-- Aqui serão exibidas as notas adicionadas -->
+  </div>
+  <script src="script.js"></script>
+  </body>
+  </html>
