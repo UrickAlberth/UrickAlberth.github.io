@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Jogo da Velha</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo da Velha</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Jogo da Velha</h1>
+  <div>
+    <span id="ptX">0</span> Humano <b>X</b> Vs <b>O</b> <span id="p2">Computador</span> <span id="ptO">0</span>
+    <div>Vez do jogador: <b><span id="currentPlayer">X</span></b></div>
+  </div>
+  <div class="board">
+    <div class="cell" onclick="makeMove(0)"></div>
+    <div class="cell" onclick="makeMove(1)"></div>
+    <div class="cell" onclick="makeMove(2)"></div>
+    <div class="cell" onclick="makeMove(3)"></div>
+    <div class="cell" onclick="makeMove(4)"></div>
+    <div class="cell" onclick="makeMove(5)"></div>
+    <div class="cell" onclick="makeMove(6)"></div>
+    <div class="cell" onclick="makeMove(7)"></div>
+    <div class="cell" onclick="makeMove(8)"></div>
+  </div>
+  <input id="pc" type="checkbox" checked> <label for="pc">Contra o Computador</label>
+  <br>
+  <div id="dificuldade">
+    <input type="radio" name="dificuldade" value="facil" id="facil">
+    <label for="facil">Fácil</label>
+    <input type="radio" name="dificuldade" value="medio" id="medio" checked>
+    <label for="medio">Médio</label>
+    <input type="radio" name="dificuldade" value="dificil" id="dificil">
+    <label for="dificil">Difícil</label>
+  </div>
+
+  <br><br>
+  <button onclick="zerarPts()">Zerar Pontuação</button>
+  <script src="script.js"></script>
+</body>
+
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
