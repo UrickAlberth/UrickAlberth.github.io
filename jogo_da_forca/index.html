@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo da Forca</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <h1>Jogo da Forca</h1>
+  <div id="pontuacao">
+    <span>Pontuação: </span><span id="pontos">_</span>
+    <br>
+    <span>Record: </span><span id="record">_</span>
+  </div>
+  <div id="hangman-container">
+    <div id="forca">
+      <table>
+        <tr>
+          <td colspan="2" class="forca">
+            ____
+          </td>
+        </tr>
+        <tr>
+          <td class="forca">
+            |
+          </td>
+          <td class="forca">
+            |
+          </td>
+
+        </tr>
+        <tr>
+          <td id="cabeca">
+            
+          </td>
+          <td class="forca">
+            |
+          </td>
+
+        </tr>
+        <tr>
+          <td id="tronco">
+            
+          </td>
+          <td class="forca">
+            |
+          </td>
+
+        </tr>
+        <tr>
+          <td id="pernas">
+            
+          </td>
+          <td class="forca">
+            |
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="forca">
+            ======
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div id="word-container">
+    <table class="palavra">
+      <tr id="letras">
+
+      </tr>
+      <tr id="dica">
+      </tr>
+    </table>
+  </div>
+  <div id="letters-container">
+<table class="keyboard">
+        <tr>
+            <td class="letter">Q</td>
+            <td class="letter">W</td>
+            <td class="letter">E</td>
+            <td class="letter">R</td>
+            <td class="letter">T</td>
+            <td class="letter">Y</td>
+            <td class="letter">U</td>
+            <td class="letter">I</td>
+            <td class="letter">O</td>
+            <td class="letter">P</td>
+        </tr>
+        <tr>
+            <td class="letter">A</td>
+            <td class="letter">S</td>
+            <td class="letter">D</td>
+            <td class="letter">F</td>
+            <td class="letter">G</td>
+            <td class="letter">H</td>
+            <td class="letter">J</td>
+            <td class="letter">K</td>
+            <td class="letter">L</td>
+        </tr>
+        <tr>
+            <td class="empty"></td>
+            <td class="letter">Z</td>
+            <td class="letter">X</td>
+            <td class="letter">C</td>
+            <td class="letter">V</td>
+            <td class="letter">B</td>
+            <td class="letter">N</td>
+            <td class="letter">M</td>
+            <td class="empty"></td>
+        </tr>
+    </table>
+  </div>
+  <button id="reiniciar" onclick="reiniciar()">Reiniciar</button>
+  <script src="./script.js"></script>
+</body>
+
+</html>
