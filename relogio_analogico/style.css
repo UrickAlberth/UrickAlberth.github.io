@@ -1,0 +1,122 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.title {
+  margin: 0 auto;
+  color: white; 
+  font-family: 'Lato', sans-serif;
+  font-size: 3rem;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  animation: changeBackgroundImage 13s infinite;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  
+}
+
+@keyframes changeBackgroundImage {
+  0% {
+    background-image: url('');
+  }
+  25% {
+    background-image: url('');
+  }
+  50% {
+    background-image: url('');
+  }
+  75% {
+    background-image: url('');
+  }
+  100% {
+    background-image: url('');
+  }
+}
+
+.relogio{
+	width: 300px;
+	height: 300px;
+	background: repeating-radial-gradient(#000, #000 15%, #000 25%);
+	border-radius: 100%;
+	border: 10px solid #c0c0c0;
+	left: 50px;
+	position:relative;
+  box-shadow: 2px 2px 2px rgb(25,15,35);
+}
+
+.meio {
+	position: absolute;
+	background-color: #0000ff;
+	width: 15px;
+	height: 15px;
+	left: 50%;
+	bottom:50%;
+	transform: translate(-50%, 50%);
+	border-radius: 50%;
+}
+
+.numero{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	text-align: center;
+	transform: rotate(calc(var(--r)*1deg));
+}
+
+.N1{--r:30;}
+.N2{--r:60;}
+.N3{--r:90;}
+.N4{--r:120;}
+.N5{--r:150;}
+.N6{--r:180;}
+.N7{--r:210;}
+.N8{--r:240;}
+.N9{--r:270;}
+.N10{--r:300;}
+.N11{--r:330;}
+.N12{--r:360;}
+
+.set {
+	--r: 30;
+	position: absolute;
+	left: 50%;
+	bottom: 50%;
+	transform: translate(-50%) rotate(calc(var(--r)*1deg));
+	transform-origin: bottom;
+}
+
+.H{width: 8px;height: 35%;background-color: green;
+box-shadow: 2px 2px 2px rgb(25,15,35);}
+.M{width: 5px;height: 38%;background-color: blue;
+box-shadow: 2px 2px 2px rgb(25,15,35);}
+.S{width: 2px;height: 48%;background-color: red;
+box-shadow: 2px 2px 2px rgb(25,15,35);}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes changeBackgroundColor {
+  0% {
+    background-color: #000;
+  }
+  50% {
+    background-color: #000;
+  }
+  100% {
+    background-color: #000;
+  }
+}
