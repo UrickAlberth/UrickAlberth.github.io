@@ -1,0 +1,23 @@
+body{
+  background-color: black;
+  height:auto;
+  color: white;
+  font-size: 45px;
+}
+#caixa_hora,#caixa_minuto,#caixa_segundo{
+  padding: 5px;
+  background-color: rgb(15,15,15);
+  width: 240px;
+  height: 120px;
+  color: white;
+  display:inline-block;
+  box-shadow: 5px 5px 5px gray;
+}
+#caixa_data{
+  padding: 5px;
+  background-color: rgb(10,10,10);
+  width: 1420px;
+  height: 250px;
+  color: gray;
+  border-radius:10px;
+}
