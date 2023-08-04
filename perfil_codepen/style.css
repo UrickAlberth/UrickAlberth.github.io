@@ -1,0 +1,163 @@
+body {
+    background: black;
+    color: #fff;
+}
+body {
+  background: linear-gradient(45deg, #1c1d23, #111111);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+a {
+  text-decoration: none;
+  color:#fff;
+}
+
+#profile-name-header {
+  background-image: linear-gradient(to bottom, #0000ff, rgb(106,90,205));
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+#profile-name-header .profile-name-wrapper {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-color: ;
+  
+  font-family: Broadway, sans-serif;
+}
+
+.profile-links>a:not(.button) {
+    display: inline-block;
+    color: rgb(106,90,205);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Estilo do contêiner para posicionar o ícone e o input */
+.search-container {
+  position: relative;
+  display: inline-block;
+  width:80%;
+}
+
+/* Estilo do ícone de lupa */
+.search-icon {
+  position: absolute;
+  left: 10px; /* Ajuste a posição horizontal do ícone conforme necessário */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #999; /* Cor do ícone */
+}
+
+/* Estilo do input de pesquisa */
+.search-container input {
+  padding-left: 45px; /* Aumenta o espaço à esquerda para acomodar o ícone */
+  height: 50px; /* Ajuste a altura conforme necessário */
+  width:100%;
+  border: 0px solid #ccc; /* Estilo da borda */
+  border-radius: 5px; /* Borda arredondada */
+  font-size: 16px; /* Tamanho da fonte */
+  background-color:#252830;
+  color:#fff;
+}
+/* Estilo do botão */
+.pin-button {
+  padding: 10px 20px; /* Ajuste o padding conforme necessário */
+  background-color: #1f2026; /* Cor de fundo do botão */
+  color: #fff; /* Cor do texto */
+  border: none; /* Remova a borda */
+  border-radius: 5px; /* Borda arredondada */
+  font-size: 16px; /* Tamanho da fonte */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse sobre o botão */
+  height: 50px;
+  margin:5px;
+}
+
+/* Estilo do ícone de alfinete */
+.pin-icon {
+ 
+  font-size: 18px; /* Tamanho do ícone */
+  color: #fff;
+}
+
+#foto{
+  background-color: #1f2026; /* Cor de fundo do botão */
+  color: #fff; /* Cor do texto */
+  border: none; /* Remova a borda */
+  border-radius: 5px; /* Borda arredondada */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse sobre o botão */
+  height: 50px;
+  width:50px;
+    position: relative;
+  top:17px;
+}
+header {
+  background-color: #1c1d23;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+#links{
+   background-color: #000;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  
+}
+#foto2{
+    height: 100px;
+  width:100px; 
+  border: 2px solid #5c5c5c;
+  position:relative;
+  top:-12px;
+  right:15px;
+}
+a{
+  margin:5px;
+}
+#bio{
+   display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top:50px;
+  margin-bottom:10px;
+}
+#nav{
+  background-color: #1c1d23;
+  width:75%;
+  height: 50px;
+    display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#nav a{
+  color:#fff;
+}
+#bt_org{
+  height:30px;
+  background-color:transparent;
+  border:2px solid #fff;
+  color:#FFF;
+}
+#pag{
+  position:relative;
+  margin-right:60%;
+}
+iframe{
+  height:300px;
+}
