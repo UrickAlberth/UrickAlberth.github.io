@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+  <table>
+    <tr>
+      <td colspan="4">
+        <input id="tela" readonly>
+      </td>
+    </tr>
+    <tr>
+      <td class="number" onclick="concatNumber(1)">1</td>
+      <td class="number" onclick="concatNumber(2)">2</td>
+      <td class="number" onclick="concatNumber(3)">3</td>
+      <td class="operation" onclick="clearScreen()">C</td>
+    </tr>
+    <tr>
+      <td class="number" onclick="concatNumber(4)">4</td>
+      <td class="number" onclick="concatNumber(5)">5</td>
+      <td class="number" onclick="concatNumber(6)">6</td>
+      <td class="operation" onclick="performOperation('+')">+</td>
+    </tr>
+    <tr>
+      <td class="number" onclick="concatNumber(7)">7</td>
+      <td class="number" onclick="concatNumber(8)">8</td>
+      <td class="number" onclick="concatNumber(9)">9</td>
+      <td class="operation" onclick="performOperation('-')">-</td>
+    </tr>
+    <tr>
+      <td class="number" onclick="concatNumber(0)">0</td>
+      <td class="operation" onclick="verificarVirgula()">.</td>
+      <td class="operation" onclick="performOperation('*')">*</td>
+      <td class="operation" onclick="performOperation('/')">/</td>      
+    </tr>
+    <tr>
+      <td colspan="4" onclick="calculateResult()">=</td>
+    </tr>
+  </table>
+
+<!-- partial -->
+  <script src="script.js"></script>
+</body>
+</html>

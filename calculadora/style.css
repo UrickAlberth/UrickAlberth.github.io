@@ -1,0 +1,22 @@
+  td {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      border: 1px solid black;
+      cursor: pointer;
+    color:#fff;
+    }
+    #tela {
+      width: 156px;
+      height: 30px;
+      text-align: right;
+    }
+table{
+  background-color:black;
+}
+.operation{
+  background:#151515;
+}
+td:hover{
+   background:#252525;
+}
