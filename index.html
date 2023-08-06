@@ -1,40 +1,86 @@
-<!DOCTYPE html>
-<html lang="pt-br" >
+
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="Aplicativo de gerenciamento Mindeles">
-    <meta property="og:title" content="Mindeles">
-    <meta property="og:description" content="Aplicativo de gerenciamento Mindeles">
-    <meta property="og:image" content="https://github.com/UrickAlberth/UrickAlberth.github.io/blob/main/banner.png?raw=true">
-    <meta property="og:url" content="UrickAlberth.github.io">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Mindeles">
-    <meta property="og:locale" content="pt_BR">
-  <title>MINDELES</title>
-  <link rel="stylesheet" href="./style.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<head>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta charset="UTF-8">
-  <script src="https://kit.fontawesome.com/42c8de28f3.js" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-</head>
-<body id="root">
   
-  <button onclick="abrir()">ABRIR</button>
-</body>
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js'></script>
-<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script  src="./script.js"></script>
+  <header>
+    <nav>
+      <div class="logo">
+        <h1>Urick Alberth</h1>
+      </div>
+      <ul class="menu">
+        <li><a href="#about-me">Sobre Mim</a></li>
+        <li><a href="#featured-project">Projeto de Destaque</a></li>
+        <li><a href="#projects">Projetos</a></li>
+        <li><a href="#contact">Contato</a></li>
+      </ul>
+      <div class="burger">
+        <i class="fas fa-bars">🔽</i>
+      </div>
+    </nav>
+  </header>
+<div id="espaco"></div>
+  <section class="about-me" id="about-me">
+    <h2>Sobre Mim</h2>
+    <img class="profile-pic" src="https://github.com/UrickAlberth/primeiro/blob/main/Desenvolvimento_de_Sistema-14-removebg-preview2%20(1).png?raw=true" alt="Profile Picture">
+    <p>Sou um desenvolvedor ambicioso e apaixonado, com fortes habilidades em HTML, CSS, JavaScript, MySQL e Python. Sou formado em Desenvolvimento de Sistemas na unidade Senai-Horto, onde já realizei vários projetos próprios. Busco combinar o conhecimento adquirido de forma autônoma com o aprendizado obtido em meu curso técnico para criar códigos inovadores e eficientes. Estou me capacitando constantemente para solucionar problemas com diversos objetivos e desafios.</p>
+  </section>
 
+  <section class="featured-project" id="featured-project">
+    <h2>Projeto de Destaque</h2>
+    <h3>Jogo da Memória - Desafie sua Memória!</h3>
+    <!-- Adicione uma breve descrição e link para o seu projeto de destaque -->
+    <p>Este projeto é um jogo clássico da memória implementado com HTML, CSS e JavaScript. O objetivo do jogo é encontrar todos os pares de cartas iguais em um tabuleiro virando-as uma de cada vez. Cada vez que duas cartas são viradas, elas são comparadas. Se forem iguais, elas permanecem viradas e o jogador ganha pontos. Caso contrário, as cartas são desviradas e o jogador perde pontos. O jogo termina quando todos os pares são encontrados.</p>
+    <b>Recursos Implementados:</b>
+    <ol>
+        <li><b>Escolha de Dificuldade:</b> O jogador pode escolher a quantidade de pares de cartas com os quais deseja jogar, tornando o jogo adequado para jogadores de todas as idades e níveis de habilidade.</li>
+        <li><b>Tempo de Jogo:</b> O jogo apresenta um cronômetro que inicia quando o jogador começa o jogo e para quando todos os pares são encontrados, permitindo que o jogador desafie a si mesmo para completar o jogo o mais rápido possível.</li>
+        <li><b>Sistema de Pontuação:</b> Os jogadores são recompensados com pontos com base na rapidez com que completam o jogo. Um sistema de pontuação estimula a competição e o aprimoramento das habilidades de memória.</li>
+        <li><b>Modo de + Jogadores:</b> É possível jogar com amigos, pois o jogo suporta múltiplos jogadores, alternando entre os jogadores após cada jogada.</li>
+        <li><b>Cartas Personalizadas:</b> O jogo usa emojis divertidos como cartas, tornando a experiência mais lúdica e atraente.</li>
+        <li><b>Sons Interativos:</b> O jogo inclui efeitos sonoros para adicionar imersão à experiência de jogo, como sons ao virar as cartas, encontrar pares e pausar o jogo.</li>
+        <li><b>Ajuda e Dicas:</b> Um botão de ajuda permite que os jogadores vejam rapidamente todas as cartas do tabuleiro por alguns segundos, facilitando a memorização.</li>
+        <li><b>Recorde de Pontuação:</b> O jogo registra a melhor pontuação de cada jogador, incentivando a busca por melhores resultados.</li>
+    </ol>
+    <b>Tecnologias Utilizadas:</b>
+    <ul>
+      <li>HTML5 para a estrutura do jogo e elementos visuais.</li>
+      <li>CSS3 para a estilização e layout responsivo.</li>
+      <li>JavaScript para a lógica do jogo, manipulação de eventos e interações com o jogador.</li>
+    </ul>
+    <br>
+    <b>Conclusão:</b>
+    <p>
+      Este projeto foi uma oportunidade emocionante de aplicar minhas habilidades em desenvolvimento web e criar um jogo interativo que desafia a memória e oferece diversão para todos. Espero que este jogo divirta e desafie os jogadores, incentivando-os a aprimorar suas habilidades de memorização enquanto se divertem.
+    </p>
+    <a href="https://urickalberth.github.io/jogo_da_memoria/" class="project-link">
+      Ver Projeto
+      <img src="https://urickalberth.github.io/jogo_da_memoria/jogo_da_memoria.png" width="100%">
+    </a>
+  </section>
+
+  <section class="projects" id="projects">
+    <h2>Projetos</h2>
+    <!-- Adicione uma lista de projetos com suas descrições e links -->
+    <ul id="projetos-list"></ul>
+  </section>
+
+  <footer>
+    <div class="social" id="contact">
+      <a href="https://github.com/UrickAlberth">GitHub</a>
+      <a href="https://www.linkedin.com/in/urick-alberth-109253184">LinkedIn</a>
+      <a href="https://www.instagram.com/urick_alberth">Instagram</a>
+      <a href="https://codepen.io/urick_alberth">Codepen</a>
+    </div>
+    <p>&copy; 2023 Urick Alberth. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
