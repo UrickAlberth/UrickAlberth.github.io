@@ -1,0 +1,98 @@
+@font-face {
+    font-family: 'LIBRAS2002';
+    src: url('https://raw.githubusercontent.com/UrickAlberth/primeiro/main/LIBRAS_2012.TTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'libras_kidimais01';
+    src: url('https://raw.githubusercontent.com/UrickAlberth/primeiro/main/libras_kidimais01.ttf') format('truetype');
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+main {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+textarea {
+  width: 95%;
+  height: 150px;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#translatedText {
+  font-family: 'LIBRAS2002','libras_kidimais01', sans-serif;
+  font-size:25px;
+  margin-top: 1rem;
+  width: 95%;
+  height: 150px;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+.font-controls {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.font-controls button {
+  margin: 0 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background-color: #555;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.font-controls button:hover {
+  background-color: #333;
+}
+
+.hidden {
+  display: none;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  background-color: #333;
+  color: #fff;
+}
