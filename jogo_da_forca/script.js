@@ -1,4 +1,4 @@
-const wordList = {
+let wordList = {
   Animal: [
     "Elefante",
     "Tigre",
@@ -116,27 +116,40 @@ let chosenWord = "";
 let dica = "";
 let guessedLetters = [];
 let wrongAttempts = 0;
-let pontuacao = 0;
-let record=0;
+let pontuacao={
+  nome:"_",
+  pontos:0
+}
+let record={
+  nome:"_",
+  pontos:0
+}
 var usedWords = [];
-
+let total_de_palavras=2;
   // Função para salvar as Record no LocalStorage
     function saveRecordToLocalStorage() {
       localStorage.setItem("record", JSON.stringify(record));
+      
     }
 
     // Função para carregar as Record do LocalStorage
     function loadRecordFromLocalStorage() {
       const storedRecord = localStorage.getItem("record");
       if (storedRecord) {
-        record = JSON.parse(storedRecord);
-        carregarRecord();
+        record.pontos = JSON.parse(storedRecord).pontos;
+        record.nome = JSON.parse(storedRecord).nome;
+        carregarRecord();        
       }
     }
 loadRecordFromLocalStorage();
 function carregarRecord(){
-  const Erecord = document.getElementById("record");
-  Erecord.textContent=record;
+  const Erecord = document.getElementById("record");  
+  Erecord.textContent=record.nome+" = "+record.pontos;
+  document.querySelector("#ConfgRecord").textContent=record.nome+" = "+record.pontos;  
+}
+function carregarPontuacao(){
+  const pontos = document.getElementById("pontuacao"); 
+  pontos.textContent = pontuacao.nome+" = "+pontuacao.pontos;
 }
 
 function normalizeWord(word) {
@@ -162,10 +175,10 @@ function chooseWord() {
 
 // Função para atualizar a exibição da palavra na tela
 function updateWordDisplay() {
+  contPalavras()
   carregarRecord();
   saveRecordToLocalStorage();
-  const pontos = document.getElementById("pontos");
-  pontos.textContent = pontuacao;
+ carregarPontuacao();
   const palavra = chosenWord;
   const letras = document.getElementById("letras");
   const Ldica = document.getElementById("dica");
@@ -179,9 +192,9 @@ function updateWordDisplay() {
     const espaco = document.createElement("td");
     if (
       guessedLetters.includes(normalizeWord(palavra[i])) ||
-      palavra[i] === "  "
+      palavra[i] === " "
     ) {
-      espaco.innerHTML = palavra[i];
+      espaco.innerHTML = palavra[i] === " " ? "&nbsp;&nbsp;" : palavra[i];      
     } else {
       espaco.innerHTML = "_";
       allLettersGuessed = false;
@@ -210,20 +223,19 @@ function checkLetter(letter) {
 
   const gameWon = updateWordDisplay(); // Verificamos se todas as letras foram adivinhadas
   if (gameWon) {
-    pontuacao += getScore(wrongAttempts);
-    if(pontuacao>=record){
-      record=pontuacao;
+    pontuacao.pontos += getScore(wrongAttempts);
+    if(pontuacao.pontos>=record.pontos){
+      record.pontos=pontuacao.pontos;
+      record.nome=pontuacao.nome;    
     }
     alert("Parabéns! Você acertou a palavra que era: " + chosenWord);
     updateWordDisplay();
-     setTimeout(function () {
- proximaPalavra();
-         }, 2000);
+
     
   }
 
   if (wrongAttempts >= maxAttempts) {
-    pontuacao += getScore(wrongAttempts);
+    pontuacao.nome += getScore(wrongAttempts);
     alert("Esgotou suas tentativas! A palavra era: " + chosenWord);
     proximaPalavra();
   }
@@ -247,17 +259,20 @@ function createLetters() {
   });
 
   // Adicionar o event listener para as teclas do teclado real
-  document.addEventListener("keypress", function (event) {
-    const letter = String.fromCharCode(event.keyCode).toUpperCase();
-    if (/^[A-Z]$/.test(letter)) {
-      letters.forEach((letter2) => {
-        if (letter2.textContent == letter) {
-          letter2.style = "background:#ddd";
-        }
-      });
-      checkLetter(letter);
-    }
-  });
+  document.addEventListener("keypress", keyPressHandler);
+}
+
+function keyPressHandler(event) {
+  const letters = document.querySelectorAll(".letter");
+  const letter = String.fromCharCode(event.keyCode).toUpperCase();
+  if (/^[A-Z]$/.test(letter)) {
+    letters.forEach((letter2) => {
+      if (letter2.textContent == letter) {
+        letter2.style = "background:#ddd";
+      }
+    });
+    checkLetter(letter);
+  }
 }
 
 function boneco(erros) {
@@ -286,7 +301,7 @@ function boneco(erros) {
 }
 
 function proximaPalavra() {
-  if (usedWords.length === Object.values(wordList).flat().length) {
+  if (usedWords.length == total_de_palavras) {
     initGame();
     return;
   }
@@ -312,11 +327,12 @@ function reiniciar() {
   if (!confirmarReiniciar) {
     return;
   }
-
+  document.querySelector(".keyboard").style="display:block";
   chosenWord = "";
   guessedLetters = [];
   wrongAttempts = 0;
-  pontuacao = 0;
+  pontuacao.pontos = 0;
+  pontuacao.nome = "_";
   usedWords = [];
 
   const letters = document.querySelectorAll(".letter");
@@ -324,20 +340,31 @@ function reiniciar() {
     letter2.style = "background-color:#fff";
   });
   boneco(0);
-  chooseWord();
+  document.removeEventListener("keypress", keyPressHandler);
   updateWordDisplay();
+  document.querySelector(".configuracao").style="height:100%;";
+  carregarCategorias();
+  carregarPalavrasRemove();
+  document.querySelector("#ConfgRecord").textContent=record.nome+" = "+record.pontos;
+}
+
+function contPalavras(){
+  document.querySelector("#restantes").textContent=usedWords.length;
+  document.querySelector("#total").textContent=total_de_palavras;
 }
 
 // Função para inicializar o jogo
-function initGame() {
+function initGame() { 
   if (usedWords.length === 0) {
     chooseWord();
-  } else if (usedWords.length === Object.values(wordList).flat().length) {
+  } else if (usedWords.length == total_de_palavras) {
     alert(
-      "Parabéns! Você jogou todas as palavras. Pontuação final: " + pontuacao
-    );
+      "Parabéns! Você jogou todas as palavras. Pontuação final: " + pontuacao.pontos
+    );    
      setTimeout(function () {
+      document.querySelector(".keyboard").style="display:none";
  reiniciar()
+ 
          }, 3000);
     return ;
   } else {
@@ -346,6 +373,115 @@ function initGame() {
 
   createLetters();
   updateWordDisplay();
+  totalPalavras();
+  contPalavras();
+pontuacao.nome=document.querySelector("#nome_jogador").value;
+carregarPontuacao();
+document.querySelector(".configuracao").style="height:0px;";
 }
 
-initGame();
+function muda_valor(){
+  document.querySelector("#qtn").textContent=document.querySelector("#qtnWord").value;
+}
+
+function totalPalavras(){
+  total_de_palavras=document.querySelector("#qtnWord").value;
+}
+
+const qtnWordInput = document.querySelector("#qtnWord");
+function valorqtnWordInput(){
+qtnWordInput.setAttribute("min", "1");
+qtnWordInput.setAttribute("max", Object.values(wordList).flat().length.toString());
+}
+valorqtnWordInput();
+
+document.addEventListener("DOMContentLoaded", function () {
+  const novaPalavraInput = document.querySelector("#nova_palavra");
+  const categoriaInput = document.querySelector("#categoria");
+  const adicionarPalavraButton = document.querySelector("#adicionar_palavra");
+  const removerPalavraSelect = document.querySelector("#remover_palavra");
+  const removerPalavraButton = document.querySelector("#remover_palavra_button");
+  carregarCategorias();
+  carregarPalavrasRemove();
+  // Função para adicionar nova palavra
+  adicionarPalavraButton.addEventListener("click", function () {
+    const novaPalavra = novaPalavraInput.value.trim();
+    const categoriaSelecionada = categoriaInput.value;
+    
+    if (novaPalavra && categoriaSelecionada) {
+      // Aqui você pode adicionar a lógica para adicionar a palavra à categoria selecionada
+      // Certifique-se de atualizar o objeto wordList
+      if(categoriaSelecionada=="NovaCategoria"){
+        let NovaCategoria= prompt("Digite o nome da categoria:")
+        wordList[NovaCategoria] = [];
+        wordList[NovaCategoria].push(novaPalavra);
+      }else{
+        wordList[categoriaSelecionada].push(novaPalavra);
+      }
+      
+      // Depois de adicionar a palavra, atualize as opções no select removerPalavraSelect
+      carregarCategorias();
+      carregarPalavrasRemove();
+      valorqtnWordInput()
+      muda_valor()
+      novaPalavraInput.value = "";
+      alert("Palavra adicionada com sucesso!");
+    }
+  });
+
+  // Função para remover palavra
+  removerPalavraButton.addEventListener("click", function () {
+    const palavraSelecionada = removerPalavraSelect.value;
+
+    if (palavraSelecionada) {
+      // Aqui você pode adicionar a lógica para remover a palavra da lista
+      // Certifique-se de atualizar o objeto wordList
+      let categoriaRemove=findCategory(palavraSelecionada);
+      const removeIndex = wordList[categoriaRemove].indexOf(palavraSelecionada);
+      if (removeIndex !== -1) {
+        wordList[categoriaRemove].splice(removeIndex, 1);
+      }
+
+      // Depois de remover a palavra, atualize as opções no select removerPalavraSelect
+      carregarCategorias();
+      carregarPalavrasRemove();
+      valorqtnWordInput()
+      muda_valor()
+      alert("Palavra removida com sucesso!");
+    }
+  });
+});
+
+const findCategory = (word) => {
+  for (const category in wordList) {
+    if (wordList[category].includes(word)) {
+      return category;
+    }
+  }
+  return null; // Retorna null se a palavra não for encontrada em nenhuma categoria
+};
+
+function carregarCategorias(){
+  const categoriaInput = document.querySelector("#categoria");
+  categoriaInput.innerHTML="";
+  categoriaInput.innerHTML='<option value="NovaCategoria">Criar Nova Categoria</option>';
+  const categorias=Object.keys(wordList);
+  for (let i=0;i<categorias.length;i++){
+    const OpCategoria = document.createElement("option");
+    OpCategoria.value=categorias[i];
+    OpCategoria.textContent=categorias[i];
+    categoriaInput.appendChild(OpCategoria);
+  }
+}
+
+function carregarPalavrasRemove(){
+  const removerPalavraSelect = document.querySelector("#remover_palavra");
+  removerPalavraSelect.innerHTML="";
+  const palavras=Object.values(wordList).flat();
+  for (let i=0;i<palavras.length;i++){
+    const OpPalavra = document.createElement("option");
+    OpPalavra.value=palavras[i];
+    OpPalavra.textContent=palavras[i];
+    removerPalavraSelect.appendChild(OpPalavra);
+  }
+}

@@ -9,10 +9,10 @@
 
 <body>
   <h1>Jogo da Forca</h1>
-  <div id="pontuacao">
-    <span>Pontuação: </span><span id="pontos">_</span>
+  <div id="pontuacao_box">
+    <label>Pontuação: </label><span id="pontuacao" style="font-size: 16px;font-weight: bold;"></span>
     <br>
-    <span>Record: </span><span id="record">_</span>
+    <label>Record: </label><span id="record" style="font-size: 16px;font-weight: bold;"></span>
   </div>
   <div id="hangman-container">
     <div id="forca">
@@ -112,7 +112,46 @@
         </tr>
     </table>
   </div>
-  <button id="reiniciar" onclick="reiniciar()">Reiniciar</button>
+  <button id="proxima" onclick="proximaPalavra()">Próxima Palavra</button>
+  <br><br>
+  <button id="reiniciar" onclick="reiniciar()">Reiniciar Jogo</button>
+  <br><br>
+  <span>Palavras Jogadas: </span><span id="restantes">_</span> de <span id="total">_</span>
+  <div class="configuracao">
+    <h1>Jogo Da Forca</h1>
+    <label for="nome_jogador">Digite Seu Nome:</label>
+    <br>
+    <input type="text" id="nome_jogador" class="input-field">
+    <br>
+    <label for="qtnWord">Quantidade de Palavras:</label>
+    <span id="qtn" class="word-count">3</span>
+    <br>
+    <input type="range" id="qtnWord" class="range-slider" oninput="muda_valor()" value="3">
+    <br>
+    <label>Record Atual:</label>
+    <br>
+    <span class="record" id="ConfgRecord">João = 0</span>
+    <br>
+    <button id="play" class="start-button" onclick="initGame()">START</button>
+    <div class="word-management">
+      <h2>Gerenciamento de Palavras</h2>
+      <label for="nova_palavra">Nova Palavra:</label>
+      <input type="text" id="nova_palavra" class="input-field">
+      <label for="categoria">Categoria:</label>
+      <select id="categoria" class="input-field">
+        <option value="NovaCategoria">Criar Nova Categoria</option>
+        <!-- Aqui você pode adicionar as opções das categorias existentes -->
+      </select>      
+      <button id="adicionar_palavra">Adicionar</button>
+      <label for="remover_palavra">Remover Palavra:</label>
+      <select id="remover_palavra" class="input-field">
+        <!-- Aqui você pode adicionar as opções das palavras existentes -->
+      </select>
+      <button id="remover_palavra_button">Remover</button>
+    </div>
+
+    
+  </div>
   <script src="./script.js"></script>
 </body>
 
