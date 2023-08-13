@@ -116,40 +116,40 @@ let chosenWord = "";
 let dica = "";
 let guessedLetters = [];
 let wrongAttempts = 0;
-let pontuacao={
-  nome:"_",
-  pontos:0
+let pontuacao = {
+  nome: "_",
+  pontos: 0
 }
-let record={
-  nome:"_",
-  pontos:0
+let record = {
+  nome: "_",
+  pontos: 0
 }
 var usedWords = [];
-let total_de_palavras=2;
-  // Função para salvar as Record no LocalStorage
-    function saveRecordToLocalStorage() {
-      localStorage.setItem("record", JSON.stringify(record));
-      
-    }
+let total_de_palavras = 2;
+// Função para salvar as Record no LocalStorage
+function saveRecordToLocalStorage() {
+  localStorage.setItem("record", JSON.stringify(record));
 
-    // Função para carregar as Record do LocalStorage
-    function loadRecordFromLocalStorage() {
-      const storedRecord = localStorage.getItem("record");
-      if (storedRecord) {
-        record.pontos = JSON.parse(storedRecord).pontos;
-        record.nome = JSON.parse(storedRecord).nome;
-        carregarRecord();        
-      }
-    }
-loadRecordFromLocalStorage();
-function carregarRecord(){
-  const Erecord = document.getElementById("record");  
-  Erecord.textContent=record.nome+" = "+record.pontos;
-  document.querySelector("#ConfgRecord").textContent=record.nome+" = "+record.pontos;  
 }
-function carregarPontuacao(){
-  const pontos = document.getElementById("pontuacao"); 
-  pontos.textContent = pontuacao.nome+" = "+pontuacao.pontos;
+
+// Função para carregar as Record do LocalStorage
+function loadRecordFromLocalStorage() {
+  const storedRecord = localStorage.getItem("record");
+  if (storedRecord && JSON.parse(storedRecord).pontos && JSON.parse(storedRecord).nome) {
+    record.pontos = JSON.parse(storedRecord).pontos;
+    record.nome = JSON.parse(storedRecord).nome;
+    carregarRecord();
+  }
+}
+loadRecordFromLocalStorage();
+function carregarRecord() {
+  const Erecord = document.getElementById("record");
+  Erecord.textContent = record.nome + " = " + record.pontos;
+  document.querySelector("#ConfgRecord").textContent = record.nome + " = " + record.pontos;
+}
+function carregarPontuacao() {
+  const pontos = document.getElementById("pontuacao");
+  pontos.textContent = pontuacao.nome + " = " + pontuacao.pontos;
 }
 
 function normalizeWord(word) {
@@ -166,7 +166,7 @@ function chooseWord() {
   do {
     const randomCategory = categories[Math.floor(Math.random() * categories.length)];
     dica = randomCategory;
-    wordsInCategory = wordList[randomCategory];  
+    wordsInCategory = wordList[randomCategory];
     newWordIndex = Math.floor(Math.random() * wordsInCategory.length);
   } while (usedWords.includes(normalizeWord(wordsInCategory[newWordIndex])));
   usedWords.push(normalizeWord(wordsInCategory[newWordIndex]));
@@ -178,7 +178,7 @@ function updateWordDisplay() {
   contPalavras()
   carregarRecord();
   saveRecordToLocalStorage();
- carregarPontuacao();
+  carregarPontuacao();
   const palavra = chosenWord;
   const letras = document.getElementById("letras");
   const Ldica = document.getElementById("dica");
@@ -194,7 +194,7 @@ function updateWordDisplay() {
       guessedLetters.includes(normalizeWord(palavra[i])) ||
       palavra[i] === " "
     ) {
-      espaco.innerHTML = palavra[i] === " " ? "&nbsp;&nbsp;" : palavra[i];      
+      espaco.innerHTML = palavra[i] === " " ? "&nbsp;&nbsp;" : palavra[i];
     } else {
       espaco.innerHTML = "_";
       allLettersGuessed = false;
@@ -224,14 +224,14 @@ function checkLetter(letter) {
   const gameWon = updateWordDisplay(); // Verificamos se todas as letras foram adivinhadas
   if (gameWon) {
     pontuacao.pontos += getScore(wrongAttempts);
-    if(pontuacao.pontos>=record.pontos){
-      record.pontos=pontuacao.pontos;
-      record.nome=pontuacao.nome;    
+    if (pontuacao.pontos >= record.pontos) {
+      record.pontos = pontuacao.pontos;
+      record.nome = pontuacao.nome;
     }
     alert("Parabéns! Você acertou a palavra que era: " + chosenWord);
     updateWordDisplay();
 
-    
+
   }
 
   if (wrongAttempts >= maxAttempts) {
@@ -287,16 +287,16 @@ function boneco(erros) {
       erros === 2
         ? partesEnforcamento[2]
         : erros === 3
-        ? partesEnforcamento[3]
-        : erros >= 4
-        ? partesEnforcamento[4]
-        : "";
+          ? partesEnforcamento[3]
+          : erros >= 4
+            ? partesEnforcamento[4]
+            : "";
     pernas.textContent =
       erros === 5
         ? partesEnforcamento[5]
         : erros >= 6
-        ? partesEnforcamento[6]
-        : "";
+          ? partesEnforcamento[6]
+          : "";
   }
 }
 
@@ -327,7 +327,7 @@ function reiniciar() {
   if (!confirmarReiniciar) {
     return;
   }
-  document.querySelector(".keyboard").style="display:block";
+  document.querySelector(".keyboard").style = "display:block";
   chosenWord = "";
   guessedLetters = [];
   wrongAttempts = 0;
@@ -342,31 +342,31 @@ function reiniciar() {
   boneco(0);
   document.removeEventListener("keypress", keyPressHandler);
   updateWordDisplay();
-  document.querySelector(".configuracao").style="height:100%;";
+  document.querySelector(".configuracao").style = "height:100%;";
   carregarCategorias();
   carregarPalavrasRemove();
-  document.querySelector("#ConfgRecord").textContent=record.nome+" = "+record.pontos;
+  document.querySelector("#ConfgRecord").textContent = record.nome + " = " + record.pontos;
 }
 
-function contPalavras(){
-  document.querySelector("#restantes").textContent=usedWords.length;
-  document.querySelector("#total").textContent=total_de_palavras;
+function contPalavras() {
+  document.querySelector("#restantes").textContent = usedWords.length;
+  document.querySelector("#total").textContent = total_de_palavras;
 }
 
 // Função para inicializar o jogo
-function initGame() { 
+function initGame() {
   if (usedWords.length === 0) {
     chooseWord();
   } else if (usedWords.length == total_de_palavras) {
     alert(
       "Parabéns! Você jogou todas as palavras. Pontuação final: " + pontuacao.pontos
-    );    
-     setTimeout(function () {
-      document.querySelector(".keyboard").style="display:none";
- reiniciar()
- 
-         }, 3000);
-    return ;
+    );
+    setTimeout(function () {
+      document.querySelector(".keyboard").style = "display:none";
+      reiniciar()
+
+    }, 3000);
+    return;
   } else {
     chooseWord();
   }
@@ -375,23 +375,23 @@ function initGame() {
   updateWordDisplay();
   totalPalavras();
   contPalavras();
-pontuacao.nome=document.querySelector("#nome_jogador").value;
-carregarPontuacao();
-document.querySelector(".configuracao").style="height:0px;";
+  pontuacao.nome = document.querySelector("#nome_jogador").value;
+  carregarPontuacao();
+  document.querySelector(".configuracao").style = "height:0px;";
 }
 
-function muda_valor(){
-  document.querySelector("#qtn").textContent=document.querySelector("#qtnWord").value;
+function muda_valor() {
+  document.querySelector("#qtn").textContent = document.querySelector("#qtnWord").value;
 }
 
-function totalPalavras(){
-  total_de_palavras=document.querySelector("#qtnWord").value;
+function totalPalavras() {
+  total_de_palavras = document.querySelector("#qtnWord").value;
 }
 
 const qtnWordInput = document.querySelector("#qtnWord");
-function valorqtnWordInput(){
-qtnWordInput.setAttribute("min", "1");
-qtnWordInput.setAttribute("max", Object.values(wordList).flat().length.toString());
+function valorqtnWordInput() {
+  qtnWordInput.setAttribute("min", "1");
+  qtnWordInput.setAttribute("max", Object.values(wordList).flat().length.toString());
 }
 valorqtnWordInput();
 
@@ -407,18 +407,18 @@ document.addEventListener("DOMContentLoaded", function () {
   adicionarPalavraButton.addEventListener("click", function () {
     const novaPalavra = novaPalavraInput.value.trim();
     const categoriaSelecionada = categoriaInput.value;
-    
+
     if (novaPalavra && categoriaSelecionada) {
       // Aqui você pode adicionar a lógica para adicionar a palavra à categoria selecionada
       // Certifique-se de atualizar o objeto wordList
-      if(categoriaSelecionada=="NovaCategoria"){
-        let NovaCategoria= prompt("Digite o nome da categoria:")
+      if (categoriaSelecionada == "NovaCategoria") {
+        let NovaCategoria = prompt("Digite o nome da categoria:")
         wordList[NovaCategoria] = [];
         wordList[NovaCategoria].push(novaPalavra);
-      }else{
+      } else {
         wordList[categoriaSelecionada].push(novaPalavra);
       }
-      
+
       // Depois de adicionar a palavra, atualize as opções no select removerPalavraSelect
       carregarCategorias();
       carregarPalavrasRemove();
@@ -436,7 +436,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (palavraSelecionada) {
       // Aqui você pode adicionar a lógica para remover a palavra da lista
       // Certifique-se de atualizar o objeto wordList
-      let categoriaRemove=findCategory(palavraSelecionada);
+      let categoriaRemove = findCategory(palavraSelecionada);
       const removeIndex = wordList[categoriaRemove].indexOf(palavraSelecionada);
       if (removeIndex !== -1) {
         wordList[categoriaRemove].splice(removeIndex, 1);
@@ -461,27 +461,27 @@ const findCategory = (word) => {
   return null; // Retorna null se a palavra não for encontrada em nenhuma categoria
 };
 
-function carregarCategorias(){
+function carregarCategorias() {
   const categoriaInput = document.querySelector("#categoria");
-  categoriaInput.innerHTML="";
-  categoriaInput.innerHTML='<option value="NovaCategoria">Criar Nova Categoria</option>';
-  const categorias=Object.keys(wordList);
-  for (let i=0;i<categorias.length;i++){
+  categoriaInput.innerHTML = "";
+  categoriaInput.innerHTML = '<option value="NovaCategoria">Criar Nova Categoria</option>';
+  const categorias = Object.keys(wordList);
+  for (let i = 0; i < categorias.length; i++) {
     const OpCategoria = document.createElement("option");
-    OpCategoria.value=categorias[i];
-    OpCategoria.textContent=categorias[i];
+    OpCategoria.value = categorias[i];
+    OpCategoria.textContent = categorias[i];
     categoriaInput.appendChild(OpCategoria);
   }
 }
 
-function carregarPalavrasRemove(){
+function carregarPalavrasRemove() {
   const removerPalavraSelect = document.querySelector("#remover_palavra");
-  removerPalavraSelect.innerHTML="";
-  const palavras=Object.values(wordList).flat();
-  for (let i=0;i<palavras.length;i++){
+  removerPalavraSelect.innerHTML = "";
+  const palavras = Object.values(wordList).flat();
+  for (let i = 0; i < palavras.length; i++) {
     const OpPalavra = document.createElement("option");
-    OpPalavra.value=palavras[i];
-    OpPalavra.textContent=palavras[i];
+    OpPalavra.value = palavras[i];
+    OpPalavra.textContent = palavras[i];
     removerPalavraSelect.appendChild(OpPalavra);
   }
 }
