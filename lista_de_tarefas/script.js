@@ -8,9 +8,10 @@ let tasks = [];
 
 function renderTasks() {
   taskList.innerHTML = "";
+
   const tasksByCategory = {};
 
-  tasks.forEach((task, index) => {
+  tasks.forEach((task) => {
     if (!tasksByCategory[task.category]) {
       tasksByCategory[task.category] = [];
     }
@@ -24,31 +25,60 @@ function renderTasks() {
 
     tasksByCategory[category].forEach((task, index) => {
       const li = document.createElement("li");
-      const span = document.createElement("span");
-      const spanBtn = document.createElement("span");
 
+      // Botão para marcar a tarefa como concluída
+      const BtnOK = document.createElement("input");
+      BtnOK.type = "checkbox";
+      BtnOK.id = `check_${category}_${index}`;
+      BtnOK.checked = task.checked || false;
+
+      const labelch = document.createElement("label");
+      labelch.className = "checks";
+      labelch.setAttribute("for", `check_${category}_${index}`);
+
+      BtnOK.addEventListener("click", () => {
+        task.checked = BtnOK.checked;
+        renderTasks();
+        saveTasksToLocalStorage();
+      });
+const spanCheck =document.createElement("span");
+spanCheck.appendChild(BtnOK);
+spanCheck.appendChild(labelch);
+
+      li.appendChild(spanCheck);
+      
+
+      const span = document.createElement("span");
+      span.setAttribute("id","text");
       span.innerHTML = task.checked ? "<del>" + task.text + "</del>" : task.text;
+      li.appendChild(span);
+
+      const spanBtns =document.createElement("span");
+      spanBtns.appendChild(EditarBtn(task, index, li));
+      const br=document.createElement("br");
+      spanBtns.appendChild(br);
+      li.appendChild(spanBtns);
 
       const removeBtn = document.createElement("button");
       removeBtn.innerHTML = "&#128465;";
       removeBtn.classList.add("remove-btn");
       removeBtn.addEventListener("click", () => {
-        tasks.splice(index, 1);
+        tasks.splice(tasks.indexOf(task), 1);
         renderTasks();
         saveTasksToLocalStorage();
       });
+      spanBtns.appendChild(removeBtn);
 
-      li.appendChild(span);
-      spanBtn.appendChild(EditarBtn(task, index, li));
-      spanBtn.appendChild(document.createElement("br"));
-      spanBtn.appendChild(removeBtn);
-      li.appendChild(spanBtn);
       taskList.appendChild(li);
     });
   }
 
   mensagem();
 }
+
+
+
+
 
 function EditarBtn(task, index, li) {
   const editarBtn = document.createElement("button");
@@ -57,13 +87,13 @@ function EditarBtn(task, index, li) {
     "<img src='https://img.icons8.com/?size=512&id=59856&format=png' width=15px;>";
   editarBtn.addEventListener("click", () => {
     if (editarBtn.textContent == "OK") {
-      const span = li.querySelector("span");
+      const span = li.querySelector("#text");
       span.contentEditable = "false";
       task.text = span.textContent;
       renderTasks();
       saveTasksToLocalStorage();
     }
-    const span = li.querySelector("span");
+    const span = li.querySelector("#text");
     span.contentEditable = "true";
     editarBtn.textContent = "OK";
   });
