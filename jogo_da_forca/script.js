@@ -136,8 +136,8 @@ function saveRecordToLocalStorage() {
 function loadRecordFromLocalStorage() {
   const storedRecord = localStorage.getItem("record");
   if (storedRecord && JSON.parse(storedRecord).pontos && JSON.parse(storedRecord).nome) {
-    record.pontos = JSON.parse(storedRecord).pontos;
-    record.nome = JSON.parse(storedRecord).nome;
+    record.pontos = JSON.parse(storedRecord).pontos ?? 0;
+    record.nome = JSON.parse(storedRecord).nome ?? "URICK";
     carregarRecord();
   }
 }
