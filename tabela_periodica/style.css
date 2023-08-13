@@ -22,6 +22,11 @@ td {
   white-space: nowrap; /* Evita que o conteúdo seja quebrado em várias linhas */
   border-radius: 10px;
 }
+td:hover{
+  background: #fff;
+  color:#000;
+  transform: scale(2);
+}
 
 #nA {
   display: flex;
@@ -62,4 +67,14 @@ td {
     padding: 0px;
     border-radius: 0px;
   }
+}
+
+#imagemElemento{
+  display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#imagemElemento img{
+width: 200px;
+height: 200px;
 }

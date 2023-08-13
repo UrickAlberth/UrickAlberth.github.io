@@ -59,70 +59,104 @@ li {
 
 input[type="checkbox"] {
 
-  display:none;
-  
+  display: none;
+
 }
+
 #labelCh::before {
-        content: "\2713"; /* Código hexadecimal do checkmark (✓) */
-        margin-right: 5px; /* Espaço entre o ícone e o texto do label */
-    }
-.checks{
-  float:left;
-  margin-top:20px;
-  margin-right:10px;
+  content: "\2713";
+  /* Código hexadecimal do checkmark (✓) */
+  margin-right: 5px;
+  /* Espaço entre o ícone e o texto do label */
 }
+
+.checks {
+  float: left;
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
 .checks:before {
   content: "";
   display: inline-block;
-  width: 150%; /* Valor maior que 100% para aumentar o tamanho */
-  height: 150%; /* Valor maior que 100% para aumentar o tamanho */
-  transform: scale(0.67); /* Reduzir o tamanho para caber no espaço original */
-  
+  width: 150%;
+  /* Valor maior que 100% para aumentar o tamanho */
+  height: 150%;
+  /* Valor maior que 100% para aumentar o tamanho */
+  transform: scale(0.67);
+  /* Reduzir o tamanho para caber no espaço original */
+
 }
+
 label {
   /* Definir o estilo visual do checkbox */
   display: inline-block;
-  width: 20px; /* Largura desejada do checkbox */
-  height: 20px; /* Altura desejada do checkbox */
-  background-color: #ccc; /* Cor de fundo do checkbox */
-  border-radius: 3px; /* Borda arredondada do checkbox */
-  cursor: pointer; /* Alterar o cursor ao passar o mouse */
-}
-input[type="checkbox"]:checked + label {
-  background-color: #0f0; /* Cor de fundo quando marcado */
-  }
-input[type="checkbox"]:checked + .checks:before  {
-    content: "\2713";
+  width: 20px;
+  /* Largura desejada do checkbox */
+  height: 20px;
+  /* Altura desejada do checkbox */
+  background-color: #ccc;
+  /* Cor de fundo do checkbox */
+  border-radius: 3px;
+  /* Borda arredondada do checkbox */
+  cursor: pointer;
+  /* Alterar o cursor ao passar o mouse */
 }
 
-li button {  
+input[type="checkbox"]:checked+label {
+  background-color: #0f0;
+  /* Cor de fundo quando marcado */
+}
+
+input[type="checkbox"]:checked+.checks:before {
+  content: "\2713";
+}
+
+li button {
   color: #ffffff;
   border: none;
-  margin-top:0px;
-  margin-right:5px;
+  margin-top: 0px;
+  margin-right: 5px;
   padding: 5px 10px;
   font-size: 14px;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  width: 30px;
+  height: 30px;
 }
 
 button.remove-btn:hover {
   background-color: #d30000;
 }
-button.remove-btn{
+
+button.remove-btn {
   background-color: #ff3b3b;
 }
+
 button.editar-btn {
-  background-color: #3bccff;  
+  background-color: #3bccff;
 }
 
 button.editar-btn:hover {
   background-color: #00d3a3;
 }
+
 span[contenteditable="true"] {
-            border: 1px solid blue; 
-            background-color: #f0f0f0; 
+  border: 1px solid blue;
+  background-color: #f0f0f0;
   padding: 5px;
   border-radius: 4px;
-        }
+}
+
+#category-select{
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s ease;
+}

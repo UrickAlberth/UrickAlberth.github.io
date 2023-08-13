@@ -226,3 +226,14 @@ footer a:hover {
 #espaco{
   height:35px;
 }
+#verMais{
+  background: linear-gradient(to left, #0000ff22 , #00b4cc);
+  border:0;
+  margin:5px;
+  color:#fff;
+  cursor:pointer;
+  border-radius:3px;
+ }
+ #verMais:hover{
+  background: linear-gradient(to left, #00f , #00b4cc);
+  }

@@ -161,6 +161,7 @@ function carregarProjetos() {
       p.textContent = projeto.descricao;
       a.textContent = "Ver Projeto";
       a.href = projeto.projetoUrl;
+      a.target = "_blank";
       a.classList.add("project-link");
       img.src = projeto.imgUrl;
       img.width = 200;
@@ -181,3 +182,12 @@ function carregarProjetos() {
 // Chame a função para carregar os projetos ao carregar a página
 window.onload = carregarProjetos;
 
+function showFullProject() {
+  // Mostrar o conteúdo completo quando o botão for clicado
+  const fullProjectDiv = document.querySelector(".full-project");
+  fullProjectDiv.style.display = "block";
+
+  // Esconder o botão após mostrar o conteúdo completo
+  const continueButton = document.querySelector("button");
+  continueButton.style.display = "none";
+}

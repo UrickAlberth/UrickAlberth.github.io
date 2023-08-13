@@ -1,23 +1,43 @@
-body{
+body {
   background-color: black;
-  height:auto;
   color: white;
-  font-size: 45px;
+  font-size: 3.5vw; /* Usando vw (viewport width) para tamanho de fonte responsivo */
 }
-#caixa_hora,#caixa_minuto,#caixa_segundo{
-  padding: 5px;
-  background-color: rgb(15,15,15);
-  width: 240px;
-  height: 120px;
+
+#caixa_hora, #caixa_minuto, #caixa_segundo {
+  padding: 2vw;
+  background-color: rgb(15, 15, 15);
+  width: 45%; /* Usando porcentagem para largura responsiva */
+  max-width: 280px; /* Definindo uma largura máxima */
+  height: 18vw; /* Usando vw para altura responsiva */
   color: white;
-  display:inline-block;
+  display: inline-block;
   box-shadow: 5px 5px 5px gray;
+  margin: 1vw; /* Margem responsiva */
 }
-#caixa_data{
-  padding: 5px;
-  background-color: rgb(10,10,10);
-  width: 1420px;
-  height: 250px;
+
+#caixa_data {
+  padding: 2vw;
+  background-color: rgb(10, 10, 10);
+  width: 90%; /* Usando porcentagem para largura responsiva */
+  max-width: 1420px; /* Definindo uma largura máxima */
+  height: 30vw; /* Usando vw para altura responsiva */
   color: gray;
-  border-radius:10px;
+  border-radius: 1vw; /* Borda responsiva */
+  margin: 2vw auto; /* Margem responsiva */
+}
+
+/* Media query para telas menores */
+@media (max-width: 768px) {
+  #caixa_hora, #caixa_minuto, #caixa_segundo {
+    width: 100%;
+    height: auto;
+    margin: 1vw 0;
+  }
+  
+  #caixa_data {
+    width: 100%;
+    height: auto;
+    margin: 2vw 0;
+  }
 }
