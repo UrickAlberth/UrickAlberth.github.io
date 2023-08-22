@@ -50,7 +50,7 @@ spanCheck.appendChild(labelch);
 
       const span = document.createElement("span");
       span.setAttribute("id","text");
-      span.innerHTML = task.checked ? "<del>" + task.text + "</del>" : task.text;
+      span.innerHTML = task.checked ? "<del>" + task.text.replace(/\n/g, '<br>') + "</del>" : task.text.replace(/\n/g, '<br>');
       li.appendChild(span);
 
       const spanBtns =document.createElement("span");
