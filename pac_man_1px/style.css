@@ -1,0 +1,203 @@
+body{
+   background-color: #000000;
+  font-family: Gugi, sans-serif;
+}
+.container {    
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    background-color: #000000;
+	color:#ffffff;
+  display:none;
+}
+
+.game-container {
+    background-color: #111111;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  
+}
+
+.maze {
+    display: grid;
+    grid-template-columns: repeat(21, 40px); /* Ajuste conforme necessário */
+    gap: 2px; /* Espaçamento entre as células do labirinto */
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    background-color: #000000;
+    border: 1px solid #000000;  
+	display:flex;
+	align-items:center;
+	justify-content:center;
+transition:0.5s;
+  
+}
+
+.wall {
+    background-color: #000000;
+  border:1px solid blue;
+}
+.pacman img{
+	background:yellow;	
+  border-radius:100%;
+}
+.ghost{
+	
+}
+.ghostSuper img{
+  background-image: linear-gradient(purple, #0000ff);
+    border: 2px solid purple;
+}
+.power-up{
+background:blue;	
+  
+}
+.point{
+	background:#001515;
+}
+.controle{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+.setas{
+	background:#00a6ed;
+	box-shadow: 3px 3px #000000;
+	padding:10px;
+	border-radius:5px;
+	font-size:30px;
+	user-select:none;	
+}
+.setas:hover{
+		background:#000000;
+	box-shadow: 0px 0px #000000;
+	transition:0.5s;
+	
+}
+img{
+	width:30px;
+	height:30px;
+   border-radius:5px;
+}
+@media only screen and (max-width: 870px) {
+	img{
+	width:20px;
+	height:20px;
+}
+.cell {
+    width: 30px;
+    height: 30px;
+	}
+	.maze {
+    display: grid;
+    grid-template-columns: repeat(21, 30px); /* Ajuste conforme necessário */
+    gap: 1px; /* Espaçamento entre as células do labirinto */
+}
+}
+@media only screen and (max-width: 660px) {
+		img{
+	width:10px;
+	height:10px;
+}
+.cell {
+    width: 20px;
+    height: 20px;
+	}
+	.maze {
+    display: grid;
+    grid-template-columns: repeat(21, 20px); /* Ajuste conforme necessário */
+    gap: 1px; /* Espaçamento entre as células do labirinto */
+}
+}
+@media only screen and (max-width: 450px) {
+		img{
+	width:10px;
+	height:10px;
+}
+.cell {
+    width: 15px;
+    height: 15px;
+	}
+	.maze {
+    display: grid;
+    grid-template-columns: repeat(21, 15px); /* Ajuste conforme necessário */
+    gap: 1px; /* Espaçamento entre as células do labirinto */
+}
+}
+
+#f1 img {
+  background:cyan;
+}
+#f2 img {
+  background:red;
+}
+#f3 img {
+  background:pink;
+}
+#f4 img {
+  background:orange;
+}
+.menu {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transition: 2s;
+    overflow: hidden;
+    background: black;
+    text-align: center;
+}
+
+.menu #personagens {
+    color: blue;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.menu #personagens img {
+    width: 30px;
+    height: 30px;
+}
+
+.menu .descricao {
+    color: #ffffff;
+    padding: 10px;
+    text-align: left;
+}
+
+.menu button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: yellow;
+    border: none;
+    color: black;
+  font-family: Gugi, sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.menu button:hover {
+    background-color: #999900;
+  box-shadow: 0px 0px 5px 3px yellow;
+  color:#ffffff;
+}
+#up{
+  background-color: blue;
+   padding:10px;
+}
+@media (max-width: 768px) {
+    .menu #personagens {
+        width: 90%; /* Reduz ainda mais a largura para telas menores */  
+      min-width:400px;
+        margin-top: 10px;
+    }
+  
+}
+

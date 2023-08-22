@@ -1,0 +1,104 @@
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+    <title>Pac-Man Game</title>
+    
+  </head>
+  <body>
+    <div id="audio"></div>
+    <div class="menu">
+      <center>
+      <table id="personagens">
+    <tr>
+        <td><img style="background:yellow;" src="https://cdn.icon-icons.com/icons2/1897/PNG/512/pacman_120924.png" width="30px"></td>
+        <td>PAC-MAN</td>
+        <td class="descricao">Objetivo: Comer todos os pontos * e sobreviver</td>
+    </tr>
+    <tr>
+        <td><img style="background:cyan;" src="https://img.icons8.com/?size=512&id=Q6Sp70b0VxE1&format=png" width="30px"></td>
+        <td>FANTASMA</td>
+        <td class="descricao" rowspan="4">
+            Papel: Assombrar, encurralar e eliminar
+        </td>
+    </tr>
+    <tr>
+        <td><img style="background:red;" src="https://img.icons8.com/?size=512&id=Q6Sp70b0VxE1&format=png" width="30px"></td>
+        <td>FANTASMA</td>
+    </tr>
+    <tr>
+        <td><img style="background:pink;" src="https://img.icons8.com/?size=512&id=Q6Sp70b0VxE1&format=png" width="30px"></td>
+        <td>FANTASMA</td>
+    </tr>
+    <tr>
+        <td><img style="background:orange;" src="https://img.icons8.com/?size=512&id=Q6Sp70b0VxE1&format=png" width="30px"></td>
+        <td>FANTASMA</td>
+    </tr>
+    <tr>
+        <td><img style="background:#fff;border:2px solid purple" src="https://img.icons8.com/?size=512&id=Q6Sp70b0VxE1&format=png" width="30px"></td>
+        <td>SUPER FANTASMA</td>
+        <td class="descricao">
+            Habilidade: Ao ser derrotado, leva junto quem o derrotou
+        </td>
+    </tr>
+    <tr>
+        <td style="color:#fff;text-align: center;">
+            *
+        </td>
+        <td>
+            PONTOS
+        </td>
+        <td class="descricao">
+            Recompensa: Ganha 2 pontos por cada ponto coletado
+        </td>
+    </tr>
+    <tr>
+        <td style="color:#fff;text-align: center;"><span id="up">&#8902;</span></td>
+        <td> POWER-UP</td>
+        <td class="descricao"> Poder especial: Permite ao PAC-MAN comer fantasmas - Ganha 12 pontos ao derrotar um fantasma</td>
+    </tr>
+</table>
+
+        <button onclick="esconder()">
+          Play
+        </button>
+        </center>
+    </div>
+    <div class="container">
+      <div class="game-container">
+        <label>Pontos: </label><span id="pts">0</span> <label>Vidas: </label>
+        <span id="vidas">5</span>
+        <div class="maze">
+          <!-- Aqui você colocará os elementos do labirinto -->
+        </div>
+        <div class="controle">
+          <table>
+            <tr>
+              <td></td>
+              <td class="setas" onclick="movimentacao('ArrowUp')">🔼</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="setas" onclick="movimentacao('ArrowLeft')">◀️</td>
+              <td></td>
+              <td class="setas" onclick="movimentacao('ArrowRight')">▶️</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="setas" onclick="movimentacao('ArrowDown')">🔽</td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+        <button id="play" onclick="fundo()">
+          <img src="https://img.icons8.com/?size=512&id=381&format=png" />
+        </button>
+      </div>
+      <style id="adaptar"></style>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
