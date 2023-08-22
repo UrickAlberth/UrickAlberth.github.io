@@ -113,6 +113,13 @@ const projetos = {
       "Criei um projeto com relógios analógico e digital, exibindo a hora atual de forma clara e precisa. Os relógios são sincronizados com o horário do sistema e oferecem uma experiência visual agradável.",
     projetoUrl: "https://urickalberth.github.io/relogio_digital/",
     imgUrl: "https://urickalberth.github.io/relogio_digital/relogio_digital.png"
+  },
+  16: {
+    nome: "Jogo da Memória - Desafie sua Memória!:",
+    descricao:
+      "Este projeto é um jogo clássico da memória implementado com HTML, CSS e JavaScript. O objetivo do jogo é encontrar todos os pares de cartas iguais em um tabuleiro virando-as uma de cada vez. Cada vez que duas cartas são viradas, elas são comparadas. Se forem iguais, elas permanecem viradas e o jogador ganha pontos. Caso contrário, as cartas são desviradas e o jogador perde pontos. O jogo termina quando todos os pares são encontrados.",
+    projetoUrl: "https://urickalberth.github.io/jogo_da_memoria/",
+    imgUrl: "https://urickalberth.github.io/jogo_da_memoria/jogo_da_memoria.png"
   }
 };
 // Função para manipular o menu hamburguer
