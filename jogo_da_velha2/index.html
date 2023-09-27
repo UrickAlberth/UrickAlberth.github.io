@@ -1,0 +1,152 @@
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Jogo da Velha</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<h1>Jogo da Velha 2</h1>
+	<div>
+		<span id="ptX">0</span> Player1 <b>X</b> Vs <b>O</b> <span id="p2">Player2</span> <span id="ptO">0</span>
+		<div>Vez do jogador: <b><span id="currentPlayer">X</span></b></div>
+	</div>
+<div class="board">			
+	<div class="cell2" id="c1">		
+		<div class="board2">	
+			<div id='0' class="cell" onclick="makeMove(0,1)"></div>
+			<div id='1' class="cell" onclick="makeMove(1,2)"></div>
+			<div id='2' class="cell" onclick="makeMove(2,3)"></div>
+			<div id='3' class="cell" onclick="makeMove(3,4)"></div>
+			<div id='4' class="cell" onclick="makeMove(4,5)"></div>
+			<div id='5' class="cell" onclick="makeMove(5,6)"></div>
+			<div id='6' class="cell" onclick="makeMove(6,7)"></div>
+			<div id='7' class="cell" onclick="makeMove(7,8)"></div>
+			<div id='8' class="cell" onclick="makeMove(8,9)"></div>
+		</div>	
+	</div>		
+	<div class="cell2" id="c2">		
+		<div class="board2">	
+			<div id='9' class="cell" onclick="makeMove(9,1)"></div>
+			<div id='10' class="cell" onclick="makeMove(10,2)"></div>
+			<div id='11' class="cell" onclick="makeMove(11,3)"></div>
+			<div id='12' class="cell" onclick="makeMove(12,4)"></div>
+			<div id='13' class="cell" onclick="makeMove(13,5)"></div>
+			<div id='14' class="cell" onclick="makeMove(14,6)"></div>
+			<div id='15' class="cell" onclick="makeMove(15,7)"></div>
+			<div id='16' class="cell" onclick="makeMove(16,8)"></div>
+			<div id='17' class="cell" onclick="makeMove(17,9)"></div>
+		</div>	
+	</div>		
+	<div class="cell2" id="c3">		
+		<div class="board2">	
+			<div id='18' class="cell" onclick="makeMove(18,1)"></div>
+			<div id='19' class="cell" onclick="makeMove(19,2)"></div>
+			<div id='20' class="cell" onclick="makeMove(20,3)"></div>
+			<div id='21' class="cell" onclick="makeMove(21,4)"></div>
+			<div id='22' class="cell" onclick="makeMove(22,5)"></div>
+			<div id='23' class="cell" onclick="makeMove(23,6)"></div>
+			<div id='24' class="cell" onclick="makeMove(24,7)"></div>
+			<div id='25' class="cell" onclick="makeMove(25,8)"></div>
+			<div id='26' class="cell" onclick="makeMove(26,9)"></div>
+		</div>	
+	</div>		
+	<div class="cell2" id="c4">		
+		<div class="board2">	
+			<div id='27' class="cell" onclick="makeMove(27,1)"></div>
+			<div id='28' class="cell" onclick="makeMove(28,2)"></div>
+			<div id='29' class="cell" onclick="makeMove(29,3)"></div>
+			<div id='30' class="cell" onclick="makeMove(30,4)"></div>
+			<div id='31' class="cell" onclick="makeMove(31,5)"></div>
+			<div id='32' class="cell" onclick="makeMove(32,6)"></div>
+			<div id='33' class="cell" onclick="makeMove(33,7)"></div>
+			<div id='34' class="cell" onclick="makeMove(34,8)"></div>
+			<div id='35' class="cell" onclick="makeMove(35,9)"></div>
+		</div>	
+	</div>		
+	<div class="cell2" id="c5">		
+		<div class="board2">	
+			<div id='36' class="cell" onclick="makeMove(36,1)"></div>
+			<div id='37' class="cell" onclick="makeMove(37,2)"></div>
+			<div id='38' class="cell" onclick="makeMove(38,3)"></div>
+			<div id='39' class="cell" onclick="makeMove(39,4)"></div>
+			<div id='40' class="cell" onclick="makeMove(40,5)"></div>
+			<div id='41' class="cell" onclick="makeMove(41,6)"></div>
+			<div id='42' class="cell" onclick="makeMove(42,7)"></div>
+			<div id='43' class="cell" onclick="makeMove(43,8)"></div>
+			<div id='44' class="cell" onclick="makeMove(44,9)"></div>
+		</div>	
+	</div>		
+	<div class="cell2" id="c6">		
+		<div class="board2">	
+			<div id='45' class="cell" onclick="makeMove(45,1)"></div>
+			<div id='46' class="cell" onclick="makeMove(46,2)"></div>
+			<div id='47' class="cell" onclick="makeMove(47,3)"></div>
+			<div id='48' class="cell" onclick="makeMove(48,4)"></div>
+			<div id='49' class="cell" onclick="makeMove(49,5)"></div>
+			<div id='50' class="cell" onclick="makeMove(50,6)"></div>
+			<div id='51' class="cell" onclick="makeMove(51,7)"></div>
+			<div id='52' class="cell" onclick="makeMove(52,8)"></div>
+			<div id='53' class="cell" onclick="makeMove(53,9)"></div>
+		</div>	
+	</div>		
+	<div class="cell2" id="c7">		
+		<div class="board2">	
+			<div id='54' class="cell" onclick="makeMove(54,1)"></div>
+			<div id='55' class="cell" onclick="makeMove(55,2)"></div>
+			<div id='56' class="cell" onclick="makeMove(56,3)"></div>
+			<div id='57' class="cell" onclick="makeMove(57,4)"></div>
+			<div id='58' class="cell" onclick="makeMove(58,5)"></div>
+			<div id='59' class="cell" onclick="makeMove(59,6)"></div>
+			<div id='60' class="cell" onclick="makeMove(60,7)"></div>
+			<div id='61' class="cell" onclick="makeMove(61,8)"></div>
+			<div id='62' class="cell" onclick="makeMove(62,9)"></div>
+		</div>	
+	</div>		
+	<div class="cell2" id="c8">		
+		<div class="board2">	
+			<div id='63' class="cell" onclick="makeMove(63,1)"></div>
+			<div id='64' class="cell" onclick="makeMove(64,2)"></div>
+			<div id='65' class="cell" onclick="makeMove(65,3)"></div>
+			<div id='66' class="cell" onclick="makeMove(66,4)"></div>
+			<div id='67' class="cell" onclick="makeMove(67,5)"></div>
+			<div id='68' class="cell" onclick="makeMove(68,6)"></div>
+			<div id='69' class="cell" onclick="makeMove(69,7)"></div>
+			<div id='70' class="cell" onclick="makeMove(70,8)"></div>
+			<div id='71' class="cell" onclick="makeMove(71,9)"></div>
+		</div>	
+	</div>		
+	<div class="cell2" id="c9">		
+		<div class="board2">	
+			<div id='72' class="cell" onclick="makeMove(72,1)"></div>
+			<div id='73' class="cell" onclick="makeMove(73,2)"></div>
+			<div id='74' class="cell" onclick="makeMove(74,3)"></div>
+			<div id='75' class="cell" onclick="makeMove(75,4)"></div>
+			<div id='76' class="cell" onclick="makeMove(76,5)"></div>
+			<div id='77' class="cell" onclick="makeMove(77,6)"></div>
+			<div id='78' class="cell" onclick="makeMove(78,7)"></div>
+			<div id='79' class="cell" onclick="makeMove(79,8)"></div>
+			<div id='80' class="cell" onclick="makeMove(80,9)"></div>
+		</div>	
+	</div>		
+</div>			
+<div id="hidden">
+	<input id="pc" type="checkbox"> <label for="pc">Contra o Computador</label>
+	<br>
+	<div id="dificuldade">
+		<input type="radio" name="dificuldade" value="facil" id="facil">
+		<label for="facil">Fácil</label>
+		<input type="radio" name="dificuldade" value="medio" id="medio" checked>
+		<label for="medio">Médio</label>
+		<input type="radio" name="dificuldade" value="dificil" id="dificil">
+		<label for="dificil">Difícil</label>
+	</div>
+	</div>
+	<br><br>
+	<button onclick="zerarPts()">Zerar Pontuação</button>
+	<script src="script.js"></script>
+</body>
+
+</html>
