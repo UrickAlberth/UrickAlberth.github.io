@@ -75,7 +75,8 @@ const winCombinations = [
 	[56, 58, 60],
 	[63, 67, 71],
 	[65, 67, 69],
-	[72, 76, 80]
+	[72, 76, 80],
+	[74, 76, 78]
 ];
 
 function checkWin(player) {
@@ -94,8 +95,18 @@ function checkWin(player) {
 	return winningCombination !== null;
 }
 
-function checkDraw() {
-	return board.every((cell) => cell !== "");
+function checkDraw(index) {
+	var elementoPai = document.getElementById(index).parentNode;
+	let cont=0	
+	for (let i = 0; i < 9; i++) {
+		if (elementoPai.getElementsByClassName("cell")[i].textContent !== "") {
+			cont++
+		}
+		
+		
+	}
+	
+	return cont==9
 }
 
 let box = document.querySelector("#c1");
@@ -153,7 +164,7 @@ function makeMove(index, bx) {
 		}
 	}
 		checarVencedor();
-	} else if (checkDraw()) {
+	} else if (checkDraw(index)) {
 		var elementoPai = document.getElementById(index).parentNode;
 		elementoPai.innerText = "X/O";
 		//alert("Empate!");
