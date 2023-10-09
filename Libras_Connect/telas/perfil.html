@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        input {
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            align-self: flex-start;
+        }
+
+    </style>
+    <title>Libras</title>
+</head>
+
+<body class="d-flex vw-100 vh-100 col-12">
+    <div class="logo align-self-end col-1"></div>
+    <div class="direito d-flex flex-column align-items-center col-5">
+        <div class="perfil m-4"></div>
+
+        <div class="form d-flex flex-column align-items-center  m-1">
+            <label for="Nome">Nome</label>
+            <input type="text" placeholder="João Pedro" class="rounded p-2">
+            <label for="E-mail">E-mail</label>
+            <input type="text" placeholder="joaopedroliveira@industria.com.br" class="rounded p-2">
+            <label for="CPF">CPF</label>
+            <input type="text" placeholder="***.***.146-01" class="rounded p-2">
+            <label for="Senha">Senha</label>
+            <input type="text" placeholder="************" class="rounded  p-2">
+        </div>
+
+        <div class="botoes d-flex gap-5">
+            <a href="../index.html" class="btn btn-primary">Voltar</a>
+            <a class="btn btn-primary">Salvar</a>
+        </div>
+    </div>
+
+    <div class="esquerdo d-flex flex-column col-12 h-100 gap-5 p-4">
+        <div class="camera-gi d-flex col-5 h-50 rounded-2 justify-content-center align-items-center">
+            <p>Chamada GI</p>
+        </div>
+
+        <div class="bloco-inf d-flex w-100 h-25 align-items-center align-self-end">
+            <div class="camera-surdo d-flex h-100 w-25 rounded-2 justify-content-center align-items-center col-3">
+                <p>Câmera surdo</p>
+            </div>
+            <div class="icones d-flex justify-content-center align-items-center col-3">
+                <div class="icones-menores d-flex flex-wrap gap-4 m-3 align-items-center">
+                    <div class="icones-menores d-flex justify-content-center align-items-center gap-4 ">
+                        <a class="email" href=""></a>
+                        <a class="tarefas "></a>
+                    </div>
+                    <div class="icones-menores d-flex justify-content-center align-items-center gap-4 ">
+                        <a class="reuniao" href="telas/reuniao.html"></a>
+                        <a class="sos "></a>
+                    </div>
+                    <a class="teclado"></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
