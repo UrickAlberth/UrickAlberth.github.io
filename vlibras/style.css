@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.barra-lateral {
+    justify-content: space-between;
+}
+
+.perfil {
+    background-image: url(imagens/perfil.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 90px;
+    height: 90px;
+}
+
+.logo {
+    background-image: url(imagens/Captura_da_Web_3-10-2023_134812_www.canva.com-removebg-preview.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 90px;
+    height: 90px;
+}
+
+/**/
+
+
+
+.camera-surdo {
+    border: 3px solid #64b6cc;
+    background-color: #d7ecf1;
+}
+
+.icones-menores {
+    justify-content: space-around;
+}
+
+
+.email, .reuniao, .tarefas, .sos {
+    width: 50px;
+    height: 50px;
+    border: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/*icones*/
+.email {
+    background-image: url(imagens/o-email.png);
+}
+.reuniao {
+    background-image: url(imagens/encontro.png);
+}
+.tarefas {
+    background-image: url(imagens/lista-de-tarefas.png);
+}
+.sos {
+    background-image: url(imagens/sos.png);
+}
+.teclado {
+    background-image: url(imagens/teclado.png);
+    width: 87px;
+    height: 70px;
+    border: none;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.rec {
+    background-image: url(imagens/CapturadaWeb_3-10-2023_15172_www.canva.com.jpeg);
+    width: 190px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+/**/
+
+.camera-gi {
+    border: 3px solid #2c928d;
+    background-color: #d7efef;
+}
