@@ -183,20 +183,3 @@ async function predictWebcam() {
         window.requestAnimationFrame(predictWebcam);
     }
 }
-/********************************************************************
-// INTERAÇÃO COM FRASES
-********************************************************************/
-let frasesCamera = ["Oi?", "Bom dia!", "Boa Tarde!", "Me ajude!", "Irei ao banheiro", "Tchau até amanhã", "Acabei", "Gostei do projeto" , "SOS"];
-
-let lenCamera = document.querySelector("#legenda_camera");
-document.addEventListener("keydown", function (event) {
-    if (event.key === "1" || event.key === "2" || event.key === "3") {
-        let index = parseInt(event.key) - 1; // Converte a tecla pressionada em um índice
-        if (index >= 0 ) {
-            lenCamera.textContent = frasesCamera[index].toUpperCase();
-        }
-        setTimeout(function () {
-            lenCamera.textContent = "LEGENDA";
-        }, 10000);
-    }
-});
