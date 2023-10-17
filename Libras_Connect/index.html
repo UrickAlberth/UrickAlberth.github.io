@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Libras Connect</title>
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/vision_bundle.js"
+            crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+        <script>
+            new window.VLibras.Widget('https://vlibras.gov.br/app');
+        </script>
+        <style>
+            div[vw] {
+                position: static;
+                transform: none;
+                height: 100%;
+            }
+
+            [vw] [vw-plugin-wrapper] {
+                width: 900px;
+
+            }
+
+            [vw] .vp-enabled {
+                display: none;
+            }
+        </style>
+        <script type="module" src="./script.js"></script>
+        <title>Libras</title>
+    </head>
+
+    <body class="d-flex flex-nowrap container-fluid vh-100 vw-100 p-3 col-12 gap-1 justify-content-between">
+        <div class="barra-lateral d-flex flex-column align-items-center col-1">
+            <div class="perfil" style="width: 80px; height: 80px;"><a href="telas/perfil.html"
+                    style="text-decoration: none; width: 100%; height: 100%; display: block;"></a></div>
+            <div class="logo"></div>
+        </div>
+
+        <div class="meio grid col-5 justify-content-center">
+            <button id="webcamButton" class="mdc-button mdc-button--raised">
+                <span class="mdc-button__ripple"></span>
+                <span class="mdc-button__label">Ligar Webcam</span>
+            </button>
+            <div class="camera-surdo d-flex h-75 rounded-2 justify-content-center align-items-center">
+                <div id="liveView" class="videoView">
+                    <div style="position: relative;">
+                        <video id="webcam" autoplay playsinline></video>
+                        <canvas class="output_canvas" id="output_canvas" width="1280" height="720"
+                            style="position: absolute; left: 0px; top: 0px;"></canvas>
+                        <p id='gesture_output' class="output" >
+                    </div>
+                </div>
+            </div>
+            <div id="legenda_camera"> legenda</div>
+            <div class="icones d-flex justify-content-center align-content-center column-gap-3">
+                <div class="icones-menores container-fluid d-flex flex-wrap gap-3 m-3 align-items-center column-gap-1">
+                    <a class="email" href="telas/email.html"></a>
+                    <a class="tarefas" href="telas/tarefa.html"></a>
+                    <a class="reuniao" href="telas/reuniao.html"></a>
+                    <a class="sos "></a>
+                    <a class="teclado"></a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="direita">
+            <div class="camera-gi d-flex  rounded-2 justify-content-center align-items-center">
+                <div vw class="enabled" style="transform: none">
+                    <div vw-access-button class="active"></div>
+                    <div vw-plugin-wrapper>
+                        <div class="vw-plugin-top-wrapper"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <span id="inputText" contentEditable="true">Digite Seu Texto Aqui</span>
+            </div>
+        </div>
+
+
+
+
+        <script>
+            function posicaoVlibras() {
+                document.querySelector(".enabled").style = "transform: none";
+            }
+            setTimeout(function () {
+                posicaoVlibras();
+            }, 2000);
+
+            /********************************************************************
+            // INTERAÇÃO COM FRASES
+            ********************************************************************/
+            let frasesCamera = ["Oi?", "Bom dia!", "Boa Tarde!", "Me ajude!", "Irei ao banheiro", "Tchau até amanhã", "Acabei", "Gostei do projeto", "SOS"];
+
+            let lenCamera = document.querySelector("#legenda_camera");
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "1" || event.key === "2" || event.key === "3" || event.key === "4" || event.key === "5" || event.key === "6" || event.key === "7" || event.key === "8" || event.key === "9") {
+                    let index = parseInt(event.key) - 1; // Converte a tecla pressionada em um índice
+                    if (index >= 0) {
+                        lenCamera.textContent = frasesCamera[index].toUpperCase();
+                    }
+
+                }
+                if (event.key === "0") {
+                    lenCamera.textContent = "LEGENDA";
+                }
+            });
+
+            /********************************************************************
+            // TRADUZIR
+            ********************************************************************/
+            function traduzir() {
+                let texto = document.querySelector("#inputText").textContent;
+                let Boxtexto = document.querySelector("#inputText");
+                let editarBtn = document.querySelector("#ok");
+                if (editarBtn.textContent == "Editar") {
+                    Boxtexto.contentEditable = "true";
+                    editarBtn.textContent = "OK";
+                    console.log("xxxx")
+                } else {
+                    Boxtexto.contentEditable = "false";
+                    editarBtn.textContent = "Editar";
+                    console.log("yyyy")
+                }
+
+
+            }
+
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    </body>
+
+    </html>
+    <!-- partial -->
+    <script type="module" src="./script.js"></script>
+
+</body>
+
+</html>
