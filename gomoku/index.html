@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="PT-BR" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOMOKU</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h1>Gomoku</h1>
+<div id="main">
+	<div id="game">
+		<table id="gomoku">
+			<tbody>
+				<tr>
+					<td id="0-0" onclick="return play(0, 0);"></td>
+					<td id="1-0" onclick="return play(1, 0);"></td>
+					<td id="2-0" onclick="return play(2, 0);"></td>
+					<td id="3-0" onclick="return play(3, 0);"></td>
+					<td id="4-0" onclick="return play(4, 0);"></td>
+					<td id="5-0" onclick="return play(5, 0);"></td>
+					<td id="6-0" onclick="return play(6, 0);"></td>
+					<td id="7-0" onclick="return play(7, 0);"></td>
+					<td id="8-0" onclick="return play(8, 0);"></td>
+					<td id="9-0" onclick="return play(9, 0);"></td>
+					<td id="10-0" onclick="return play(10, 0);"></td>
+					<td id="11-0" onclick="return play(11, 0);"></td>
+					<td id="12-0" onclick="return play(12, 0);"></td>
+					<td id="13-0" onclick="return play(13, 0);"></td>
+					<td id="14-0" onclick="return play(14, 0);"></td>
+					<td id="15-0" onclick="return play(15, 0);"></td>
+					<td id="16-0" onclick="return play(16, 0);"></td>
+					<td id="17-0" onclick="return play(17, 0);"></td>
+					<td id="18-0" onclick="return play(18, 0);"></td>
+				</tr>
+				<tr>
+					<td id="0-1" onclick="return play(0, 1);"></td>
+					<td id="1-1" onclick="return play(1, 1);"></td>
+					<td id="2-1" onclick="return play(2, 1);"></td>
+					<td id="3-1" onclick="return play(3, 1);"></td>
+					<td id="4-1" onclick="return play(4, 1);"></td>
+					<td id="5-1" onclick="return play(5, 1);"></td>
+					<td id="6-1" onclick="return play(6, 1);"></td>
+					<td id="7-1" onclick="return play(7, 1);"></td>
+					<td id="8-1" onclick="return play(8, 1);"></td>
+					<td id="9-1" onclick="return play(9, 1);"></td>
+					<td id="10-1" onclick="return play(10, 1);"></td>
+					<td id="11-1" onclick="return play(11, 1);"></td>
+					<td id="12-1" onclick="return play(12, 1);"></td>
+					<td id="13-1" onclick="return play(13, 1);"></td>
+					<td id="14-1" onclick="return play(14, 1);"></td>
+					<td id="15-1" onclick="return play(15, 1);"></td>
+					<td id="16-1" onclick="return play(16, 1);"></td>
+					<td id="17-1" onclick="return play(17, 1);"></td>
+					<td id="18-1" onclick="return play(18, 1);"></td>
+				</tr>
+				<tr>
+					<td id="0-2" onclick="return play(0, 2);"></td>
+					<td id="1-2" onclick="return play(1, 2);"></td>
+					<td id="2-2" onclick="return play(2, 2);"></td>
+					<td id="3-2" onclick="return play(3, 2);"></td>
+					<td id="4-2" onclick="return play(4, 2);"></td>
+					<td id="5-2" onclick="return play(5, 2);"></td>
+					<td id="6-2" onclick="return play(6, 2);"></td>
+					<td id="7-2" onclick="return play(7, 2);"></td>
+					<td id="8-2" onclick="return play(8, 2);"></td>
+					<td id="9-2" onclick="return play(9, 2);"></td>
+					<td id="10-2" onclick="return play(10, 2);"></td>
+					<td id="11-2" onclick="return play(11, 2);"></td>
+					<td id="12-2" onclick="return play(12, 2);"></td>
+					<td id="13-2" onclick="return play(13, 2);"></td>
+					<td id="14-2" onclick="return play(14, 2);"></td>
+					<td id="15-2" onclick="return play(15, 2);"></td>
+					<td id="16-2" onclick="return play(16, 2);"></td>
+					<td id="17-2" onclick="return play(17, 2);"></td>
+					<td id="18-2" onclick="return play(18, 2);"></td>
+				</tr>
+				<tr>
+					<td id="0-3" onclick="return play(0, 3);"></td>
+					<td id="1-3" onclick="return play(1, 3);"></td>
+					<td id="2-3" onclick="return play(2, 3);"></td>
+					<td id="3-3" onclick="return play(3, 3);"></td>
+					<td id="4-3" onclick="return play(4, 3);"></td>
+					<td id="5-3" onclick="return play(5, 3);"></td>
+					<td id="6-3" onclick="return play(6, 3);"></td>
+					<td id="7-3" onclick="return play(7, 3);"></td>
+					<td id="8-3" onclick="return play(8, 3);"></td>
+					<td id="9-3" onclick="return play(9, 3);"></td>
+					<td id="10-3" onclick="return play(10, 3);"></td>
+					<td id="11-3" onclick="return play(11, 3);"></td>
+					<td id="12-3" onclick="return play(12, 3);"></td>
+					<td id="13-3" onclick="return play(13, 3);"></td>
+					<td id="14-3" onclick="return play(14, 3);"></td>
+					<td id="15-3" onclick="return play(15, 3);"></td>
+					<td id="16-3" onclick="return play(16, 3);"></td>
+					<td id="17-3" onclick="return play(17, 3);"></td>
+					<td id="18-3" onclick="return play(18, 3);"></td>
+				</tr>
+				<tr>
+					<td id="0-4" onclick="return play(0, 4);"></td>
+					<td id="1-4" onclick="return play(1, 4);"></td>
+					<td id="2-4" onclick="return play(2, 4);"></td>
+					<td id="3-4" onclick="return play(3, 4);"></td>
+					<td id="4-4" onclick="return play(4, 4);"></td>
+					<td id="5-4" onclick="return play(5, 4);"></td>
+					<td id="6-4" onclick="return play(6, 4);"></td>
+					<td id="7-4" onclick="return play(7, 4);"></td>
+					<td id="8-4" onclick="return play(8, 4);"></td>
+					<td id="9-4" onclick="return play(9, 4);"></td>
+					<td id="10-4" onclick="return play(10, 4);"></td>
+					<td id="11-4" onclick="return play(11, 4);"></td>
+					<td id="12-4" onclick="return play(12, 4);"></td>
+					<td id="13-4" onclick="return play(13, 4);"></td>
+					<td id="14-4" onclick="return play(14, 4);"></td>
+					<td id="15-4" onclick="return play(15, 4);"></td>
+					<td id="16-4" onclick="return play(16, 4);"></td>
+					<td id="17-4" onclick="return play(17, 4);"></td>
+					<td id="18-4" onclick="return play(18, 4);"></td>
+				</tr>
+				<tr>
+					<td id="0-5" onclick="return play(0, 5);"></td>
+					<td id="1-5" onclick="return play(1, 5);"></td>
+					<td id="2-5" onclick="return play(2, 5);"></td>
+					<td id="3-5" onclick="return play(3, 5);"></td>
+					<td id="4-5" onclick="return play(4, 5);"></td>
+					<td id="5-5" onclick="return play(5, 5);"></td>
+					<td id="6-5" onclick="return play(6, 5);"></td>
+					<td id="7-5" onclick="return play(7, 5);"></td>
+					<td id="8-5" onclick="return play(8, 5);"></td>
+					<td id="9-5" onclick="return play(9, 5);"></td>
+					<td id="10-5" onclick="return play(10, 5);"></td>
+					<td id="11-5" onclick="return play(11, 5);"></td>
+					<td id="12-5" onclick="return play(12, 5);"></td>
+					<td id="13-5" onclick="return play(13, 5);"></td>
+					<td id="14-5" onclick="return play(14, 5);"></td>
+					<td id="15-5" onclick="return play(15, 5);"></td>
+					<td id="16-5" onclick="return play(16, 5);"></td>
+					<td id="17-5" onclick="return play(17, 5);"></td>
+					<td id="18-5" onclick="return play(18, 5);"></td>
+				</tr>
+				<tr>
+					<td id="0-6" onclick="return play(0, 6);"></td>
+					<td id="1-6" onclick="return play(1, 6);"></td>
+					<td id="2-6" onclick="return play(2, 6);"></td>
+					<td id="3-6" onclick="return play(3, 6);"></td>
+					<td id="4-6" onclick="return play(4, 6);"></td>
+					<td id="5-6" onclick="return play(5, 6);"></td>
+					<td id="6-6" onclick="return play(6, 6);"></td>
+					<td id="7-6" onclick="return play(7, 6);"></td>
+					<td id="8-6" onclick="return play(8, 6);"></td>
+					<td id="9-6" onclick="return play(9, 6);"></td>
+					<td id="10-6" onclick="return play(10, 6);"></td>
+					<td id="11-6" onclick="return play(11, 6);"></td>
+					<td id="12-6" onclick="return play(12, 6);"></td>
+					<td id="13-6" onclick="return play(13, 6);"></td>
+					<td id="14-6" onclick="return play(14, 6);"></td>
+					<td id="15-6" onclick="return play(15, 6);"></td>
+					<td id="16-6" onclick="return play(16, 6);"></td>
+					<td id="17-6" onclick="return play(17, 6);"></td>
+					<td id="18-6" onclick="return play(18, 6);"></td>
+				</tr>
+				<tr>
+					<td id="0-7" onclick="return play(0, 7);"></td>
+					<td id="1-7" onclick="return play(1, 7);"></td>
+					<td id="2-7" onclick="return play(2, 7);"></td>
+					<td id="3-7" onclick="return play(3, 7);"></td>
+					<td id="4-7" onclick="return play(4, 7);"></td>
+					<td id="5-7" onclick="return play(5, 7);"></td>
+					<td id="6-7" onclick="return play(6, 7);"></td>
+					<td id="7-7" onclick="return play(7, 7);"></td>
+					<td id="8-7" onclick="return play(8, 7);"></td>
+					<td id="9-7" onclick="return play(9, 7);"></td>
+					<td id="10-7" onclick="return play(10, 7);"></td>
+					<td id="11-7" onclick="return play(11, 7);"></td>
+					<td id="12-7" onclick="return play(12, 7);"></td>
+					<td id="13-7" onclick="return play(13, 7);"></td>
+					<td id="14-7" onclick="return play(14, 7);"></td>
+					<td id="15-7" onclick="return play(15, 7);"></td>
+					<td id="16-7" onclick="return play(16, 7);"></td>
+					<td id="17-7" onclick="return play(17, 7);"></td>
+					<td id="18-7" onclick="return play(18, 7);"></td>
+				</tr>
+				<tr>
+					<td id="0-8" onclick="return play(0, 8);"></td>
+					<td id="1-8" onclick="return play(1, 8);"></td>
+					<td id="2-8" onclick="return play(2, 8);"></td>
+					<td id="3-8" onclick="return play(3, 8);"></td>
+					<td id="4-8" onclick="return play(4, 8);"></td>
+					<td id="5-8" onclick="return play(5, 8);"></td>
+					<td id="6-8" onclick="return play(6, 8);"></td>
+					<td id="7-8" onclick="return play(7, 8);"></td>
+					<td id="8-8" onclick="return play(8, 8);"></td>
+					<td id="9-8" onclick="return play(9, 8);"></td>
+					<td id="10-8" onclick="return play(10, 8);"></td>
+					<td id="11-8" onclick="return play(11, 8);"></td>
+					<td id="12-8" onclick="return play(12, 8);"></td>
+					<td id="13-8" onclick="return play(13, 8);"></td>
+					<td id="14-8" onclick="return play(14, 8);"></td>
+					<td id="15-8" onclick="return play(15, 8);"></td>
+					<td id="16-8" onclick="return play(16, 8);"></td>
+					<td id="17-8" onclick="return play(17, 8);"></td>
+					<td id="18-8" onclick="return play(18, 8);"></td>
+				</tr>
+				<tr>
+					<td id="0-9" onclick="return play(0, 9);"></td>
+					<td id="1-9" onclick="return play(1, 9);"></td>
+					<td id="2-9" onclick="return play(2, 9);"></td>
+					<td id="3-9" onclick="return play(3, 9);"></td>
+					<td id="4-9" onclick="return play(4, 9);"></td>
+					<td id="5-9" onclick="return play(5, 9);"></td>
+					<td id="6-9" onclick="return play(6, 9);"></td>
+					<td id="7-9" onclick="return play(7, 9);"></td>
+					<td id="8-9" onclick="return play(8, 9);"></td>
+					<td id="9-9" onclick="return play(9, 9);"></td>
+					<td id="10-9" onclick="return play(10, 9);"></td>
+					<td id="11-9" onclick="return play(11, 9);"></td>
+					<td id="12-9" onclick="return play(12, 9);"></td>
+					<td id="13-9" onclick="return play(13, 9);"></td>
+					<td id="14-9" onclick="return play(14, 9);"></td>
+					<td id="15-9" onclick="return play(15, 9);"></td>
+					<td id="16-9" onclick="return play(16, 9);"></td>
+					<td id="17-9" onclick="return play(17, 9);"></td>
+					<td id="18-9" onclick="return play(18, 9);"></td>
+				</tr>
+				<tr>
+					<td id="0-10" onclick="return play(0, 10);"></td>
+					<td id="1-10" onclick="return play(1, 10);"></td>
+					<td id="2-10" onclick="return play(2, 10);"></td>
+					<td id="3-10" onclick="return play(3, 10);"></td>
+					<td id="4-10" onclick="return play(4, 10);"></td>
+					<td id="5-10" onclick="return play(5, 10);"></td>
+					<td id="6-10" onclick="return play(6, 10);"></td>
+					<td id="7-10" onclick="return play(7, 10);"></td>
+					<td id="8-10" onclick="return play(8, 10);"></td>
+					<td id="9-10" onclick="return play(9, 10);"></td>
+					<td id="10-10" onclick="return play(10, 10);"></td>
+					<td id="11-10" onclick="return play(11, 10);"></td>
+					<td id="12-10" onclick="return play(12, 10);"></td>
+					<td id="13-10" onclick="return play(13, 10);"></td>
+					<td id="14-10" onclick="return play(14, 10);"></td>
+					<td id="15-10" onclick="return play(15, 10);"></td>
+					<td id="16-10" onclick="return play(16, 10);"></td>
+					<td id="17-10" onclick="return play(17, 10);"></td>
+					<td id="18-10" onclick="return play(18, 10);"></td>
+				</tr>
+				<tr>
+					<td id="0-11" onclick="return play(0, 11);"></td>
+					<td id="1-11" onclick="return play(1, 11);"></td>
+					<td id="2-11" onclick="return play(2, 11);"></td>
+					<td id="3-11" onclick="return play(3, 11);"></td>
+					<td id="4-11" onclick="return play(4, 11);"></td>
+					<td id="5-11" onclick="return play(5, 11);"></td>
+					<td id="6-11" onclick="return play(6, 11);"></td>
+					<td id="7-11" onclick="return play(7, 11);"></td>
+					<td id="8-11" onclick="return play(8, 11);"></td>
+					<td id="9-11" onclick="return play(9, 11);"></td>
+					<td id="10-11" onclick="return play(10, 11);"></td>
+					<td id="11-11" onclick="return play(11, 11);"></td>
+					<td id="12-11" onclick="return play(12, 11);"></td>
+					<td id="13-11" onclick="return play(13, 11);"></td>
+					<td id="14-11" onclick="return play(14, 11);"></td>
+					<td id="15-11" onclick="return play(15, 11);"></td>
+					<td id="16-11" onclick="return play(16, 11);"></td>
+					<td id="17-11" onclick="return play(17, 11);"></td>
+					<td id="18-11" onclick="return play(18, 11);"></td>
+				</tr>
+				<tr>
+					<td id="0-12" onclick="return play(0, 12);"></td>
+					<td id="1-12" onclick="return play(1, 12);"></td>
+					<td id="2-12" onclick="return play(2, 12);"></td>
+					<td id="3-12" onclick="return play(3, 12);"></td>
+					<td id="4-12" onclick="return play(4, 12);"></td>
+					<td id="5-12" onclick="return play(5, 12);"></td>
+					<td id="6-12" onclick="return play(6, 12);"></td>
+					<td id="7-12" onclick="return play(7, 12);"></td>
+					<td id="8-12" onclick="return play(8, 12);"></td>
+					<td id="9-12" onclick="return play(9, 12);"></td>
+					<td id="10-12" onclick="return play(10, 12);"></td>
+					<td id="11-12" onclick="return play(11, 12);"></td>
+					<td id="12-12" onclick="return play(12, 12);"></td>
+					<td id="13-12" onclick="return play(13, 12);"></td>
+					<td id="14-12" onclick="return play(14, 12);"></td>
+					<td id="15-12" onclick="return play(15, 12);"></td>
+					<td id="16-12" onclick="return play(16, 12);"></td>
+					<td id="17-12" onclick="return play(17, 12);"></td>
+					<td id="18-12" onclick="return play(18, 12);"></td>
+				</tr>
+				<tr>
+					<td id="0-13" onclick="return play(0, 13);"></td>
+					<td id="1-13" onclick="return play(1, 13);"></td>
+					<td id="2-13" onclick="return play(2, 13);"></td>
+					<td id="3-13" onclick="return play(3, 13);"></td>
+					<td id="4-13" onclick="return play(4, 13);"></td>
+					<td id="5-13" onclick="return play(5, 13);"></td>
+					<td id="6-13" onclick="return play(6, 13);"></td>
+					<td id="7-13" onclick="return play(7, 13);"></td>
+					<td id="8-13" onclick="return play(8, 13);"></td>
+					<td id="9-13" onclick="return play(9, 13);"></td>
+					<td id="10-13" onclick="return play(10, 13);"></td>
+					<td id="11-13" onclick="return play(11, 13);"></td>
+					<td id="12-13" onclick="return play(12, 13);"></td>
+					<td id="13-13" onclick="return play(13, 13);"></td>
+					<td id="14-13" onclick="return play(14, 13);"></td>
+					<td id="15-13" onclick="return play(15, 13);"></td>
+					<td id="16-13" onclick="return play(16, 13);"></td>
+					<td id="17-13" onclick="return play(17, 13);"></td>
+					<td id="18-13" onclick="return play(18, 13);"></td>
+				</tr>
+				<tr>
+					<td id="0-14" onclick="return play(0, 14);"></td>
+					<td id="1-14" onclick="return play(1, 14);"></td>
+					<td id="2-14" onclick="return play(2, 14);"></td>
+					<td id="3-14" onclick="return play(3, 14);"></td>
+					<td id="4-14" onclick="return play(4, 14);"></td>
+					<td id="5-14" onclick="return play(5, 14);"></td>
+					<td id="6-14" onclick="return play(6, 14);"></td>
+					<td id="7-14" onclick="return play(7, 14);"></td>
+					<td id="8-14" onclick="return play(8, 14);"></td>
+					<td id="9-14" onclick="return play(9, 14);"></td>
+					<td id="10-14" onclick="return play(10, 14);"></td>
+					<td id="11-14" onclick="return play(11, 14);"></td>
+					<td id="12-14" onclick="return play(12, 14);"></td>
+					<td id="13-14" onclick="return play(13, 14);"></td>
+					<td id="14-14" onclick="return play(14, 14);"></td>
+					<td id="15-14" onclick="return play(15, 14);"></td>
+					<td id="16-14" onclick="return play(16, 14);"></td>
+					<td id="17-14" onclick="return play(17, 14);"></td>
+					<td id="18-14" onclick="return play(18, 14);"></td>
+				</tr>
+				<tr>
+					<td id="0-15" onclick="return play(0, 15);"></td>
+					<td id="1-15" onclick="return play(1, 15);"></td>
+					<td id="2-15" onclick="return play(2, 15);"></td>
+					<td id="3-15" onclick="return play(3, 15);"></td>
+					<td id="4-15" onclick="return play(4, 15);"></td>
+					<td id="5-15" onclick="return play(5, 15);"></td>
+					<td id="6-15" onclick="return play(6, 15);"></td>
+					<td id="7-15" onclick="return play(7, 15);"></td>
+					<td id="8-15" onclick="return play(8, 15);"></td>
+					<td id="9-15" onclick="return play(9, 15);"></td>
+					<td id="10-15" onclick="return play(10, 15);"></td>
+					<td id="11-15" onclick="return play(11, 15);"></td>
+					<td id="12-15" onclick="return play(12, 15);"></td>
+					<td id="13-15" onclick="return play(13, 15);"></td>
+					<td id="14-15" onclick="return play(14, 15);"></td>
+					<td id="15-15" onclick="return play(15, 15);"></td>
+					<td id="16-15" onclick="return play(16, 15);"></td>
+					<td id="17-15" onclick="return play(17, 15);"></td>
+					<td id="18-15" onclick="return play(18, 15);"></td>
+				</tr>
+				<tr>
+					<td id="0-16" onclick="return play(0, 16);"></td>
+					<td id="1-16" onclick="return play(1, 16);"></td>
+					<td id="2-16" onclick="return play(2, 16);"></td>
+					<td id="3-16" onclick="return play(3, 16);"></td>
+					<td id="4-16" onclick="return play(4, 16);"></td>
+					<td id="5-16" onclick="return play(5, 16);"></td>
+					<td id="6-16" onclick="return play(6, 16);"></td>
+					<td id="7-16" onclick="return play(7, 16);"></td>
+					<td id="8-16" onclick="return play(8, 16);"></td>
+					<td id="9-16" onclick="return play(9, 16);"></td>
+					<td id="10-16" onclick="return play(10, 16);"></td>
+					<td id="11-16" onclick="return play(11, 16);"></td>
+					<td id="12-16" onclick="return play(12, 16);"></td>
+					<td id="13-16" onclick="return play(13, 16);"></td>
+					<td id="14-16" onclick="return play(14, 16);"></td>
+					<td id="15-16" onclick="return play(15, 16);"></td>
+					<td id="16-16" onclick="return play(16, 16);"></td>
+					<td id="17-16" onclick="return play(17, 16);"></td>
+					<td id="18-16" onclick="return play(18, 16);"></td>
+				</tr>
+				<tr>
+					<td id="0-17" onclick="return play(0, 17);"></td>
+					<td id="1-17" onclick="return play(1, 17);"></td>
+					<td id="2-17" onclick="return play(2, 17);"></td>
+					<td id="3-17" onclick="return play(3, 17);"></td>
+					<td id="4-17" onclick="return play(4, 17);"></td>
+					<td id="5-17" onclick="return play(5, 17);"></td>
+					<td id="6-17" onclick="return play(6, 17);"></td>
+					<td id="7-17" onclick="return play(7, 17);"></td>
+					<td id="8-17" onclick="return play(8, 17);"></td>
+					<td id="9-17" onclick="return play(9, 17);"></td>
+					<td id="10-17" onclick="return play(10, 17);"></td>
+					<td id="11-17" onclick="return play(11, 17);"></td>
+					<td id="12-17" onclick="return play(12, 17);"></td>
+					<td id="13-17" onclick="return play(13, 17);"></td>
+					<td id="14-17" onclick="return play(14, 17);"></td>
+					<td id="15-17" onclick="return play(15, 17);"></td>
+					<td id="16-17" onclick="return play(16, 17);"></td>
+					<td id="17-17" onclick="return play(17, 17);"></td>
+					<td id="18-17" onclick="return play(18, 17);"></td>
+				</tr>
+				<tr>
+					<td id="0-18" onclick="return play(0, 18);"></td>
+					<td id="1-18" onclick="return play(1, 18);"></td>
+					<td id="2-18" onclick="return play(2, 18);"></td>
+					<td id="3-18" onclick="return play(3, 18);"></td>
+					<td id="4-18" onclick="return play(4, 18);"></td>
+					<td id="5-18" onclick="return play(5, 18);"></td>
+					<td id="6-18" onclick="return play(6, 18);"></td>
+					<td id="7-18" onclick="return play(7, 18);"></td>
+					<td id="8-18" onclick="return play(8, 18);"></td>
+					<td id="9-18" onclick="return play(9, 18);"></td>
+					<td id="10-18" onclick="return play(10, 18);"></td>
+					<td id="11-18" onclick="return play(11, 18);"></td>
+					<td id="12-18" onclick="return play(12, 18);"></td>
+					<td id="13-18" onclick="return play(13, 18);"></td>
+					<td id="14-18" onclick="return play(14, 18);"></td>
+					<td id="15-18" onclick="return play(15, 18);"></td>
+					<td id="16-18" onclick="return play(16, 18);"></td>
+					<td id="17-18" onclick="return play(17, 18);"></td>
+					<td id="18-18" onclick="return play(18, 18);"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="board">
+		<div id="result">
+			Placar
+			<div id="score">
+				<span id="scorePlayer1" title="Your score">0</span><span class="delimiter">:</span>
+				<span id="scorePlayer2" title="Computer score">0</span>
+			</div>
+			<div>
+				<span id="namePlayer1" title="That's you">Player 1</span><span class="delimiter"></span>
+				<span id="namePlayer2" title="Computer player">Player 2</span>
+			</div>
+		</div>
+		<div id="control">
+			<button type="button" name="startNewGameButton" value="startNewGameButton" onclick="startNewGame();">Start New Game</button>
+		</div>
+	</div>
+</div>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>

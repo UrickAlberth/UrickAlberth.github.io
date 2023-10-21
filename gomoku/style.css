@@ -1,0 +1,319 @@
+html,body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif,-apple-system,"Roboto";
+    background: #f5f6f8;
+    color: #1d1d1f;
+    height: 100%;
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    text-size-adjust: none
+}
+
+html {
+    overflow-y: scroll
+}
+
+* {
+    -webkit-tap-highlight-color: transparent
+}
+
+h1 {
+    text-align: center;
+    margin: 1.2em 0 1.4em 0
+}
+
+table#gomoku {
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+table#gomoku td {
+    cursor: pointer;
+    white-space: nowrap;
+    width: 20px;
+    height: 20px;
+    border: .01em solid navy !important;
+    vertical-align: middle;
+    text-align: center
+}
+
+table#gomoku td .move {
+    display: block;
+    margin: 0 auto;
+    width: 84%;
+    height: 84%;
+    border-radius: 50%
+}
+
+table#gomoku td .user-move {
+    background-color: royalblue
+}
+
+table#gomoku td .comp-move {
+    background-color: tomato
+}
+
+table#gomoku td .user-win {
+    background-color: cyan
+}
+
+table#gomoku td .comp-win {
+    background-color: firebrick
+}
+
+#main {
+    max-width: 760px;
+    margin: 0 auto 3em auto;
+    padding: 0 1em
+}
+
+#game {
+    display: inline-block
+}
+
+#board {
+    float: right
+}
+
+#result {
+    font-size: 1.4em;
+    text-align: center;
+    color: navy
+}
+
+#score {
+    margin: 1em 0 .32em 0
+}
+
+#result span {
+    display: inline-block;
+    text-align: center
+}
+
+#control {
+    margin: 4em 0 1.4em 0;
+    text-align: center
+}
+
+#control button {
+  padding: .32em;
+  color: navy;
+  background: linear-gradient(45deg, royalblue, tomato);
+  background-size: 100% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  border: 1px solid black;
+	border-radius:3px;
+	cursor:pointer;
+}
+
+#control button:hover {
+	border: 1px solid red;
+}
+
+
+.delimiter {
+    width: 2rem
+}
+
+#scorePlayer1,#scorePlayer2,.delimiter {
+    font-size: 1.8em
+}
+
+#scorePlayer1,#scorePlayer2,#namePlayer1,#namePlayer2 {
+    width: 5rem
+}
+
+#namePlayer1,#namePlayer2 {
+    font-size: 1.4rem
+}
+
+#scorePlayer1,#namePlayer1 {
+    color: royalblue
+}
+
+#scorePlayer2,#namePlayer2 {
+    color: tomato
+}
+
+@media screen and (max-width: 760px) {
+    #main {
+        margin-bottom:1em;
+        padding: 0
+    }
+
+    #board {
+        float: unset;
+        width: max-content;
+        margin: 0 auto;
+        margin-top: 2em
+    }
+
+    #game {
+        display: unset;
+        text-align: center;
+        margin: 0 auto;
+        width: max-content
+    }
+
+    #control {
+        margin-top: 2em
+    }
+}
+
+@media screen and (max-width: 460px) {
+    table#gomoku td {
+        width:18px;
+        height: 18px
+    }
+}
+
+@media screen and (max-width: 400px) {
+    table#gomoku td {
+        width:16px;
+        height: 16px
+    }
+}
+
+@media screen and (max-width: 380px) {
+    table#gomoku td {
+        width:14px;
+        height: 14px
+    }
+}
+
+@media screen and (max-width: 320px) {
+    table#gomoku td {
+        width:12px;
+        height: 12px
+    }
+}
+
+.help {
+    margin: 1em auto 4em auto;
+    max-width: 760px;
+    padding: 1em
+}
+
+.help p {
+    margin: 1em 0;
+    text-align: justify;
+    text-indent: 1.52em;
+    line-height: 1.42em
+}
+
+.red {
+    color: red
+}
+
+.blue {
+    color: blue
+}
+
+.bold {
+    font-weight: bold
+}
+
+.italic {
+    font-style: italic
+}
+
+.description {
+    margin: -2em auto 0 auto;
+    max-width: 760px;
+    padding: 1em
+}
+
+p.notes {
+    margin: 1em 0;
+    text-align: justify;
+    text-indent: 1.52em;
+    line-height: 1.64em
+}
+
+h2.notes-title {
+    font-size: 1.32em;
+    margin: 1.72em 0 .72em 0;
+    text-align: justify;
+    text-indent: 1.52rem;
+    line-height: 1.64rem
+}
+
+ul.notes-list {
+    list-style: circle inside;
+    margin: .72em 0;
+    text-align: justify;
+    text-indent: 1.52em;
+    line-height: 1.64em
+}
+
+ul.notes-list li {
+    list-style: circle inside
+}
+
+div.link-home {
+    text-align: right;
+    margin: 2em 0
+}
+
+div.link-home a {
+    font-weight: bold
+}
+
+.cc_banner-wrapper {
+    position: relative;
+    z-index: 9001
+}
+
+.cc_container .cc_btn {
+    background-color: #dcdcdc;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 1.5em;
+    margin-left: .72em;
+    max-width: 120px;
+    padding: .42em .72em;
+    text-align: center;
+    white-space: nowrap
+}
+
+.cc_container .cc_message {
+    display: inline-block;
+    text-align: left;
+    font-size: 1em;
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0
+}
+
+.cc_container {
+    background: #f8f8ff;
+    bottom: 0;
+    box-sizing: border-box;
+    left: 0;
+    overflow: hidden;
+    padding: .72em;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.cc_container a,.cc_container a:visited {
+    color: #00f;
+    text-decoration: none
+}
+
+@media print {
+    .cc_banner-wrapper,.cc_container {
+        display: none
+    }
+}
