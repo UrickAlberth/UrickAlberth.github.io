@@ -1,0 +1,275 @@
+body {
+  background: #123;
+}
+
+h2 {
+  color: #666;
+  font-family: monospace;
+  text-align: center;
+}
+
+.background {
+  table-layout: fixed;
+  border-spacing: 0;
+}
+
+.background td {
+  padding: 0;
+}
+
+.lava,
+.actor {
+  background: #ff0000;
+}
+
+.wall {
+  background: deepskyblue;
+  border: solid 3px #333;
+  box-sizing: content-box;
+}
+
+.actor {
+  position: absolute;
+}
+
+.coin {
+  background: silver;
+  border-radius: 50%;
+  border:1px solid yellow;
+}
+
+.player {
+  background: url(https://raw.githubusercontent.com/UrickAlberth/primeiro/main/blockman.png);
+  background-size: 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: none;
+}
+
+.lost .player {
+  background: #a04040;
+}
+
+.won .player {
+  background: green;
+}
+
+.game {
+  position: relative;
+  overflow: hidden;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.fases {
+    max-height: 500px; /* Defina a altura máxima para a navegação */
+    overflow-y: auto; /* Adiciona uma barra de rolagem vertical quando necessário */
+}
+
+.fases ul {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Inicialmente 2 colunas */
+    gap: 20px; /* Espaço entre os itens */
+    padding: 0;
+    margin: 0;
+}
+
+.fases ul li {
+    margin: 10px;
+}
+
+.fases ul li .btn {
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #00a6ed, #123);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, background 0.3s;
+    overflow: hidden;
+}
+
+.fases ul li .btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: width 0.3s, height 0.3s, top 0.3s, left 0.3s;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.fases ul li .btn:hover::before {
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 50%;
+}
+
+.fases ul li .btn:hover {
+    transform: scale(1.1);
+    background: linear-gradient(45deg, #00a6ed, #123);
+}
+.fases .Fatual{
+	border:1px solid yellow;
+}
+
+.fases ul li .Fbloq{
+	background:gray;
+	pointer-events: none;
+}
+
+/* Media queries para ajustar o número de colunas */
+@media (min-width: 600px) {
+    .fases ul {
+        grid-template-columns: repeat(3, 1fr); /* 3 colunas para telas maiores que 600px */
+    }
+}
+
+@media (min-width: 900px) {
+    .fases ul {
+        grid-template-columns: repeat(4, 1fr); /* 4 colunas para telas maiores que 900px */
+    }
+}
+
+@media (min-width: 1200px) {
+    .fases ul {
+        grid-template-columns: repeat(5, 1fr); /* 5 colunas para telas maiores que 1200px */
+    }
+}
+
+.time,
+.time::after {
+  display: block;
+  position: absolute;
+  background: #ffd54f;
+  left: 0;
+  right: 0;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  line-height: 47px;
+  font-size: 22px;
+  margin: auto;
+  bottom: -5px;
+  box-shadow: 0 0 0 10px #ffd54f;
+  text-align: center;
+}
+.time::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: -4px;
+  background: none;
+  border-top-color: #000;
+}
+.time.start::after {
+  -webkit-animation: rotate 1s linear infinite;
+  animation: rotate 1s linear infinite;
+}
+
+.pontos {
+  height: 20px;
+  color: #fff;
+}
+
+#modal,
+.menu {
+  position: absolute;
+  background-color: #123;
+  color: #fff;
+  width: 0;
+  height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: 1s;
+  z-index: 999;
+}
+button {
+  background-color: #fff;
+  color: #769656;
+  border: 0;
+  width: 80px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  box-shadow: 0px 2px 10px 2px #fff;
+}
+
+.menu {
+  width: 100%;
+  height: 100%;
+}
+
+.controle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+   
+  
+}
+
+.controle div,
+.controle table {
+  width: 100%;
+  height: 80px;
+}
+
+.setas {
+  background: #00a6ed;
+  box-shadow: 3px 3px #000;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 30px;
+  user-select: none;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+}
+.setas:hover {
+  box-shadow: 0px 0px #000;
+}
+#up::before,
+#left::before,
+#right::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#up::before {
+  border-width: 0 12.5px 25px 12.5px;
+  border-color: transparent transparent black transparent;
+}
+
+#left::before {
+  border-width: 12.5px 25px 12.5px 0;
+  border-color: transparent black transparent transparent;
+}
+
+#right::before {
+  border-width: 12.5px 0 12.5px 25px;
+  border-color: transparent transparent transparent black;
+}
