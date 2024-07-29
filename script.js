@@ -149,6 +149,13 @@ const projetos = {
     projetoUrl: "https://urickalberth.github.io/snake/",
     imgUrl: "https://urickalberth.github.io/snake/snake.png"
   },
+  21: {
+    nome: "PacMan 1px",
+    descricao:
+      "Este projeto consiste em uma recriação do clássico jogo de arcade Pac-Man, onde o jogador controla o personagem Pac-Man e tenta comer todos os pontos no labirinto enquanto evita os fantasmas. O jogo foi implementado utilizando HTML, CSS e JavaScript.",
+    projetoUrl: "https://urickalberth.github.io/pac_man_1px/",
+    imgUrl: "https://urickalberth.github.io/pac_man_1px/pac_man_1px.png"
+  },
 
 };
 // Função para manipular o menu hamburguer
