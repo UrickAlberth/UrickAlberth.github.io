@@ -1,1264 +1,473 @@
-function reiniciar(){
-  for(var i=1;i<65;i++){
-    $("#" + i).text("")
-  }
-  for(var i = 0 in pecasP){
-    var j=parseInt(i)+1
-    $("#"+j).text(pecasP[i])
-  }
-  var p=0
-  for(var i = 64;i>48;i--){  
-    $("#"+i).text(pecasB[p])    
-    p=p+1    
-  }
-  vez=0
-  tp1 = 0;
-tp2 = 0;
-tb1 = 0;
-tb2 = 0;
-rp1 = 0;
-rb1 = 0;
-  var telaFim = document.getElementById("FimDeJogo");
-  telaFim.style.display = "none";
-  corPretas()
-}
-
-var id2 = 0;
-$("#container div.row div").click(function () {
-  // Captura o ID da posição da peça
-  var id = $(this).attr("id");
-
-  // Captura o conteudo da seleção (Imagem peça)
-  var peca = $(this).text();
-  if (vezJogador(peca) == false) {
-    return 0;
-  }
-
-  // inclui a peça seleciona no WebStoraged utilizando a   função setPosicaoPeca. Caso a peça já esteja selecionada anteriormente, a mesma e posicionada no local desejada e é limpada do webStoraged
-  if (peca != "") {
-    console.log(id);
-    id2 = id;
-    if (getPeca()) {
-      comerPecas(id, peca);
-      if (PouB(peca) == "P") {
-        cheque("♚");
-      }
-      if (PouB(peca) == "B") {
-        cheque("♔");
-      }
-      limparDados();
-    } else {
-      setPosicaoPeca(id, peca);
-      $(this).text("");
-    }
-  } else {
-    if (id2 == id) {
-      id2 = 0;
-      if (vez == 0) {
-        vez = 1;
-      } else {
-        vez = 0;
-      }
-    }
-    console.log(id);
-    if (getPeca()) {
-      rock(getPeca(), id);
-      $("#" + id).text(getPeca());
-
-      if (PouB(getPeca()) == "B") {
-        cheque("♚");
-      }
-      if (PouB(getPeca()) == "P") {
-        cheque("♔");
-      }
-      limparDados();
-      vrock();
-    }
-  }
-  corPretas();
-});
-
-function setPosicaoPeca(id, peca) {
-  localStorage.setItem("id", id);
-  localStorage.setItem("peca", peca);
-  validarJogada(getPeca(), getPosicaoID());
-}
-
-function getPosicaoID() {
-  return localStorage.getItem("id");
-}
-
-function getPeca() {
-  return localStorage.getItem("peca");
-}
-
-function limparDados() {
-  localStorage.clear();
-  for (var i = 1; i < 65; i++) {
-    var qdr = document.getElementById(i);
-
-    qdr.style.border = "0.1px solid #000000";
-  }
-}
-
-var col1 = [1, 9, 17, 25, 33, 41, 49, 57];
-var col2 = [8, 16, 24, 32, 40, 48, 56, 64];
-var colA = [2, 10, 18, 26, 34, 42, 50, 58];
-var colB = [7, 15, 23, 31, 39, 47, 55, 63];
-function validarJogada(peca, id, ch) {
-  if (peca == "♙") {
-    
-    var mov1 = document.getElementById(id - 8);
-    if ($(mov1).text() == "") {
-      selecao(mov1);
-      for (var i = 49; i < 57; i++) {
-        if (id == i) {
-          var mov2 = document.getElementById(id - 16);
-          if ($(mov2).text() == "") {
-            selecao(mov2);
-          }
-        }
-      }
-    }
-    if (coluna(id - 7) != "c1") {
-      var mov3 = document.getElementById(id - 7);
-      if ($(mov3).text() != "") {
-        if (PouB(mov3) == "P") {
-          selecao(mov3);
-        }
-      }
-    }
-    if (coluna(id - 9) != "c2") {
-      var mov4 = document.getElementById(id - 9);
-      if ($(mov4).text() != "") {
-        if (PouB(mov4) == "P") {
-          selecao(mov4);
-        }
-      }
-    }
-    for (var i = 9; i < 17; i++) {
-      if (id == i && ch!="ch") {        
-        var esc = document.getElementById("escolhaB");
-        escolha(esc);
-      }
-    }
-  }
-  if (peca == "♟") {
-    for (var i = 49; i < 57; i++) {
-      if (id == i && ch!="ch") {
-        var esc = document.getElementById("escolhaP");
-        escolha(esc);
-      }
-    }
-    var mov1 = document.getElementById(parseInt(id) + 8);
-    if ($(mov1).text() == "") {
-      selecao(mov1);
-      for (var i = 9; i < 17; i++) {
-        if (id == i) {
-          var mov2 = document.getElementById(parseInt(id) + 16);
-          if ($(mov2).text() == "") {
-            selecao(mov2);
-          }
-        }
-      }
-    }
-    if (coluna(parseInt(id) + 7) != "c2") {
-      var mov3 = document.getElementById(parseInt(id) + 7);
-      if ($(mov3).text() != "") {
-        if (PouB(mov3) == "B") {
-          selecao(mov3);
-        }
-      }
-    }
-    if (coluna(parseInt(id) + 9) != "c1") {
-      var mov4 = document.getElementById(parseInt(id) + 9);
-      if ($(mov4).text() != "") {
-        if (PouB(mov4) == "B") {
-          selecao(mov4);
-        }
-      }
-    }
-  }
-  if (peca == "♜" || peca == "♖") {
-    //movimento pra baixo
-    if (id < 57) {
-      for (var i = 8; i < 64; i = i + 8) {
-        var mov1 = document.getElementById(parseInt(id) + i);
-        if (parseInt(id) + i > 64) {
-        } else {
-          if ($(mov1).text() == "") {
-            selecao(mov1);
-          } else {
-            if (selectPouB(peca, mov1, "break") == "break") {
-              break;
-            }
-          }
-        }
-      }
-    }
-    //movimento pra cima
-    if (id > 8) {
-      for (var i = 8; i < 64; i = i + 8) {
-        var mov1 = document.getElementById(parseInt(id) - i);
-        if (parseInt(id) - i <= 0) {
-        } else {
-          if ($(mov1).text() == "") {
-            selecao(mov1);
-          } else {
-            if (selectPouB(peca, mov1, "break") == "break") {
-              break;
-            }
-          }
-        }
-      }
-    }
-    //movimento pra esquerda
-    for (var i = 1; i < 8; i++) {
-      if (id - i < 1) {
-        break;
-      }
-      var mov1 = document.getElementById(parseInt(id) - i);
-      if (coluna(id - i) != "c1" && coluna(id - i) != "c2") {
-        if ($(mov1).text() == "") {
-          selecao(mov1);
-        } else {
-          if (selectPouB(peca, mov1, "break") == "break") {
-            break;
-          }
-        }
-      } else {
-        if (coluna(id - i) == "c2") {
-          break;
-        } else {
-          if (selectPouB(peca, mov1, "") == "break") {
-            break;
-          }
-        }
-      }
-    }
-    //movimento pra direita
-    for (var i = 1; i < 8; i++) {
-      if (parseInt(id) + i > 64) {
-        break;
-      }
-      var mov1 = document.getElementById(parseInt(id) + i);
-      if (
-        coluna(parseInt(id) + i) != "c1" &&
-        coluna(parseInt(id) + i) != "c2"
-      ) {
-        if ($(mov1).text() == "") {
-          selecao(mov1);
-        } else {
-          if (selectPouB(peca, mov1, "break") == "break") {
-            break;
-          }
-        }
-      } else {
-        if (coluna(parseInt(id) + i) == "c1") {
-          break;
-        } else {
-          if (selectPouB(peca, mov1, "") == "break") {
-            break;
-          }
-        }
-      }
-    }
-  }
-  if (peca == "♗" || peca == "♝") {
-    //movimento esquerda/cima
-    for (var i = 9; i < 64; i = i + 9) {
-      if (id - i < 1) {
-        break;
-      }
-      var mov1 = document.getElementById(parseInt(id) - i);
-      if (coluna(id - i) != "c1" && coluna(id - i) != "c2") {
-        if ($(mov1).text() == "") {
-          selecao(mov1);
-        } else {
-          if (selectPouB(peca, mov1, "break") == "break") {
-            break;
-          }
-        }
-      } else {
-        if (coluna(id - i) == "c2") {
-          break;
-        } else {
-          if (selectPouB(peca, mov1, "") == "break") {
-            break;
-          }
-        }
-      }
-    }
-    //movimento direita/cima
-    for (var i = 7; i < 64; i = i + 7) {
-      if (id - i < 1) {
-        break;
-      }
-      var mov1 = document.getElementById(parseInt(id) - i);
-      if (coluna(id - i) != "c1" && coluna(id - i) != "c2") {
-        if ($(mov1).text() == "") {
-          selecao(mov1);
-        } else {
-          if (selectPouB(peca, mov1, "break") == "break") {
-            break;
-          }
-        }
-      } else {
-        if (coluna(id - i) == "c1") {
-          break;
-        } else {
-          if (selectPouB(peca, mov1, "") == "break") {
-            break;
-          }
-        }
-      }
-    }
-    //movimento direita/baixo
-    for (var i = 9; i < 64; i = i + 9) {
-      if (parseInt(id) + i > 64) {
-        break;
-      }
-      var mov1 = document.getElementById(parseInt(id) + i);
-      if (
-        coluna(parseInt(id) + i) != "c1" &&
-        coluna(parseInt(id) + i) != "c2"
-      ) {
-        if ($(mov1).text() == "") {
-          selecao(mov1);
-        } else {
-          if (selectPouB(peca, mov1, "break") == "break") {
-            break;
-          }
-        }
-      } else {
-        if (coluna(parseInt(id) + i) == "c1") {
-          break;
-        } else {
-          if (selectPouB(peca, mov1, "") == "break") {
-            break;
-          }
-        }
-      }
-    }
-    //movimento esquerda/baixo
-    for (var i = 7; i < 64; i = i + 7) {
-      if (parseInt(id) + i > 64) {
-        break;
-      }
-      var mov1 = document.getElementById(parseInt(id) + i);
-      if (
-        coluna(parseInt(id) + i) != "c1" &&
-        coluna(parseInt(id) + i) != "c2"
-      ) {
-        if ($(mov1).text() == "") {
-          selecao(mov1);
-        } else {
-          if (selectPouB(peca, mov1, "break") == "break") {
-            break;
-          }
-        }
-      } else {
-        if (coluna(parseInt(id) + i) == "c2") {
-          break;
-        } else {
-          if (selectPouB(peca, mov1, "") == "break") {
-            break;
-          }
-        }
-      }
-    }
-  }
-  if (peca == "♕" || peca == "♛") {
-    //movimento pra baixo
-    if (id < 57) {
-      for (var i = 8; i < 64; i = i + 8) {
-        var mov1 = document.getElementById(parseInt(id) + i);
-        if (parseInt(id) + i > 64) {
-        } else {
-          if ($(mov1).text() == "") {
-            selecao(mov1);
-          } else {
-            if (selectPouB(peca, mov1, "break") == "break") {
-              break;
-            }
-          }
-        }
-      }
-    }
-    //movimento pra cima
-    if (id > 8) {
-      for (var i = 8; i < 64; i = i + 8) {
-        var mov1 = document.getElementById(parseInt(id) - i);
-        if (parseInt(id) - i <= 0) {
-        } else {
-          if ($(mov1).text() == "") {
-            selecao(mov1);
-          } else {
-            if (selectPouB(peca, mov1, "break") == "break") {
-              break;
-            }
-          }
-        }
-      }
-    }
-    //movimento pra esquerda
-    for (var i = 1; i < 8; i++) {
-      if (id - i < 1) {
-        break;
-      }
-      var mov1 = document.getElementById(parseInt(id) - i);
-      if (coluna(id - i) != "c1" && coluna(id - i) != "c2") {
-        if ($(mov1).text() == "") {
-          selecao(mov1);
-        } else {
-          if (selectPouB(peca, mov1, "break") == "break") {
-            break;
-          }
-        }
-      } else {
-        if (coluna(id - i) == "c2") {
-          break;
-        } else {
-          if (selectPouB(peca, mov1, "") == "break") {
-            break;
-          }
-        }
-      }
-    }
-    //movimento pra direita
-    for (var i = 1; i < 8; i++) {
-      if (parseInt(id) + i > 64) {
-        break;
-      }
-      var mov1 = document.getElementById(parseInt(id) + i);
-      if (
-        coluna(parseInt(id) + i) != "c1" &&
-        coluna(parseInt(id) + i) != "c2"
-      ) {
-        if ($(mov1).text() == "") {
-          selecao(mov1);
-        } else {
-          if (selectPouB(peca, mov1, "break") == "break") {
-            break;
-          }
-        }
-      } else {
-        if (coluna(parseInt(id) + i) == "c1") {
-          break;
-        } else {
-          if (selectPouB(peca, mov1, "") == "break") {
-            break;
-          }
-        }
-      }
-    }
-    //movimento esquerda/cima
-    for (var i = 9; i < 64; i = i + 9) {
-      if (id - i < 1) {
-        break;
-      }
-      var mov1 = document.getElementById(parseInt(id) - i);
-      if (coluna(id - i) != "c1" && coluna(id - i) != "c2") {
-        if ($(mov1).text() == "") {
-          selecao(mov1);
-        } else {
-          if (selectPouB(peca, mov1, "break") == "break") {
-            break;
-          }
-        }
-      } else {
-        if (coluna(id - i) == "c2") {
-          break;
-        } else {
-          if (selectPouB(peca, mov1, "") == "break") {
-            break;
-          }
-        }
-      }
-    }
-    //movimento direita/cima
-    for (var i = 7; i < 64; i = i + 7) {
-      if (id - i < 1) {
-        break;
-      }
-      var mov1 = document.getElementById(parseInt(id) - i);
-      if (coluna(id - i) != "c1" && coluna(id - i) != "c2") {
-        if ($(mov1).text() == "") {
-          selecao(mov1);
-        } else {
-          if (selectPouB(peca, mov1, "break") == "break") {
-            break;
-          }
-        }
-      } else {
-        if (coluna(id - i) == "c1") {
-          break;
-        } else {
-          if (selectPouB(peca, mov1, "") == "break") {
-            break;
-          }
-        }
-      }
-    }
-    //movimento direita/baixo
-    for (var i = 9; i < 64; i = i + 9) {
-      if (parseInt(id) + i > 64) {
-        break;
-      }
-      var mov1 = document.getElementById(parseInt(id) + i);
-      if (
-        coluna(parseInt(id) + i) != "c1" &&
-        coluna(parseInt(id) + i) != "c2"
-      ) {
-        if ($(mov1).text() == "") {
-          selecao(mov1);
-        } else {
-          if (selectPouB(peca, mov1, "break") == "break") {
-            break;
-          }
-        }
-      } else {
-        if (coluna(parseInt(id) + i) == "c1") {
-          break;
-        } else {
-          if (selectPouB(peca, mov1, "") == "break") {
-            break;
-          }
-        }
-      }
-    }
-    //movimento esquerda/baixo
-    for (var i = 7; i < 64; i = i + 7) {
-      if (parseInt(id) + i > 64) {
-        break;
-      }
-      var mov1 = document.getElementById(parseInt(id) + i);
-      if (
-        coluna(parseInt(id) + i) != "c1" &&
-        coluna(parseInt(id) + i) != "c2"
-      ) {
-        if ($(mov1).text() == "") {
-          selecao(mov1);
-        } else {
-          if (selectPouB(peca, mov1, "break") == "break") {
-            break;
-          }
-        }
-      } else {
-        if (coluna(parseInt(id) + i) == "c2") {
-          break;
-        } else {
-          if (selectPouB(peca, mov1, "") == "break") {
-            break;
-          }
-        }
-      }
-    }
-  }
-  if (peca == "♘" || peca == "♞") {
-    var cavalo = [6, 10, 15, 17];
-    for (i in cavalo) {
-      if (id - cavalo[i] > 0) {
-        if (cavalo[i] == 6 || cavalo[i] == 15) {
-          if (coluna(parseInt(id) - cavalo[i]) != "c1") {
-            if (cavalo[i] == 6 && coluna(parseInt(id) - cavalo[i]) == "cA") {
-            } else {
-              var mov2 = document.getElementById(parseInt(id) - cavalo[i]);
-              if (PouB(mov2) != PouB(peca)) {
-                selecao(mov2);
-              }
-            }
-          }
-        } else {
-          if (coluna(parseInt(id) - cavalo[i]) != "c2") {
-            if (cavalo[i] == 10 && coluna(parseInt(id) - cavalo[i]) == "cB") {
-            } else {
-              var mov2 = document.getElementById(parseInt(id) - cavalo[i]);
-              if (PouB(mov2) != PouB(peca)) {
-                selecao(mov2);
-              }
-            }
-          }
-        }
-      }
-      if (parseInt(id) + cavalo[i] < 65) {
-        if (cavalo[i] == 10 || cavalo[i] == 17) {
-          if (coluna(parseInt(id) + cavalo[i]) != "c1") {
-            if (cavalo[i] == 10 && coluna(parseInt(id) + cavalo[i]) == "cA") {
-            } else {
-              var mov1 = document.getElementById(parseInt(id) + cavalo[i]);
-              if (PouB(mov1) != PouB(peca)) {
-                selecao(mov1);
-              }
-            }
-          }
-        } else {
-          if (coluna(parseInt(id) + cavalo[i]) != "c2") {
-            if (cavalo[i] == 6 && coluna(parseInt(id) + cavalo[i]) == "cB") {
-            } else {
-              var mov1 = document.getElementById(parseInt(id) + cavalo[i]);
-              if (PouB(mov1) != PouB(peca)) {
-                selecao(mov1);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  if (peca == "♔") {
-    if (rb1 != 1) {
-      if (tb1 != 1) {
-        var cav = document.getElementById("58");
-        var bis = document.getElementById("59");
-        var rai = document.getElementById("60");
-        if ($(cav).text() == "" && $(bis).text() == "" && $(rai).text() == "") {
-          var mov2 = document.getElementById("59");
-          selecao(mov2);
-        }
-      }
-      if (tb2 != 1) {
-        var cav2 = document.getElementById("63");
-        var bis2 = document.getElementById("62");
-        if ($(cav2).text() == "" && $(bis2).text() == "") {
-          var mov3 = document.getElementById("63");
-          selecao(mov3);
-        }
-      }
-    }
-  }
-  if (peca == "♚") {
-    if (rp1 != 1) {
-      if (tp1 != 1) {
-        var cav = document.getElementById("2");
-        var bis = document.getElementById("3");
-        var rai = document.getElementById("4");
-        if ($(cav).text() == "" && $(bis).text() == "" && $(rai).text() == "") {
-          var mov2 = document.getElementById("3");
-          selecao(mov2);
-        }
-      }
-      if (tp2 != 1) {
-        var cav2 = document.getElementById("7");
-        var bis2 = document.getElementById("6");
-        if ($(cav2).text() == "" && $(bis2).text() == "") {
-          var mov3 = document.getElementById("7");
-          selecao(mov3);
-        }
-      }
-    }
-  }
-}
-function coluna(id) {
-  for (i in col1) {
-    if (id == col1[i]) {
-      return "c1";
-    }
-  }
-  for (i in col2) {
-    if (id == col2[i]) {
-      return "c2";
-    }
-  }
-  for (i in colA) {
-    if (id == colA[i]) {
-      return "cA";
-    }
-  }
-  for (i in colB) {
-    if (id == colB[i]) {
-      return "cB";
-    }
-  }
-  return "nc";
-}
-function selectPouB(peca, mov, brk) {
-  if (brk == "break") {
-    if (PouB(peca) == PouB(mov)) {
-      return "break";
-    } else {
-      selecao(mov);
-      return "break";
-    }
-  } else {
-    if (PouB(peca) == PouB(mov)) {
-      return "break";
-    } else {
-      selecao(mov);
-    }
-  }
-}
-function PouB(peca) {
-  var cont = 0;
-  for (i in pecasP) {
-    if ($(peca).text() == pecasP[i]) {
-      return "P";
-    } else {
-      if (peca == pecasP[i]) {
-        return "P";
-      } else {
-        cont++;
-      }
-    }
-  }
-  if (cont == 16) {
-    cont = 0;
-    for (i in pecasB) {
-      if ($(peca).text() == pecasB[i]) {
-        return "B";
-      } else {
-        if (peca == pecasB[i]) {
-          return "B";
-        } else {
-          cont++;
-        }
-      }
-    }
-    if (cont == 16) {
-      return "V";
-    }
-  }
-}
-
-function escolha(esc) {
-  console.log("escolha");
-
-  esc.style.display = "block";
-  $("#escolhaB button").click(function () {
-    var op = $(this).text();
-    console.log(op);
-    localStorage.setItem("peca", op);
-    esc.style.display = "none";
-  });
-  $("#escolhaP button").click(function () {
-    var op = $(this).text();
-    console.log(op);
-    localStorage.setItem("peca", op);
-    esc.style.display = "none";
-  });
-}
-function selecao(select) {
-  select.style.border = "thick solid #0000FF";
-  if ($(select).text() == "♔" || $(select).text() == "♚") {
-    alert("CHEQUE");
-  }
-}
-
-var pecasP = [
-  "♜",
-  "♞",
-  "♝",
-  "♛",
-  "♚",
-  "♝",
-  "♞",
-  "♜",
-  "♟",
-  "♟",
-  "♟",
-  "♟",
-  "♟",
-  "♟",
-  "♟",
-  "♟"
+const chessBoard = document.getElementById("chess-board");
+const initialBoard = [
+	["r", "n", "b", "q", "k", "b", "n", "r"],
+	["p", "p", "p", "p", "p", "p", "p", "p"],
+	["", "", "", "", "", "", "", ""],
+	["", "", "", "", "", "", "", ""],
+	["", "", "", "", "", "", "", ""],
+	["", "", "", "", "", "", "", ""],
+	["P", "P", "P", "P", "P", "P", "P", "P"],
+	["R", "N", "B", "Q", "K", "B", "N", "R"]
 ];
-var pecasB = [
-  "♖",
-  "♘",
-  "♗",
-  "♔",
-  "♕",
-  "♗",
-  "♘",
-  "♖",
-  "♙",
-  "♙",
-  "♙",
-  "♙",
-  "♙",
-  "♙",
-  "♙",
-  "♙"
-];
-var corTinicio = "rgb(106, 90, 205)";
-var corT2inicio = "rgb(119, 136, 153)";
-function corPretas() {
-  for (var i = 0; i < 16; i++) {
-    for (var j = 0; j < 64; j++) {
-      let el = document.getElementById(j + 1);
-      var containerDiv = $("#" + (j + 1));
 
-      if (containerDiv.css("background-color") == corTinicio) {
-        el.style.background = conv_rgb(corT1.value);
-      }
-      if (containerDiv.css("background-color") == corT2inicio) {
-        el.style.background = conv_rgb(corT2.value);
-      }
-      if ($(el).text() == pecasP[i]) {
-        el.style.color = cor2.value;
-      } else {
-        if ($(el).text() == pecasB[i]) {
-          el.style.color = cor1.value;
-        }
-      }
-    }
-    corTinicio = conv_rgb(corT1.value);
-    corT2inicio = conv_rgb(corT2.value);
-  }
-}
-function conv_rgb(hexa) {
-  const hexToRgb = (hex) =>
-    hex
-      .replace(
-        /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
-        (m, r, g, b) => "#" + r + r + g + g + b + b
-      )
-      .substring(1)
-      .match(/.{2}/g)
-      .map((x) => parseInt(x, 16));
+const pieces = {
+	r: "♜",
+	n: "♞",
+	b: "♝",
+	q: "♛",
+	k: "♚",
+	p: "♟",
+	R: "♖",
+	N: "♘",
+	B: "♗",
+	Q: "♕",
+	K: "♔",
+	P: "♙"
+};
 
-  var rgb =
-    "rgb(" +
-    hexToRgb(hexa)[0] +
-    ", " +
-    hexToRgb(hexa)[1] +
-    ", " +
-    hexToRgb(hexa)[2] +
-    ")";
-  return rgb;
-}
-function comerPecas(id, peca) {
-  if (vez == 0) {
-    vez = 1;
-  } else {
-    vez = 0;
-  }
-    if (PouB(getPeca()) == "P") {      
-        if (PouB(peca) == "P") {
-          alert("Jogada Inválida");
-          return 0;
-        } else {          
-            if (PouB(peca) == "B") {
-              $("#" + id).text(getPeca());
-              limparDados();
-              if(peca=="♔"){
-                fimdejogo();
-              }
-              return 0;
-            }          
-          return 0;
-        }      
-    } else {
-      if (PouB(getPeca()) == "B") {        
-          if (PouB(peca) == "B") {
-            alert("Jogada Inválida");
-            return 0;
-          } else {           
-              if (PouB(peca) == "P") {
-                $("#" + id).text(getPeca());
-                limparDados();
-                if(peca=="♚"){
-                fimdejogo();
-              }
-                return 0;
-              }            
-            return 0;
-          }        
-      }
-    }  
-}
-var vez = 0;
-function vezJogador(peca) {
-  for (var i in pecasB) {
-    if (peca == pecasB[i]) {
-      if (vez == 1) {
-        alert("Vez do outro jogador");
-        return false;
-      } else {
-        vez = 1;
-        return true;
-      }
-    }
-  }
-  for (var i in pecasP) {
-    if (peca == pecasP[i]) {
-      if (vez == 0) {
-        alert("Vez do outro jogador");
-        return false;
-      } else {
-        vez = 0;
-        return true;
-      }
-    }
-  }
+let selectedPiece = null;
+let selectedSquare = null;
+let boardState = JSON.parse(JSON.stringify(initialBoard));
+let currentPlayer = "white";
+let enPassantTarget = null;
+let castlingRights = {
+	white: { kingside: true, queenside: true },
+	black: { kingside: true, queenside: true }
+};
+
+function createBoard() {
+	for (let row = 0; row < 8; row++) {
+		for (let col = 0; col < 8; col++) {
+			const square = document.createElement("div");
+			square.classList.add("square", (row + col) % 2 === 0 ? "white" : "black");
+			square.dataset.row = row;
+			square.dataset.col = col;
+			square.addEventListener("click", onSquareClick);
+			chessBoard.appendChild(square);
+		}
+	}
+	renderBoard();
 }
 
-function cheque(peca) {
-  var id = 0;
-  for (var i = 1; i < 65; i++) {
-    var esp = document.getElementById(i);
-    if (PouB(peca) == "P") {
-      if ($(esp).text() == "♚") {
-        id = i;
-      }
-    }
-    if (PouB(peca) == "B") {
-      if ($(esp).text() == "♔") {
-        id = i;
-      }
-    }
-  }
-  //movimento pra baixo
-  if (id < 57) {
-    for (var i = 8; i < 64; i = i + 8) {
-      var mov1 = document.getElementById(parseInt(id) + i);
-      if (parseInt(id) + i > 64) {
-      } else {
-        if ($(mov1).text() == "") {
-        } else {
-          if (PouB(peca) == PouB(mov1)) {
-            break;
-          } else {
-            if ($(mov1).text() != "") {
-              validarJogada($(mov1).text(), parseInt(id) + i, "ch");
-            }
-            break;
-          }
-        }
-      }
-    }
-  }
-  //movimento pra cima
-  if (id > 8) {
-    for (var i = 8; i < 64; i = i + 8) {
-      var mov1 = document.getElementById(parseInt(id) - i);
-      if (parseInt(id) - i <= 0) {
-      } else {
-        if ($(mov1).text() == "") {
-        } else {
-          if (PouB(peca) == PouB(mov1)) {
-            break;
-          } else {
-            if ($(mov1).text() != "") {
-              validarJogada($(mov1).text(), parseInt(id) - i, "ch");
-            }
-            break;
-          }
-        }
-      }
-    }
-  }
-  //movimento pra esquerda
-  for (var i = 1; i < 8; i++) {
-    if (id - i < 1) {
-      break;
-    }
-    var mov1 = document.getElementById(parseInt(id) - i);
-    if (coluna(id - i) != "c1" && coluna(id - i) != "c2") {
-      if ($(mov1).text() == "") {
-      } else {
-        if (PouB(peca) == PouB(mov1)) {
-          break;
-        } else {
-          if ($(mov1).text() != "") {
-            validarJogada($(mov1).text(), parseInt(id) - i, "ch");
-          }
-          break;
-        }
-      }
-    } else {
-      if (coluna(id - i) == "c2") {
-        break;
-      } else {
-        if (PouB(peca) == PouB(mov1)) {
-          break;
-        } else {
-          if ($(mov1).text() != "") {
-            validarJogada($(mov1).text(), parseInt(id) - i, "ch");
-          }
-        }
-      }
-    }
-  }
-  //movimento pra direita
-  for (var i = 1; i < 8; i++) {
-    if (parseInt(id) + i > 64) {
-      break;
-    }
-    var mov1 = document.getElementById(parseInt(id) + i);
-    if (coluna(parseInt(id) + i) != "c1" && coluna(parseInt(id) + i) != "c2") {
-      if ($(mov1).text() == "") {
-      } else {
-        if (PouB(peca) == PouB(mov1)) {
-          break;
-        } else {
-          if ($(mov1).text() != "") {
-            validarJogada($(mov1).text(), parseInt(id) + i, "ch");
-          }
-          break;
-        }
-      }
-    } else {
-      if (coluna(parseInt(id) + i) == "c1") {
-        break;
-      } else {
-        if (PouB(peca) == PouB(mov1)) {
-          break;
-        } else {
-          if ($(mov1).text() != "") {
-            validarJogada($(mov1).text(), parseInt(id) + i, "ch");
-          }
-        }
-      }
-    }
-  }
-  //movimento esquerda/cima
-  for (var i = 9; i < 64; i = i + 9) {
-    if (id - i < 1) {
-      break;
-    }
-    var mov1 = document.getElementById(parseInt(id) - i);
-    if (coluna(id - i) != "c1" && coluna(id - i) != "c2") {
-      if ($(mov1).text() == "") {
-      } else {
-        if (PouB(peca) == PouB(mov1)) {
-          break;
-        } else {
-          if ($(mov1).text() != "") {
-            validarJogada($(mov1).text(), parseInt(id) - i, "ch");
-          }
-          break;
-        }
-      }
-    } else {
-      if (coluna(id - i) == "c2") {
-        break;
-      } else {
-        if (PouB(peca) == PouB(mov1)) {
-          break;
-        } else {
-          if ($(mov1).text() != "") {
-            validarJogada($(mov1).text(), parseInt(id) - i, "ch");
-          }
-        }
-      }
-    }
-  }
-  //movimento direita/cima
-  for (var i = 7; i < 64; i = i + 7) {
-    if (id - i < 1) {
-      break;
-    }
-    var mov1 = document.getElementById(parseInt(id) - i);
-    if (coluna(id - i) != "c1" && coluna(id - i) != "c2") {
-      if ($(mov1).text() == "") {
-      } else {
-        if (PouB(peca) == PouB(mov1)) {
-          break;
-        } else {
-          if ($(mov1).text() != "") {
-            validarJogada($(mov1).text(), parseInt(id) - i, "ch");
-          }
-          break;
-        }
-      }
-    } else {
-      if (coluna(id - i) == "c1") {
-        break;
-      } else {
-        if (PouB(peca) == PouB(mov1)) {
-          break;
-        } else {
-          if ($(mov1).text() != "") {
-            validarJogada($(mov1).text(), parseInt(id) - i, "ch");
-          }
-        }
-      }
-    }
-  }
-  //movimento direita/baixo
-  for (var i = 9; i < 64; i = i + 9) {
-    if (parseInt(id) + i > 64) {
-      break;
-    }
-    var mov1 = document.getElementById(parseInt(id) + i);
-    if (coluna(parseInt(id) + i) != "c1" && coluna(parseInt(id) + i) != "c2") {
-      if ($(mov1).text() == "") {
-      } else {
-        if (PouB(peca) == PouB(mov1)) {
-          break;
-        } else {
-          if ($(mov1).text() != "") {
-            validarJogada($(mov1).text(), parseInt(id) + i,"ch");
-          }
-          break;
-        }
-      }
-    } else {
-      if (coluna(parseInt(id) + i) == "c1") {
-        break;
-      } else {
-        if (PouB(peca) == PouB(mov1)) {
-          break;
-        } else {
-          if ($(mov1).text() != "") {
-            validarJogada($(mov1).text(), parseInt(id) + i, "ch");
-          }
-        }
-      }
-    }
-  }
-  //movimento esquerda/baixo
-  for (var i = 7; i < 64; i = i + 7) {
-    if (parseInt(id) + i > 64) {
-      break;
-    }
-    var mov1 = document.getElementById(parseInt(id) + i);
-    if (coluna(parseInt(id) + i) != "c1" && coluna(parseInt(id) + i) != "c2") {
-      if ($(mov1).text() == "") {
-      } else {
-        if (PouB(peca) == PouB(mov1)) {
-          break;
-        } else {
-          if ($(mov1).text() != "") {
-            validarJogada($(mov1).text(), parseInt(id) + i, "ch");
-          }
-          break;
-        }
-      }
-    } else {
-      if (coluna(parseInt(id) + i) == "c2") {
-        break;
-      } else {
-        if (PouB(peca) == PouB(mov1)) {
-          break;
-        } else {
-          if ($(mov1).text() != "") {
-            validarJogada($(mov1).text(), parseInt(id) + i, "ch");
-          }
-        }
-      }
-    }
-  }
-  //movimento cavalo
-  var cavalo = [6, 10, 15, 17];
-  for (i in cavalo) {
-    if (id - cavalo[i] > 0) {
-      if (cavalo[i] == 6 || cavalo[i] == 15) {
-        if (coluna(parseInt(id) - cavalo[i]) != "c1") {
-          if (cavalo[i] == 6 && coluna(parseInt(id) - cavalo[i]) == "cA") {
-          } else {
-            var mov2 = document.getElementById(parseInt(id) - cavalo[i]);
-            if (PouB(mov2) != PouB(peca)) {
-              if ($(mov1).text() != "") {
-                validarJogada($(mov1).text(), parseInt(id) - cavalo[i], "ch");
-              }
-            }
-          }
-        }
-      } else {
-        if (coluna(parseInt(id) - cavalo[i]) != "c2") {
-          if (cavalo[i] == 10 && coluna(parseInt(id) - cavalo[i]) == "cB") {
-          } else {
-            var mov2 = document.getElementById(parseInt(id) - cavalo[i]);
-            if (PouB(mov2) != PouB(peca)) {
-              if ($(mov2).text() != "") {
-                validarJogada($(mov2).text(), parseInt(id) - cavalo[i], "ch");
-              }
-            }
-          }
-        }
-      }
-    }
-    if (parseInt(id) + cavalo[i] < 65) {
-      if (cavalo[i] == 10 || cavalo[i] == 17) {
-        if (coluna(parseInt(id) + cavalo[i]) != "c1") {
-          if (cavalo[i] == 10 && coluna(parseInt(id) + cavalo[i]) == "cA") {
-          } else {
-            var mov1 = document.getElementById(parseInt(id) + cavalo[i]);
-            if (PouB(mov1) != PouB(peca)) {
-              if ($(mov1).text() != "") {
-                validarJogada($(mov1).text(), parseInt(id) + cavalo[i], "ch");
-              }
-            }
-          }
-        }
-      } else {
-        if (coluna(parseInt(id) + cavalo[i]) != "c2") {
-          if (cavalo[i] == 6 && coluna(parseInt(id) + cavalo[i]) == "cB") {
-          } else {
-            var mov1 = document.getElementById(parseInt(id) + cavalo[i]);
-            if (PouB(mov1) != PouB(peca)) {
-              if ($(mov2).text() != "") {
-                validarJogada($(mov2).text(), parseInt(id) + cavalo[i], "ch");
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+function renderBoard() {
+	const squares = document.querySelectorAll(".square");
+	squares.forEach((square) => {
+		const row = square.dataset.row;
+		const col = square.dataset.col;
+		square.innerHTML = pieces[boardState[row][col]] || "";
+		square.classList.remove("highlight");
+		square.style="color:black;";
+	});
+}
+let squareSelect;
+function onSquareClick(event) {
+	const square = event.target;
+	const row = square.dataset.row;
+	const col = square.dataset.col;
+
+	if (selectedPiece) {
+		movePiece(row, col);
+		squareSelect.style = "color:black;";
+		clearHighlights();
+		colorCheque();
+
+		if (isCheckmate(currentPlayer === "black" ? "black" : "white")) {
+			currentPlayer = currentPlayer === "white" ? "black" : "white";
+			activeModal(currentPlayer);
+		}
+	} else {
+		clearHighlights();
+		selectPiece(row, col);
+		const piece = boardState[row][col];
+	if (piece && isCurrentPlayerPiece(piece)) {
+		highlightValidMoves(row, col);
+	}
+		squareSelect = event.target;
+	}
 }
 
-var tp1 = 0;
-var tp2 = 0;
-var tb1 = 0;
-var tb2 = 0;
-var rp1 = 0;
-var rb1 = 0;
-function vrock() {
-  var t1 = document.getElementById("1");
-  if ($(t1).text() != "♜") {
-    tp1 = 1;
-  }
-  var t2 = document.getElementById("8");
-  if ($(t2).text() != "♜") {
-    tp2 = 1;
-  }
-  var t3 = document.getElementById("57");
-  if ($(t3).text() != "♖") {
-    tb1 = 1;
-  }
-  var t4 = document.getElementById("64");
-  if ($(t4).text() != "♖") {
-    tb2 = 1;
-  }
-  var r1 = document.getElementById("5");
-  if ($(r1).text() != "♚") {
-    rp1 = 1;
-  }
-  var r2 = document.getElementById("61");
-  if ($(r2).text() != "♔") {
-    rb1 = 1;
-  }
-}
-function rock(peca, id) {
-  if (peca == "♔" && rb1 == 0) {
-    if (id == 59 && tb1 == 0) {
-      $("#" + 57).text("");
-      $("#" + 60).text("♖");
-    }
-    if (id == 63 && tb2 == 0) {
-      $("#" + 64).text("");
-      $("#" + 62).text("♖");
-    }
-  }
-  if (peca == "♚" && rp1 == 0) {
-    if (id == 3 && tp1 == 0) {
-      $("#" + 1).text("");
-      $("#" + 4).text("♜");
-    }
-    if (id == 7 && tp2 == 0) {
-      $("#" + 8).text("");
-      $("#" + 6).text("♜");
-    }
-  }
+function colorCheque() {
+	const player = currentPlayer;
+	const player2 = player === "black" ? "white" : "black";
+	const king1 = document.querySelector(
+		`.square[data-row='${findKing(player).row}'][data-col='${
+			findKing(player).col
+		}']`
+	);
+	const king2 = document.querySelector(
+		`.square[data-row='${findKing(player2).row}'][data-col='${
+			findKing(player2).col
+		}']`
+	);
+	if (isInCheck(player)) {
+		king1.style.color = "red";
+	} else {
+		if (isInCheck(player2)) {
+			king2.style.color = "red";
+		} else {
+			king1.style.color = "black";
+			king2.style.color = "black";
+		}
+	}
 }
 
-function fimdejogo(cn){
-  var telaFim = document.getElementById("FimDeJogo");
-  telaFim.style.display = "block";
-  if(cn==1){
-    telaFim.style.display = "none";
-  }
+function clearHighlights() {
+	const squares = document.querySelectorAll(".square");
+	squares.forEach((square) => {
+		square.classList.remove("highlight");
+	});
 }
+
+function highlightValidMoves(row, col) {
+	for (let newRow = 0; newRow < 8; newRow++) {
+		for (let newCol = 0; newCol < 8; newCol++) {
+			if (isValidMove(parseInt(row), parseInt(col), newRow, newCol)) {
+				const square = document.querySelector(
+					`.square[data-row='${newRow}'][data-col='${newCol}']`
+				);
+				square.classList.add("highlight");
+			}
+		}
+	}
+}
+
+function isValidMove(fromRow, fromCol, toRow, toCol) {
+	if (simulateMove(fromRow, fromCol, toRow, toCol)) return false;
+
+	const piece = boardState[fromRow][fromCol];
+	const target = boardState[toRow][toCol];
+
+	if (toRow < 0 || toRow > 7 || toCol < 0 || toCol > 7) return false;
+	if (fromRow === toRow && fromCol === toCol) return false;
+	if (target && isSameColor(piece, target)) return false;
+
+	switch (piece.toLowerCase()) {
+		case "p":
+			return isValidPawnMove(piece, fromRow, fromCol, toRow, toCol);
+		case "r":
+			return isValidRookMove(fromRow, fromCol, toRow, toCol);
+		case "n":
+			return isValidKnightMove(fromRow, fromCol, toRow, toCol);
+		case "b":
+			return isValidBishopMove(fromRow, fromCol, toRow, toCol);
+		case "q":
+			return isValidQueenMove(fromRow, fromCol, toRow, toCol);
+		case "k":
+			return (
+				isValidKingMove(fromRow, fromCol, toRow, toCol) ||
+				isValidCastlingMove(piece, fromRow, fromCol, toRow, toCol)
+			);
+		default:
+			return false;
+	}
+}
+
+function isSameColor(piece1, piece2) {
+	return (
+		(piece1 === piece1.toUpperCase() && piece2 === piece2.toUpperCase()) ||
+		(piece1 === piece1.toLowerCase() && piece2 === piece2.toLowerCase())
+	);
+}
+
+function isValidPawnMove(piece, fromRow, fromCol, toRow, toCol) {
+	const direction = piece === piece.toUpperCase() ? -1 : 1;
+	const startRow = piece === piece.toUpperCase() ? 6 : 1;
+
+	if (toCol === fromCol && !boardState[toRow][toCol]) {
+		if (toRow === fromRow + direction) return true;
+		if (
+			fromRow === startRow &&
+			toRow === fromRow + 2 * direction &&
+			!boardState[fromRow + direction][fromCol]
+		)
+			return true;
+	}
+
+	if (
+		Math.abs(toCol - fromCol) === 1 &&
+		toRow === fromRow + direction &&
+		(boardState[toRow][toCol] ||
+			(enPassantTarget &&
+				toCol === enPassantTarget.col &&
+				toRow === enPassantTarget.row))
+	) {
+		return true;
+	}
+
+	return false;
+}
+
+function isValidRookMove(fromRow, fromCol, toRow, toCol) {
+	if (fromRow !== toRow && fromCol !== toCol) return false;
+
+	const stepRow = fromRow === toRow ? 0 : toRow > fromRow ? 1 : -1;
+	const stepCol = fromCol === toCol ? 0 : toCol > fromCol ? 1 : -1;
+
+	for (let i = 1; i < Math.abs(toRow - fromRow + toCol - fromCol); i++) {
+		if (boardState[fromRow + i * stepRow][fromCol + i * stepCol]) return false;
+	}
+
+	return true;
+}
+
+function isValidKnightMove(fromRow, fromCol, toRow, toCol) {
+	const rowDiff = Math.abs(fromRow - toRow);
+	const colDiff = Math.abs(fromCol - toCol);
+
+	return (rowDiff === 2 && colDiff === 1) || (rowDiff === 1 && colDiff === 2);
+}
+
+function isValidBishopMove(fromRow, fromCol, toRow, toCol) {
+	if (Math.abs(fromRow - toRow) !== Math.abs(fromCol - toCol)) return false;
+
+	const stepRow = toRow > fromRow ? 1 : -1;
+	const stepCol = toCol > fromCol ? 1 : -1;
+
+	for (let i = 1; i < Math.abs(toRow - fromRow); i++) {
+		if (boardState[fromRow + i * stepRow][fromCol + i * stepCol]) return false;
+	}
+
+	return true;
+}
+
+function isValidQueenMove(fromRow, fromCol, toRow, toCol) {
+	return (
+		isValidRookMove(fromRow, fromCol, toRow, toCol) ||
+		isValidBishopMove(fromRow, fromCol, toRow, toCol)
+	);
+}
+
+function isValidKingMove(fromRow, fromCol, toRow, toCol) {
+	const rowDiff = Math.abs(fromRow - toRow);
+	const colDiff = Math.abs(fromCol - toCol);
+
+	return rowDiff <= 1 && colDiff <= 1;
+}
+
+function isValidCastlingMove(piece, fromRow, fromCol, toRow, toCol) {
+	const player = piece === "K" ? "white" : "black";
+	const row = player === "white" ? 7 : 0;
+
+	if (fromRow !== row || toRow !== row) return false;
+	if (fromCol !== 4 || (toCol !== 6 && toCol !== 2)) return false;
+
+	if (
+		toCol === 6 &&
+		castlingRights[player].kingside &&
+		!boardState[row][5] &&
+		!boardState[row][6] &&
+		!isInCheck(player) &&
+		!simulateMove(fromRow, fromCol, row, 5)
+	) {
+		return true;
+	}
+	if (
+		toCol === 2 &&
+		castlingRights[player].queenside &&
+		!boardState[row][1] &&
+		!boardState[row][2] &&
+		!boardState[row][3] &&
+		!isInCheck(player) &&
+		!simulateMove(fromRow, fromCol, row, 3)
+	) {
+		return true;
+	}
+
+	return false;
+}
+
+function movePiece(row, col) {
+	const fromRow = parseInt(selectedSquare.row);
+	const fromCol = parseInt(selectedSquare.col);
+	const toRow = parseInt(row);
+	const toCol = parseInt(col);
+
+	if (isValidMove(fromRow, fromCol, toRow, toCol)) {
+		// Roque
+		if (
+			boardState[fromRow][fromCol].toLowerCase() === "k" &&
+			Math.abs(fromCol - toCol) === 2
+		) {
+			if (toCol === 6) {
+				boardState[toRow][5] = boardState[toRow][7];
+				boardState[toRow][7] = "";
+			} else {
+				boardState[toRow][3] = boardState[toRow][0];
+				boardState[toRow][0] = "";
+			}
+		}
+
+		// En Passant
+		if (
+			boardState[fromRow][fromCol].toLowerCase() === "p" &&
+			enPassantTarget &&
+			toCol === enPassantTarget.col &&
+			toRow === enPassantTarget.row
+		) {
+			boardState[fromRow][toCol] = "";
+		}
+
+		boardState[toRow][toCol] = selectedPiece;
+		boardState[fromRow][fromCol] = "";
+
+		// Atualizar os direitos de roque
+		if (selectedPiece === "K")
+			castlingRights.white = { kingside: false, queenside: false };
+		if (selectedPiece === "k")
+			castlingRights.black = { kingside: false, queenside: false };
+		if (selectedPiece === "R" && fromRow === 7) {
+			if (fromCol === 0) castlingRights.white.queenside = false;
+			if (fromCol === 7) castlingRights.white.kingside = false;
+		}
+		if (selectedPiece === "r" && fromRow === 0) {
+			if (fromCol === 0) castlingRights.black.queenside = false;
+			if (fromCol === 7) castlingRights.black.kingside = false;
+		}
+
+		// En Passant Target Update
+		if (selectedPiece.toLowerCase() === "p" && Math.abs(fromRow - toRow) === 2) {
+			enPassantTarget = { row: (fromRow + toRow) / 2, col: fromCol };
+		} else {
+			enPassantTarget = null;
+		}
+
+		// Promoção de peão
+		if (
+			(selectedPiece === "P" && toRow === 0) ||
+			(selectedPiece === "p" && toRow === 7)
+		) {
+			promotionSquare = { row: toRow, col: toCol };
+			showPromotionOptions();
+			return; // Esperar pela promoção antes de continuar
+		}
+
+		renderBoard();
+
+		currentPlayer = currentPlayer === "white" ? "black" : "white";
+	}
+
+	selectedPiece = null;
+	selectedSquare = null;
+}
+
+function selectPiece(row, col) {
+	const piece = boardState[row][col];
+	if (piece && isCurrentPlayerPiece(piece)) {
+		selectedPiece = piece;
+		selectedSquare = { row, col };
+		document.querySelector(
+			`.square[data-row='${row}'][data-col='${col}']`
+		).style.color = "cyan";
+	}
+}
+
+function isCurrentPlayerPiece(piece, player = currentPlayer) {
+	return (
+		(player === "white" && piece === piece.toUpperCase()) ||
+		(player === "black" && piece === piece.toLowerCase())
+	);
+}
+
+function findKing(player) {
+	const king = player === "white" ? "K" : "k";
+	for (let row = 0; row < 8; row++) {
+		for (let col = 0; col < 8; col++) {
+			if (boardState[row][col] === king) {
+				return { row, col };
+			}
+		}
+	}
+	return null;
+}
+
+function isInCheck(player) {
+	const kingPosition = findKing(player);
+	if (!kingPosition) return false;
+
+	const enemy = player === "white" ? "black" : "white";
+
+	for (let row = 0; row < 8; row++) {
+		for (let col = 0; col < 8; col++) {
+			if (isCurrentPlayerPiece(boardState[row][col], enemy)) {
+				if (isValidMove(row, col, kingPosition.row, kingPosition.col)) {
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
+}
+
+function simulateMove(fromRow, fromCol, toRow, toCol) {
+	const backup = boardState[toRow][toCol];
+	boardState[toRow][toCol] = boardState[fromRow][fromCol];
+	boardState[fromRow][fromCol] = "";
+
+	const isCheck = isInCheck(currentPlayer);
+
+	boardState[fromRow][fromCol] = boardState[toRow][toCol];
+	boardState[toRow][toCol] = backup;
+
+	return isCheck;
+}
+
+function isCheckmate(player) {
+	if (!isInCheck(player)) return false;
+
+	for (let row = 0; row < 8; row++) {
+		for (let col = 0; col < 8; col++) {
+			if (isCurrentPlayerPiece(boardState[row][col], player)) {
+				for (let newRow = 0; newRow < 8; newRow++) {
+					for (let newCol = 0; newCol < 8; newCol++) {
+						if (isValidMove(row, col, newRow, newCol)) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return true;
+}
+
+function activeModal(win) {
+	const modal = document.getElementById("modal");
+	modal.style = "width:640px;height:640px;";
+	const Win = document.getElementById("win");
+	Win.textContent = win;
+	
+}
+
+function NoActiveModal() {
+	const modal = document.getElementById("modal");
+	modal.style = "width:0;height:0;";
+	boardState = JSON.parse(JSON.stringify(initialBoard));
+	currentPlayer = "white";
+	renderBoard();
+	colorCheque()
+}
+
+function showPromotionOptions() {
+	const modal = document.getElementById("promotion-modal");
+	modal.style.display = "block";
+}
+
+function hidePromotionOptions() {
+	const modal = document.getElementById("promotion-modal");
+	modal.style.display = "none";
+}
+
+function promotePawn(newPiece) {
+	if (promotionSquare) {
+		const { row, col } = promotionSquare;
+		boardState[row][col] = newPiece;
+		promotionSquare = null;
+		renderBoard();
+		currentPlayer = currentPlayer === "white" ? "black" : "white";
+	}
+	hidePromotionOptions();
+}
+
+createBoard();
