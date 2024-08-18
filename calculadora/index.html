@@ -11,35 +11,55 @@
   <table>
     <tr>
       <td colspan="4">
+        <input id="tela2" readonly>
         <input id="tela" readonly>
       </td>
     </tr>
     <tr>
-      <td class="number" onclick="concatNumber(1)">1</td>
-      <td class="number" onclick="concatNumber(2)">2</td>
-      <td class="number" onclick="concatNumber(3)">3</td>
-      <td class="operation" onclick="clearScreen()">C</td>
+      <td class="memory" colspan="4">
+        <button onclick="memoryClear()">MC</button>
+        <button onclick="memoryRecall()">MR</button>
+        <button onclick="memoryPlus()">M+</button>
+        <button onclick="memoryMinus()">M-</button>
+        <button onclick="memoryStore()">MS</button>
+      </td>
+      
     </tr>
     <tr>
-      <td class="number" onclick="concatNumber(4)">4</td>
-      <td class="number" onclick="concatNumber(5)">5</td>
-      <td class="number" onclick="concatNumber(6)">6</td>
-      <td class="operation" onclick="performOperation('+')">+</td>
+      <td class="operation" onclick="percent('%')">%</td>
+      <td class="operation" onclick="clearEntry()">CE</td>
+      <td class="operation" onclick="clearScreen()">C</td>
+      <td class="operation" onclick="backspace()">⌫</td>
+    </tr>
+    <tr>
+      <td class="operation" onclick="calculateFraction()">1/x</td>
+      <td class="operation" onclick="calculatePower()">x²</td>
+      <td class="operation" onclick="calculateSquareRoot()">√x</td>
+      <td class="operation" onclick="performOperation('/')">/</td>
     </tr>
     <tr>
       <td class="number" onclick="concatNumber(7)">7</td>
       <td class="number" onclick="concatNumber(8)">8</td>
       <td class="number" onclick="concatNumber(9)">9</td>
+      <td class="operation" onclick="performOperation('*')">*</td>
+    </tr>
+    <tr>
+      <td class="number" onclick="concatNumber(4)">4</td>
+      <td class="number" onclick="concatNumber(5)">5</td>
+      <td class="number" onclick="concatNumber(6)">6</td>
       <td class="operation" onclick="performOperation('-')">-</td>
     </tr>
     <tr>
-      <td class="number" onclick="concatNumber(0)">0</td>
-      <td class="operation" onclick="verificarVirgula()">.</td>
-      <td class="operation" onclick="performOperation('*')">*</td>
-      <td class="operation" onclick="performOperation('/')">/</td>      
+      <td class="number" onclick="concatNumber(1)">1</td>
+      <td class="number" onclick="concatNumber(2)">2</td>
+      <td class="number" onclick="concatNumber(3)">3</td>
+      <td class="operation" onclick="performOperation('+')">+</td>
     </tr>
     <tr>
-      <td colspan="4" onclick="calculateResult()">=</td>
+      <td class="operation" onclick="toggleSign()">+/-</td>
+      <td class="number" onclick="concatNumber(0)">0</td>
+      <td class="operation" onclick="verificarVirgula()">.</td>
+      <td class="equal" onclick="calculateResult()">=</td>
     </tr>
   </table>
 

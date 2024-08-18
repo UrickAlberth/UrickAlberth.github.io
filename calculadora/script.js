@@ -1,6 +1,9 @@
 let screen = document.getElementById("tela");
+let screen2 = document.getElementById("tela2");
 let equation = "";
-let virgula = true;
+let currentNumber = "";
+let memory = 0;
+let result="";
 
 // Adicione um evento de escuta para detectar a entrada do teclado
 document.addEventListener("keydown", function(event) {
@@ -8,71 +11,143 @@ document.addEventListener("keydown", function(event) {
   const key = event.key;
   if (/[0-9]/.test(key)) { // Dígitos de 0 a 9
     concatNumber(key);
-  } else if (key === ".") { // Ponto decimal
+  } else if (key === "." || key == ",") { // Ponto decimal
     verificarVirgula();
-  } else if (key === "+") { // Adição
-    performOperation("+");
-  } else if (key === "-") { // Subtração
-    performOperation("-");
-  } else if (key === "*") { // Multiplicação
-    performOperation("*");
-  } else if (key === "/") { // Divisão
-    performOperation("/");
   } else if (key === "Enter") { // Tecla Enter para calcular o resultado
     calculateResult();
   } else if (key === "Escape") { // Tecla Esc para limpar a tela
     clearScreen();
+  } else if(key == "+" || key == "-" || key == "*" || key == "/"){
+    performOperation(key);
+  } else if(key == "Backspace"){
+    backspace();   
   }
+  console.log(key)
 });
 
-function acionarTeclas(tecla){
-  var linhas = document.querySelectorAll("td");
-
-  for (var i = 0; i < linhas.length; i++) {
-    if (linhas[i].innerText.trim() === tecla.toString()) {
-      linhas[i].style.backgroundColor = "blue";
-      setTimeout(function() {
-        linhas[i].style.backgroundColor = ""; // restaura a cor original após 1 segundo
-      }, 1000);
-      break; // opcional: interrompe o loop se encontrar o número correspondente
-    }
-  }
-}
-
+let concat=null;
 function concatNumber(number) {
-  acionarTeclas(number)
-  equation += number;
-  screen.value = equation;
+  currentNumber += number;
+  screen.value = currentNumber;
 }
 
 function verificarVirgula() {
-  if (virgula) {
-    concatNumber(".");
-    virgula = false;
+  if (!currentNumber.includes(".")) {
+      concatNumber(".");
   }
 }
 
 function clearScreen() {
-  acionarTeclas("C")
   equation = "";
+  currentNumber = "";
   screen.value = "";
-  virgula = true;
+  screen2.value = "";
+}
+
+function clearEntry() {
+  currentNumber = "";
+  screen.value = "";
 }
 
 function performOperation(operator) {
-  acionarTeclas(operator)
-  equation += operator;
-  screen.value = equation;
-  virgula = true;
+  if (currentNumber !== "") {
+      equation += currentNumber + " " + operator + " ";      
+  }else{
+    equation += result + " " + operator + " "; 
+  }
+  screen2.value = equation;
+      currentNumber = "";
 }
 
 function calculateResult() {
-  acionarTeclas("=")
-  try {
-    let result = eval(equation);
-    equation = result.toFixed(2);
-    screen.value = equation;
-  } catch (error) {
-    screen.value = "Error";
+  if (currentNumber !== "") {
+      equation += currentNumber;
+      screen2.value = equation + " =";
+      try {
+          result = eval(equation);
+          screen.value = result;
+          equation = "";
+          currentNumber = "";
+      } catch (error) {
+          screen.value = "Error";
+          equation = "";
+      }
+  }
+}
+
+function backspace() {
+  currentNumber = currentNumber.slice(0, -1);
+  screen.value = currentNumber;
+}
+
+function memoryClear() {
+  memory = 0;
+}
+
+function memoryRecall() {
+  currentNumber = memory.toString();
+  screen.value = currentNumber;
+}
+
+function memoryPlus() {
+  if (currentNumber !== "") {
+      memory += parseFloat(currentNumber);
+      currentNumber = "";
+      screen.value = memory;
+  }
+}
+
+function memoryMinus() {
+  if (currentNumber !== "") {
+      memory -= parseFloat(currentNumber);
+      currentNumber = "";
+      screen.value = memory;
+  }
+}
+
+function memoryStore() {
+  if (currentNumber !== "") {
+      memory = parseFloat(currentNumber);
+      currentNumber = "";
+  }
+}
+
+function calculateSquareRoot() {
+  if (currentNumber !== "") {
+      result = Math.sqrt(parseFloat(currentNumber));
+      screen.value = result;
+      currentNumber = result.toString();
+  }
+}
+
+function calculatePower() {
+  if (currentNumber !== "") {
+      result = Math.pow(parseFloat(currentNumber), 2);
+      screen.value = result;
+      currentNumber = result.toString();
+  }
+}
+
+function calculateFraction() {
+  if (currentNumber !== "") {
+      result = 1 / parseFloat(currentNumber);
+      screen.value = result;
+      currentNumber = result.toString();
+  }
+}
+
+function percent(){
+  if (currentNumber !== "") {
+    result = parseFloat(currentNumber)/100;
+    screen.value = result;
+    currentNumber = result.toString();
+}
+
+}
+
+function toggleSign() {
+  if (currentNumber !== "") {
+      currentNumber = (parseFloat(currentNumber) * -1).toString();
+      screen.value = currentNumber;
   }
 }
