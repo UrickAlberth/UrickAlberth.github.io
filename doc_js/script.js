@@ -24,7 +24,7 @@ const navbar = document.querySelector("#navbar");
 const menuList = document.querySelector("#navbar ul");
 const titulo = document.querySelector("#titulo");
 const doc = document.querySelector("#main-doc");
-menuList.style.width = "300px";
+menuList.style.width = "0px";
 function esconder() {
   // Verifica se a lista de itens do menu está visível
   const isMenuVisible = menuList.style.width === "300px";
