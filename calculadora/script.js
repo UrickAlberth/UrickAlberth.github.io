@@ -61,19 +61,22 @@ function performOperation(operator) {
 
 function calculateResult() {
   if (currentNumber !== "") {
-      equation += currentNumber;
-      screen2.value = equation + " =";
-      try {
-          result = eval(equation);
-          screen.value = result;
-          equation = "";
-          currentNumber = "";
-      } catch (error) {
-          screen.value = "Error";
-          equation = "";
-      }
+    equation += currentNumber;
+  } else {
+    equation += screen.value;
+  }
+  screen2.value = equation + " =";  
+  try {
+    result = eval(equation);
+    screen.value = result;
+  } catch (error) {
+    screen.value = "Error";
+  } finally {
+    equation = "";
+    currentNumber = "";
   }
 }
+
 
 function backspace() {
   currentNumber = currentNumber.slice(0, -1);
