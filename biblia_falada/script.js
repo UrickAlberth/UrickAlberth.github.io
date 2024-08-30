@@ -1248,7 +1248,7 @@ let AudioInPlay = false;
 function playSong(song, index) {
     const audioPlayer = document.getElementById('audioPlayer');
     const albumName = albumList[currentAlbumIndex];
-    audioPlayer.src = `BÍBLIA/${albumName}/${song}`;
+    audioPlayer.src = `https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/biblia_falada/Bíblia/${albumName}/${song}`;
     audioPlayer.play();
     if (AudioInPlay) {			
         AudioInPlay.classList.remove("Inplay");
