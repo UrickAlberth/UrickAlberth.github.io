@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calendar-container">
+        <div class="time-display" id="timeDisplay"></div>
+        <div class="date-display">
+            <div id="currentDate" onclick="next_or_prev()"></div>
+        </div>
+        <div class="calendar">
+            <div class="month-display">
+                <span id="monthName"></span>
+								<span>de</span>							
+                <span id="year"></span>
+							<span id="prev" onclick="next_or_prev(0)"><</span>
+								<span id="next" onclick="next_or_prev(1)">></span>
+            </div>
+            <div class="week-days">
+                <div>D</div>
+                <div>S</div>
+                <div>T</div>
+                <div>Q</div>
+                <div>Q</div>
+                <div>S</div>
+                <div>S</div>
+            </div>
+            <div class="days-container" id="daysContainer"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

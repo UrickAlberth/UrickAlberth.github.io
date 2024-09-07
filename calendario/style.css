@@ -1,0 +1,86 @@
+body {
+	font-family: Arial, sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	background: url('https://www.elcomercio.com/wp-content/uploads/2023/05/astronauta-encontro-tesoros-desde-espacio-oculto-nasa.jpg') no-repeat center center fixed;
+            background-size: cover;
+}
+
+.calendar-container {
+	background: rgba(50, 50, 50, 0.9);
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	color: #fff;
+	padding: 20px;
+	width: 300px;
+	text-align: center;
+}
+
+.time-display {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.date-display {
+	margin-bottom: 20px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.month-display {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.week-days,
+.days-container {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+}
+
+.week-days div,
+.days-container div {
+	padding: 10px;
+	/*border: 1px solid #ddd;*/
+	margin: -1px -1px 0 0;
+}
+.days-container div:hover {
+	border: 1px solid #ddd;
+}
+
+.days-container div {
+	height: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.days-container div.today {
+	background-color: #007bff;
+	color: white;
+	border-radius: 50%;
+}
+#next,
+#prev {
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	box-shadow: 2px 2px 2px #000;
+	cursor: pointer;
+}
+
+.with-border {
+	border: 1px solid #ddd;
+}
+.selected {
+	border: 1px solid blue;
+}

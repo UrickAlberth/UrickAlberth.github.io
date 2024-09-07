@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<title>▶️ Arctic Monkeys</title>
+  	<link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+	<canvas id="waveCanvas"></canvas>
+	<div class="controle">
+		<button onclick="playPrev()"><</button>
+<button onclick="player(currentTrackIndex)" id="BtnPlay_Pause">|▶|</button>
+<button onclick="playNext()">></button>
+			<input type="range" id="rangeMusica">
+			<label id="valorRange"></label>
+	</div>
+	<div class="audios">
+		<ul id="playList">
+			<li>
+				01. Do I Wanna Know?.mp3
+				<button onclick="player(0)">▶</button>
+			</li>
+			<li>
+				02.  R U Mine?.mp3
+				<button onclick="player(1)">▶</button>
+			</li>
+		</ul>
+	</div>
+	<script src="script.js"></script>
+</body>
+
+</html>
