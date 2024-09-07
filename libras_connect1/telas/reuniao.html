@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+    <title>Libras</title>
+    <style>
+        h3 {
+            color: white;
+            font-size: 1.1em;
+            margin: 5px;
+        }
+
+        .mensagens>p {
+            text-align: center;
+            font-size: 0.7em;
+        }
+
+        .apresentacao {
+            background-position: center center;
+            background-size: cover;
+        }
+
+        .desligar,
+        .mutar,
+        .camera {
+            background-size: cover;
+            display: block;
+        }
+    </style>
+    <style>
+        div[vw] {
+            position: static;
+            transform: none;
+            height: 100%;
+        }
+
+        [vw] [vw-plugin-wrapper] {
+            width: 900px;
+
+        }
+
+        [vw] .vp-enabled {
+            display: none;
+        }
+    </style>
+    <script>
+        function posicaoVlibras() {
+            document.querySelector(".enabled").style = "transform: none";
+        }
+        setTimeout(function () {
+            posicaoVlibras();
+        }, 2000);
+    </script>
+    <script type="module" src="../script.js"></script>
+</head>
+
+<body class="d-flex container-fluid vh-100 vw-100 p-4 col-12 gap-4 justify-content-between">
+    <div class="barra-lateral d-flex col-2 gap-2 flex-column justify-content-between">
+        <div class="camera-surdo d-flex flex-column w-100 h-25 rounded-2 justify-content-center align-items-center">
+            <p>Câmera do</p>
+            <p>apresentador</p>
+        </div>
+        <div class="chat d-flex flex-column rounded-2 align-items-center p-2 h-75 justify-content-between"
+            style="border: 3px solid #64b6cc; background-color: aliceblue;" class="d-flex h-75 rounded-2 ">
+            <div class="cabecalho rounded-3 d-flex justify-content-between w-100 m-1 p-0"
+                style="background-color: #64b6cc; ">
+                <h3>Chat</h3>
+                <h3>X</h3>
+            </div>
+            <div class="mensagens">
+                <p>As mensagens só podem ser vistas pelas pessoas na chamada e são excluídas quando ela termina.</p>
+            </div>
+            <div class="teclado " style="width: 100px; height: 60px;"></div>
+        </div>
+        <a href="../index.html"><div class="logo"></div></a>
+    </div>
+
+    <div class="meio grid col-6 justify-content-center">
+        <div class="icones d-flex justify-content-center align-content-center">
+            <div class="icones-menores container-fluid d-flex flex-wrap m-1 align-items-center justify-content-between">
+                <a class="rec" style="width: 135px; height: 50px;"></a>
+                <a class="reuniao" style="width: 40px; height: 40px;"></a>
+            </div>
+        </div>
+        <div class="apresentacao h-75 w-100 rounded-5" style="background-image: url(../imagens/apresentacao.jpg);">
+        </div>
+        <div class="icones d-flex justify-content-center align-content-center">
+            <div
+                class="icones-menores container-fluid d-flex flex-wrap m-1 align-items-center justify-content-start gap-2">
+                <a href="../index.html" class="desligar"
+                    style="background-image: url(../imagens/desligar.png); width: 30px; height: 30px;"></a>
+                <a href="" class="mutar"
+                    style="background-image: url(../imagens/mutar.png); width: 30px; height: 30px;"></a>
+                <a href="" class="camera"
+                    style="background-image: url(../imagens/camera.png); width: 30px; height: 30px;"></a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="chamadas d-flex flex-column gap-2 col-3">
+        <div class="camera-gi d-flex rounded-2 justify-content-center h-75 align-items-center">
+            <div vw class="enabled" style="transform: none">
+                <div vw-access-button class="active"></div>
+                <div vw-plugin-wrapper>
+                    <div class="vw-plugin-top-wrapper"></div>
+                </div>
+            </div>
+        </div>
+        <button id="webcamButton" class="mdc-button mdc-button--raised">
+            <span class="mdc-button__ripple"></span>
+            <span class="mdc-button__label">Ligar Webcam</span>
+        </button>
+        <div class="camera-surdo d-flex h-25 rounded-2 justify-content-center align-items-center">
+
+            <div id="liveView" class="videoView">
+                <div style="position: relative;">
+                    <video id="webcam" autoplay playsinline></video>
+                    <canvas class="output_canvas" id="output_canvas" width="1280" height="720"
+                        style="position: absolute; left: 0px; top: 0px;"></canvas>
+                    <p id='gesture_output' class="output">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
