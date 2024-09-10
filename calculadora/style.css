@@ -1,7 +1,6 @@
 body {
-  background-image:url(https://wallpapers.com/images/hd/angled-calculus-math-equations-zcadykjv1mqw68t9.jpg);
-  background-repeat:no-repeat;
-  background-size: 100%;
+  background: url('https://wallpapers.com/images/hd/angled-calculus-math-equations-zcadykjv1mqw68t9.jpg') no-repeat center center fixed;
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
