@@ -111,8 +111,8 @@ let jogadorAtual = 0; // Índice do jogador atual no array de jogadores
 
 function iniciar() {
 	playStartSound();
-	pares = parseInt(variacao.value);
-	const qtdJogadores = parseInt(qntdJg.value);
+	pares = parseInt(document.getElementById('porcem').innerText);
+	const qtdJogadores = parseInt(document.getElementById('qtj').innerText);;
 
 	jogadores = []; // Limpa os pontos dos jogadores
 	for (let i = 0; i < qtdJogadores; i++) {
@@ -179,18 +179,16 @@ function verificarPar() {
 			for (key in jogadores) {
 				ganhadores =
 					ganhadores +
-					"jogador " +
+					"Jogador " +
 					(parseInt(key) + 1) +
 					" - " +
 					jogadores[key].toFixed(2) +
 					"\n";
-			}
-			setTimeout(() => {
-				alert("Parabéns! Você completou o jogo da memória!\n" + ganhadores), 500;
-			});
-			if (pares < 101) {
-				variacao.value = parseInt(pares) + 4;
-				muda_valor();
+			}			
+				winner.innerText="Parabéns! Você completou o jogo da memória!\n" + ganhadores;
+			
+			if (pares < 105) {				
+				muda_valor(1);
 			}
 		}
 	} else {
@@ -201,11 +199,35 @@ function verificarPar() {
 	cartasViradas = [];
 }
 
-function muda_valor() {
-	porcem.textContent = variacao.value;
+function muda_valor(x) {
+	if(x==1){
+	if (pares < 105) {
+        pares++;
+        document.getElementById('porcem').innerText = pares;
+    }
+	}
+	if(x==0){
+	if (pares > 6) {
+        pares--;
+        document.getElementById('porcem').innerText = pares;
+    }
+	}
+	
 }
-function muda_valorJ() {
-	qtj.textContent = qntdJg.value;
+function muda_valorJ(x) {
+	let jg = parseInt(document.getElementById('qtj').innerText)
+	if(x==1){
+	if (jg < 5) {
+        jg++;
+        document.getElementById('qtj').innerText = jg;
+    }
+	}
+	if(x==0){
+	if (jg > 1) {
+        jg--;
+        document.getElementById('qtj').innerText = jg;
+    }
+	}
 }
 
 function Reiniciar() {

@@ -16,13 +16,19 @@
 	<audio id="pauseSound" src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/efeito_sonoro/pause.mp3"></audio>
 	<audio id="pause_pianoSound" src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/efeito_sonoro/pause_piano.mp3"></audio>
 
-	<h1>Jogo da Memória</h1>
+	<h1>Jogo da Memória🧠</h1>
 	<div id="record">Record: <span id="RecordPts">0</span></div>
 	<div class="configuracao">
-		Quantidade de Pares: <span id="porcem">6</span><br>
-		<input id="variacao" type="range" min="6" max="105" oninput="muda_valor()" value="6"><br>
-		Quantidade de Jogadores: <span id="qtj">1</span><br>
-		<input id="qntdJg" type="range" min="1" max="5" oninput="muda_valorJ()" value="1"><br>
+		<div class="controle">
+			<label style="margin-top:15px;">Pares: <span id="porcem">6</span></label>
+			<button id="decrement" onclick="muda_valor(1)">&#9650;</button>
+			<button id="increment" onclick="muda_valor(0)">&#9660;</button>
+		</div>
+		<div class="controle">
+			<label style="margin-top:15px;">Jogadores: <span id="qtj">1</span></label>
+			<button id="decrement" onclick="muda_valorJ(1)">&#9650;</button>
+			<button id="increment" onclick="muda_valorJ(0)">&#9660;</button>
+		</div>
 		<button id="btnComecar" onclick="iniciar()">Começar</button>
 		<button id="btnReiniciar" onclick="Reiniciar()" disabled>Reiniciar</button>
 		<button id="btnPausar" onclick="Pausar()" disabled>Pausar</button>
@@ -30,9 +36,10 @@
 	</div>
 	<div id="cronometro"></div>
 	<div id="pontuacao"><span id="jogador">Jogador 1</span>Pontuação: <span id="pts"></span></div>
+	<hr>
+	<div id="winner"></div>
 
 	<div class="game-container"></div>
 	<script src="script.js"></script>
 </body>
-
 </html>
