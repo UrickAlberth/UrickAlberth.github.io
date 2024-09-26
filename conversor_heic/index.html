@@ -1,0 +1,65 @@
+<html lang="PT-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEIC to JPG Converter</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="container">
+        <h1>Converter HEIC para JPG</h1>
+        <label for="fileInput">Escolher Arquivos</label>
+        <input type="file" id="fileInput" accept=".heic" multiple>
+        <button id="convertButton">Converter</button>
+        <div id="loadingSpinner"></div>
+        <div id="outputContainer"></div>
+    </div>
+	    <footer>
+				<center>
+        criado por URICK
+				</center>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@latest/dist/heic2any.min.js"></script>
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const convertButton = document.getElementById('convertButton');
+        const outputContainer = document.getElementById('outputContainer');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        convertButton.addEventListener('click', async () => {
+            const files = fileInput.files;
+            if (files.length === 0) {
+                alert('Por favor, selecione pelo menos um arquivo HEIC.');
+                return;
+            }
+
+            // Limpa a área de saída
+            outputContainer.innerHTML = '';
+
+            // Mostra o spinner de carregamento
+            loadingSpinner.style.display = 'block';
+
+            try {
+                for (const file of files) {
+                    const result = await heic2any({ blob: file, toType: 'image/jpeg' });
+                    
+                    // Cria um link para download
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(result);
+                    link.download = file.name.replace(/\.[^/.]+$/, "") + ".jpg"; // Altera a extensão para .jpg
+                    link.textContent = `Download ${file.name.replace(/\.[^/.]+$/, "")}.jpg`;
+
+                    outputContainer.appendChild(link);
+                }
+            } catch (err) {
+                console.error('Erro na conversão:', err);
+            } finally {
+                // Oculta o spinner de carregamento
+                loadingSpinner.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+
