@@ -1,0 +1,136 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background: url('https://motionbgs.com/media/4780/hogwarts-in-moonlight.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #000;
+}
+
+.quiz-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background: rgba(250, 250, 250, 0.4);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+h1 {
+  text-align: center;
+  color: #000;
+}
+
+h3 {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+	margin-bottom:5px;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+#prev, #next{
+	display: inline;
+	width: 40%;
+}
+
+button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+  }
+
+#houseResult {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#characters {
+  margin-top: 20px;
+	background-size: cover;
+	background: no-repeat center center fixed;
+	color:#fff;
+
+}
+
+#chapeu{
+	width:50px;
+	position:absolute;
+	
+}
+
+li{
+	margin-bottom:7px;
+}
+
+a{
+	text-decoration:none;
+	color:#000;
+	background:#fff;
+	padding:3px;
+	border-radius:5px;
+}
+
+/* Estilo base para todas as casas */
+.house {
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px 0;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Grifinória - vermelho e dourado */
+.Grifinória {
+  background: linear-gradient(135deg, #7F0909, #FFC500);
+  border: 2px solid #FFC500;
+}
+
+/* Sonserina - verde e prata */
+.Sonserina {
+  background: linear-gradient(135deg, #1A472A, #C0C0C0);
+  border: 2px solid #C0C0C0;
+}
+
+/* Corvinal - azul e bronze */
+.Corvinal {
+  background: linear-gradient(135deg, #0E1A40, #946B2D);
+  border: 2px solid #946B2D;
+}
+
+/* Lufa-Lufa - amarelo e preto */
+.LufaLufa {
+  background: linear-gradient(135deg, #EEE117, #000000);
+  border: 2px solid #000000;
+}
+
+/* Estilos adicionais */
+.house h2 {
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.house p {
+  font-size: 16px;
+  line-height: 1.5;
+}
