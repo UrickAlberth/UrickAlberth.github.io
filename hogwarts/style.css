@@ -1,136 +1,177 @@
 body {
-  font-family: 'Arial', sans-serif;
-  background: url('https://motionbgs.com/media/4780/hogwarts-in-moonlight.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #000;
+	font-family: "Arial", sans-serif;
+	background: url("https://motionbgs.com/media/4780/hogwarts-in-moonlight.jpg")
+		no-repeat center center fixed;
+	background-size: cover;
+	color: #000;
 }
 
 .quiz-container {
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 20px;
-  background: rgba(250, 250, 250, 0.4);
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	max-width: 600px;
+	margin: 50px auto;
+	padding: 20px;
+	background: rgba(250, 250, 250, 0.4);
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
 }
 
 h1 {
-  text-align: center;
-  color: #000;
+	text-align: center;
+	color: #000;
 }
 
 h3 {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 label {
-  display: block;
-  margin-bottom: 10px;
+	display: block;
+	margin-bottom: 10px;
 }
 
 button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-	margin-bottom:5px;
+	display: block;
+	width: 100%;
+	padding: 10px;
+	background-color: #333;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-bottom: 5px;
 }
 
 button:hover {
-  background-color: #555;
+	background-color: #555;
 }
 
-#prev, #next{
+#prev,
+#next {
 	display: inline;
 	width: 40%;
 }
 
 button:disabled {
-    background-color: #ccc;
-    color: #666;
-    cursor: not-allowed;
-  }
+	background-color: #ccc;
+	color: #666;
+	cursor: not-allowed;
+}
 
 #houseResult {
-  text-align: center;
-  margin-top: 20px;
+	text-align: center;
+	margin-top: 20px;
 }
 
 #characters {
-  margin-top: 20px;
+	margin-top: 20px;
 	background-size: cover;
 	background: no-repeat center center fixed;
-	color:#fff;
-
+	color: #fff;
 }
 
-#chapeu{
-	width:50px;
-	position:absolute;
-	
+#chapeu {
+	width: 50px;
+	position: absolute;
 }
 
-li{
-	margin-bottom:7px;
+li {
+	margin-bottom: 7px;
 }
 
-a{
-	text-decoration:none;
-	color:#000;
-	background:#fff;
-	padding:3px;
-	border-radius:5px;
+a {
+	text-decoration: none;
+	color: #000;
+	background: #fff;
+	padding: 3px;
+	border-radius: 5px;
 }
 
 /* Estilo base para todas as casas */
 .house {
-  border-radius: 8px;
-  padding: 20px;
-  margin: 15px 0;
-  color: white;
-  font-family: 'Arial', sans-serif;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	border-radius: 8px;
+	padding: 20px;
+	margin: 15px 0;
+	color: white;
+	font-family: "Arial", sans-serif;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Grifinória - vermelho e dourado */
 .Grifinória {
-  background: linear-gradient(135deg, #7F0909, #FFC500);
-  border: 2px solid #FFC500;
+	background: linear-gradient(135deg, #7f0909, #ffc500);
+	border: 2px solid #ffc500;
 }
 
 /* Sonserina - verde e prata */
 .Sonserina {
-  background: linear-gradient(135deg, #1A472A, #C0C0C0);
-  border: 2px solid #C0C0C0;
+	background: linear-gradient(135deg, #1a472a, #c0c0c0);
+	border: 2px solid #c0c0c0;
 }
 
 /* Corvinal - azul e bronze */
 .Corvinal {
-  background: linear-gradient(135deg, #0E1A40, #946B2D);
-  border: 2px solid #946B2D;
+	background: linear-gradient(135deg, #0e1a40, #946b2d);
+	border: 2px solid #946b2d;
 }
 
 /* Lufa-Lufa - amarelo e preto */
 .LufaLufa {
-  background: linear-gradient(135deg, #EEE117, #000000);
-  border: 2px solid #000000;
+	background: linear-gradient(135deg, #eee117, #000000);
+	border: 2px solid #000000;
 }
 
 /* Estilos adicionais */
 .house h2 {
-  font-size: 24px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
+	font-size: 24px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	margin-bottom: 10px;
 }
 
 .house p {
-  font-size: 16px;
-  line-height: 1.5;
+	font-size: 16px;
+	line-height: 1.5;
+}
+
+.progress-bar {
+	width: 100%;
+	max-width: 800px;
+	height: 50px;
+	display: flex;
+	border-radius: 25px;
+	overflow: hidden;
+	border: 2px solid #fff;
+}
+
+.progress-segment {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 20px;
+	font-weight: bold;
+	color: #fff;
+	overflow: hidden;
+}
+
+.orange {
+	background-color: #7f0909;
+	transition: 2s;
+}
+
+.green {
+	background-color: #1a472a;
+	transition: 2s;
+}
+
+.blue {
+	background-color: #0e1a40;
+	transition: 2s;
+}
+
+.yellow {
+	background-color: #ddd110;
+	transition: 2s;
 }
