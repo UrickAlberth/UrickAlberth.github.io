@@ -123,7 +123,12 @@ function startquestios(i) {
         });
     });
 }
-
+let houseScores = {
+        Grifinória: 0,
+        Sonserina: 0,
+        Corvinal: 0,
+        LufaLufa: 0
+    };
 document.getElementById('quizForm').addEventListener('submit', function (event) {
     event.preventDefault();
 		const totalQuestions = Object.keys(questions).length;
@@ -134,7 +139,7 @@ document.getElementById('quizForm').addEventListener('submit', function (event) 
         return; // Impede o envio do formulário
     }
 
-    let houseScores = {
+    houseScores = {
         Grifinória: 0,
         Sonserina: 0,
         Corvinal: 0,
@@ -212,9 +217,36 @@ function TextHouses(house){
    ${housesTexts[house]}
   </p>
 </div>
-
+<div class="progress-bar" id="progressBar">
+        <div class="progress-segment Grifinória" id="orange">25%</div>
+        <div class="progress-segment Sonserina" id="green">25%</div>
+        <div class="progress-segment Corvinal" id="blue">25%</div>
+        <div class="progress-segment LufaLufa" id="yellow">25%</div>
+    </div>
 	`
 	var divHouse = document.getElementById("aboutHouse");
 	aboutHouse.innerHTML=Element;
+	
+	updateProgressBar(houseScores.Grifinória*10, houseScores.Sonserina*10, houseScores.Corvinal*10, houseScores.LufaLufa*10)
 }
 //startquestios()
+function updateProgressBar(o, g, b, y) {
+            // Calcula a soma total para garantir que seja 100%
+            const total = o + g + b + y;
+            if (total !== 100) {
+                alert('A soma das porcentagens deve ser igual a 100%');
+                return;
+            }
+
+            // Atualiza a largura de cada segmento
+            document.getElementById('orange').style.width = o + '%';
+            document.getElementById('green').style.width = g + '%';
+            document.getElementById('blue').style.width = b + '%';
+            document.getElementById('yellow').style.width = y + '%';
+
+            // Atualiza o texto interno de cada segmento
+            document.getElementById('orange').textContent = o + '%';
+            document.getElementById('green').textContent = g + '%';
+            document.getElementById('blue').textContent = b + '%';
+            document.getElementById('yellow').textContent = y + '%';
+        }
