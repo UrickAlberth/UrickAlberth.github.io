@@ -1,0 +1,135 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Roboto", sans-serif;
+	background: linear-gradient(135deg, #6a11cb, #2575fc);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	color: #fff;
+}
+
+.quiz-container {
+	background-color: rgba(255, 255, 255, 0.1);
+	border-radius: 20px;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+	padding: 30px;
+	max-width: 600px;
+	width: 100%;
+	height: 590px;
+	text-align: center;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+#quiz {
+	flex: 1;
+}
+
+.quiz-container h1 {
+	font-size: 2.5em;
+	margin-bottom: 20px;
+	color: #fff;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+p {
+	font-size: 1.2em;
+	margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="range"] {
+	width: 100%;
+	padding: 10px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	border-radius: 8px;
+	border: none;
+	background-color: rgba(255, 255, 255, 0.2);
+	color: #fff;
+	font-size: 1.1em;
+	outline: none;
+	transition: background-color 0.3s ease;
+}
+
+input[type="text"]::placeholder {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+input[type="text"]:focus {
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
+input[type="range"] {
+	cursor: pointer;
+}
+
+label {
+	font-size: 1em;
+	margin: 0 5px;
+}
+
+hr {
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	margin-bottom: 20px;
+}
+
+.btn {
+	background-color: #2575fc;
+	color: #fff;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 30px;
+	font-size: 1.2em;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+	background-color: #6a11cb;
+	transform: translateY(-5px);
+}
+
+.btn:active {
+	transform: translateY(0);
+}
+
+.hidden {
+	display: none;
+}
+
+input[type="radio"] {
+	accent-color: #6a11cb;
+	margin-left: 10px;
+}
+
+input[type="radio"]:checked + label {
+	color: #6a11cb;
+	font-weight: bold;
+}
+.question {
+	display: none;
+}
+
+.active {
+	display: block;
+}
+
+.tamanho-container, .proxima-container{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 10px;
+}
+
+label {
+	flex-basis: 33%; /* Cada label terá 1/3 da largura do container */
+	text-align: center;
+}
