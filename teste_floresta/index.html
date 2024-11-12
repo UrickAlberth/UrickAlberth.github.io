@@ -12,12 +12,15 @@
 		<h1>Teste de Personalidade</h1>
 		<div id="quiz">
 			<div class="question active">
+				<img src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/teste_floresta/img/capa.jpg" alt="capa" id="capa">
+				<br>
 				<button class="btn" id="start-btn">Começar</button>
 			</div>
 			<!-- Pergunta 1 -->
 			<div class="question">
 				<p>1 – Imagine que você está caminhando com uma pessoa. Quem seria?</p>
 				<input type="text" id="pessoa" placeholder="Escreva o nome aqui..." />
+				<img src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/teste_floresta/img/caminhando.jpg" alt="caminhando" id="caminhando">
 			</div>
 
 			<!-- Pergunta 2 -->
@@ -26,20 +29,38 @@
 				<input type="text" id="animal" placeholder="Escreva o animal aqui..." /><br>
 				<p>Qual o tamanho dele?</p>
 				<div class="tamanho-container">
-					<label>Pequeno</label>
-					<label>Médio</label>
-					<label>Grande</label>
+					<label onclick="animal_tamanho.value='1'">
+						Pequeno
+						<br>
+						<img src="https://images.vexels.com/media/users/3/143123/isolated/preview/5ff5dadf11ada76c06de418d6de3d013-icone-de-peixe-plano.png?w=360" width="50" height="50">
+					</label>
+					<label onclick="animal_tamanho.value='2'">
+						Médio
+						<br>
+						<img src="https://images.vexels.com/media/users/3/143123/isolated/preview/5ff5dadf11ada76c06de418d6de3d013-icone-de-peixe-plano.png?w=360" width="60" height="60">
+					</label>
+					<label onclick="animal_tamanho.value='3'">
+						Grande
+						<br>
+						<img src="https://images.vexels.com/media/users/3/143123/isolated/preview/5ff5dadf11ada76c06de418d6de3d013-icone-de-peixe-plano.png?w=360" width="70" height="70">
+					</label>
 				</div>
 				<input id="animal_tamanho" type="range" min="1" max="3" />
+
 			</div>
 
 			<!-- Pergunta 3 -->
 			<div class="question">
 				<p>3 – Você decide se aproximar do animal. Como ele reage a isso?</p>
 				<div class="tamanho-container">
-					<label>Dócil</label>
-					<label>Natural</label>
-					<label>Agressivo</label>
+					<label onclick="reacao.value='1'">Dócil</label>
+					<label onclick="reacao.value='2'">Natural</label>
+					<label onclick="reacao.value='3'">Agressivo</label>
+				</div>
+				<div class="tamanho-container">
+					<img src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/teste_floresta/img/docil.jpg" alt="docil" id="docil" onclick="reacao.value='1'">
+					<img src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/teste_floresta/img/natural.jpg" alt="natural" id="natural" onclick="reacao.value='2'">
+					<img src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/teste_floresta/img/Agressivo.jpg" alt="agressivo" id="agressivo" onclick="reacao.value='3'">
 				</div>
 				<input id="reacao" type="range" min="1" max="3" />
 			</div>
@@ -58,9 +79,21 @@
 				<br>
 				<p>Qual o seu tamanho?</p>
 				<div class="tamanho-container">
-					<label>Pequena</label>
-					<label>Média</label>
-					<label>Grande</label>
+					<label onclick="casa_tamanho.value='1'">
+						Pequeno
+						<br>
+						<img src="https://www.imagensempng.com.br/wp-content/uploads/2021/08/02-51.png" width="40" height="40">
+					</label>
+					<label onclick="casa_tamanho.value='2'">
+						Médio
+						<br>
+						<img src="https://www.imagensempng.com.br/wp-content/uploads/2021/08/02-51.png" width="50" height="50">
+					</label>
+					<label onclick="casa_tamanho.value='3'">
+						Grande
+						<br>
+						<img src="https://www.imagensempng.com.br/wp-content/uploads/2021/08/02-51.png" width="60" height="60">
+					</label>
 				</div>
 				<input id="casa_tamanho" type="range" min="1" max="3" />
 			</div>
@@ -75,8 +108,10 @@
 				<input type="checkbox" id="pessoas" value="Pessoas">
 				<label for="pessoas">Pessoas</label>
 				<br>
-				<p>Outro:</p>
+				<p><input type="checkbox" id="outro" value="outro" checked><label for="outro">Outro:</label></p>
 				<input type="text" id="mesa_objeto" placeholder="O que está em cima da mesa?" />
+				<br>
+				<img src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/teste_floresta/img/mesa.jpg" alt="mesa" id="mesa">
 			</div>
 
 			<!-- Pergunta 6 -->
@@ -95,31 +130,36 @@
 				<br>
 				<p>E o que você faz com ele</p>
 				<input type="text" id="copo" placeholder="Descreva o que faz com o copo.." />
+				<br>
+				<img src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/teste_floresta/img/jardim_copo.jpg" alt="jardim_copo" id="jardim_copo">
+				<img src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/teste_floresta/img/copo.jpg" alt="copo" id="copoImg">
 			</div>
 
 			<!-- Pergunta 7 -->
 			<div class="question">
-				<p>7 – O jardim é interessante e você continua andando sobre ele. Quando chega no seu fim, encontra um espelho d’água. O que está formando aquele reflexo? Um rio? Um lago?</p>
-				<input type="text" id="agua_reflexo" placeholder="Descreva o espelho d'água..." />
+				<p>7 – Quando chega no fim, encontra um espelho d’água. O que está formando aquele reflexo?</p>
+				<input type="text" id="agua_reflexo" placeholder="Um rio? Um lago? Um mar..." />
 				<br>
 				<p>Qual o seu tamanho?</p>
-				<br>
 				<div class="tamanho-container">
-					<label>Pequena</label>
-					<label>Média</label>
-					<label>Grande</label>
+					<label onclick="agua_tamanho.value='1'">Pequena</label>
+					<label onclick="agua_tamanho.value='2'">Média</label>
+					<label onclick="agua_tamanho.value='3'">Grande</label>
 				</div>
 				<input id="agua_tamanho" type="range" min="1" max="3" />
+				<img src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/teste_floresta/img/agua.jpg" alt="agua" id="agua">
 			</div>
 
 			<!-- Pergunta 8 -->
 			<div class="question">
-				<p>8 – Para voltar para casa, você precisa passar pela água e acaba se molhando. Quando sai do outro lado, você está muito ou pouco molhado?</p>
+				<p>8 – Para voltar para casa, você precisa passar pela água e acaba se molhando. Quando sai do outro lado, você está quanto molhado?</p>
 				<div class="tamanho-container">
-					<label>Pouco</label>
-					<label>Muito</label>
+					<label onclick="molhado.value='1'">Pouco</label>
+					<label onclick="molhado.value='2'">Muito</label>
 				</div>
 				<input id="molhado" type="range" min="1" max="2" value=2 />
+				<br>
+				<img src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/teste_floresta/img/molhado1.jpeg" alt="molhado" id="molhado1">
 			</div>
 		</div>
 		<hr>
