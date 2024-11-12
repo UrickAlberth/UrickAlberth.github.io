@@ -62,10 +62,13 @@ function calculateResults() {
 
 	let result = `
     <h2>Resultado do Teste</h2>
+		<br>
+		<img src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/teste_floresta/img/capa1.jpg" alt="capa1" id="capa1">
     <p>1 – A pessoa que você está caminhando no bosque é a pessoa mais importante da sua vida: <strong>${pessoa}</strong>.</p>
     <p>2 – O animal que você encontrou: ${animal} é ${
 		animalTamanho === "1" ? "pequeno" : animalTamanho === "2" ? "médio" : "grande"
 	}, indicando a proporção dos seus problemas.</p>
+		<img src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/teste_floresta/img/capa2.jpg" alt="capa2" id="capa2">
     <p>3 – O animal reagiu de forma ${
 					reacaoAnimal === "1"
 						? "dócil"
@@ -80,8 +83,10 @@ function calculateResults() {
 	}, o que indica que você é ${
 		cercas === "sim" ? "mais reservado" : "uma pessoa aberta"
 	}.</p>
+		<img src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/teste_floresta/img/capa3.jpg" alt="capa3" id="capa3">
     <p>5 – Sobre a mesa você encontrou: <strong>${mesaObjeto}</strong>. Isso reflete seu estado emocional. Comida, flores ou uma pessoa? Se a sua resposta não foi nenhuma dessas alternativas então isso indica que você anda um pouco triste.</p>
     <p>6 – O seu copo era de <strong>${copoMaterial}</strong>, Ele era resistente ou frágil? Isso indica como é a sua relação com a pessoa que estava caminhando com você. Além disso, você fez: "${copoAcao}", isso mostra a atitude que você tem com aquela pessoa.</p>
+		<img src="https://github.com/UrickAlberth/UrickAlberth.github.io/raw/main/teste_floresta/img/capa4-1.jpg" alt="capa4" id="capa4">
     <p>7 – O ${aguaReflexo} que você imaginou era ${
 		agua_tamanho === "1" ? "pequena" : agua_tamanho === "2" ? "média" : "grande"
 	} o que representa a proporção do seu apetite sexual</p>
