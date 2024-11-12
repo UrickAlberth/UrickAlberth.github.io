@@ -6,7 +6,7 @@
 
 body {
 	font-family: "Roboto", sans-serif;
-	background: linear-gradient(135deg, #6a11cb, #2575fc);
+	background: linear-gradient(135deg, #38661e, #2575fc);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -19,9 +19,9 @@ body {
 	border-radius: 20px;
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 	padding: 30px;
-	max-width: 600px;
+	/*max-width: 600px;*/
 	width: 100%;
-	height: 590px;
+	height: 100%;
 	text-align: center;
 	overflow-y: auto;
 	display: flex;
@@ -48,7 +48,6 @@ input[type="text"],
 input[type="range"] {
 	width: 100%;
 	padding: 10px;
-	margin-top: 10px;
 	margin-bottom: 20px;
 	border-radius: 8px;
 	border: none;
@@ -82,7 +81,7 @@ hr {
 }
 
 .btn {
-	background-color: #2575fc;
+	background-color: #38661e;
 	color: #fff;
 	padding: 12px 20px;
 	border: none;
@@ -132,4 +131,48 @@ input[type="radio"]:checked + label {
 label {
 	flex-basis: 33%; /* Cada label terá 1/3 da largura do container */
 	text-align: center;
+}
+
+#caminhando{
+	width:90%;
+}
+ #molhado1{
+	width:80%;
+}
+
+#mesa{
+	width:45%;
+}
+
+#agua{
+	width:50%;
+}
+
+#capa{
+	width:100%;
+}
+
+#docil, #natural, #agressivo{
+		width:30%;
+}
+
+#copoImg, #jardim_copo{
+	width:30%;
+}
+
+#capa1 , #capa2, #capa3, #capa4{
+	width:50%;
+}
+
+@media (width >= 600px) {
+#capa, #caminhando, #molhado1{
+	width:55vh;
+}
+	#capa1 , #capa2, #capa3, #capa4{
+	width:55vh;
+}
+	#mesa, #agua{
+	width:40vh;
+	height:auto;
+}
 }
