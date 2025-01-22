@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerar Pauta de Audiência</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container" id="form" style="display: ;">
+        <h1>Gerar Pauta de Audiência</h1>
+        <form id="audienceForm">
+            <label for="processNumber">Número do Processo</label>
+            <input type="text" id="processNumber" oninput="formatCNJ(this)" required>
+
+            <label for="dateTime">Data e Horário</label>
+            <input type="datetime-local" id="dateTime" required>
+
+            <label for="location">Local</label>
+            <input type="text" id="location" required>
+
+            <label for="audienceType">Tipo de Audiência</label>
+            <input type="text" id="audienceType" required>
+
+            <div class="parties">
+                <label>Parte(s) Autora(s)</label>
+                <button type="button" class="add-button" onclick="addParty()">Adicionar Parte Autora</button>
+                <div id="partyContainerA"></div>
+							<label>Parte(s) Ré(s)</label>
+                <button type="button" class="add-button" onclick="addPartyR()" style="background:#F0845A;">Adicionar Parte Ré</button>
+                <div id="partyContainerR"></div>
+            </div>
+
+            <div class="witnesses">
+                <label>Testemunhas</label>
+                <button type="button" class="add-button" onclick="addWitness()" style="background:#A127FD;">Adicionar Testemunha</button>
+                <div id="witnessContainer"></div>
+            </div>
+
+            <button type="submit">GERAR PAUTA</button>
+        </form>
+    </div>
+
+    <div id="pauta" class="pauta-container" style="display: none;">
+			<div class="section">
+					<div class="section-head">
+						<img src="https://www8.tjmg.jus.br/Processo_Eletronico_TJMG/PJe-tutorial/TutorialEntidadesExternas/lib/logo%20tjmg.jpg" width=60 style="position:absolute;">
+						<center>
+						<p>JUSTIÇA DE 1ª INSTÂNCIA</p>
+							<p>SECRETARIA DA 1ª VARA DA FAZENDA PÚBLICA E AUTARQUIAS</p>
+							<p>DA COMARCA DE BELO HORIZONTE/MG</p>		
+							</center>
+						</div>
+            
+        </div>
+			
+			<center><h2>PAUTA DE AUDIÊNCIA</h2></center>
+        <div class="section">
+					<div class="section-title">
+						<strong>Número do Processo: </strong>
+						<span id="pautaProcessNumber"></span>							
+						</div>
+            
+        </div>
+        <div class="section">
+            <div class="section-title"><strong>Data e Horário: </strong>
+            <span id="pautaDateTime"></span>
+							</div>
+        </div>
+        <div class="section">
+            <div class="section-title"><strong>Local: </strong>
+            <span id="pautaLocation"></span>
+							</div>
+        </div>
+        <div class="section">
+            <div class="section-title"><strong>Tipo de Audiência: </strong>
+            <span id="pautaAudienceType"></span>
+					</div>
+        </div>
+			<hr>
+        <div class="section">
+            <center><div class="section-title"><strong>Identificação das Partes: </strong></div></center>
+            <div id="pautaParties"></div>
+        </div>
+			<hr>
+        <div class="section">
+					<center><div class="section-title"><strong>Testemunhas:</strong></div></center>
+            <div id="pautaWitnesses"></div>
+        </div>
+				<div class="section" id="impress">				
+					<button onclick="printPauta()">Imprimir</button>
+					<button onclick="voltar()">Voltar</button>
+        </div>
+    </div>
+  <script  src="./script.js"></script>
+</body>
+</html>
