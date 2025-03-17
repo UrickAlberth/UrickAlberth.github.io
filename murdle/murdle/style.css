@@ -1,0 +1,277 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	background: #f2f2f2;
+	color: #333;
+}
+header {
+	background: #3f51b5;
+	color: #fff;
+	padding: 1em;
+	text-align: center;
+}
+main {
+	max-width: 800px;
+	margin: 2em auto;
+	background: #fff;
+	padding: 2em;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h1,
+h2,
+h3 {
+	margin-top: 0;
+}
+.section {
+	margin-bottom: 1.5em;
+}
+.pistas {
+	background: #eee;
+	padding: 1em;
+	border-radius: 6px;
+	margin-top: 1em;
+}
+.resposta {
+	margin-top: 1em;
+	padding: 1em;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	background: #fafafa;
+}
+label {
+	display: inline-block;
+	margin-right: 1em;
+	margin-bottom: 0.5em;
+}
+select {
+	margin-right: 1em;
+	padding: 0.3em;
+}
+button {
+	background: #3f51b5;
+	color: #fff;
+	border: none;
+	padding: 0.7em 1em;
+	border-radius: 4px;
+	cursor: pointer;
+}
+button:hover {
+	background: #303f9f;
+}
+.resultado {
+	font-weight: bold;
+	margin-top: 1em;
+}
+
+h3 {
+	text-transform: uppercase;
+	font-size: 18px;
+	font-weight: bold;
+	color: #333;
+}
+.suspeito, .local, .arma{
+	background-color: #fff;
+	border-radius: 10px;
+	padding: 15px;
+	margin-bottom: 15px;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+		display: flex;
+	align-items: center;
+	
+}
+.local, .arma {
+	display: block;
+	width:150px;
+	height:220px;
+}
+.locais, .armas{
+	display: flex;
+	align-items: center;
+	justify-content:space-between;
+	
+}
+
+.icone {
+	font-size: 30px;
+	margin-right: 15px;
+}
+.descricao {
+	flex: 1;
+}
+.descricao p {
+	margin: 5px 0;
+}
+.atributos {
+	font-weight: bold;
+}
+
+h5,h6{
+	margin:5px;
+}
+
+.parent {
+display: grid;
+grid-template-columns: repeat(8, 1fr);
+grid-template-rows: repeat(8, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+}
+
+.div1 { grid-area: 1 / 3 / 2 / 6; }
+.div2 { grid-area: 1 / 6 / 2 / 9; }
+.div3 { grid-area: 6 / 1 / 9 / 2; }
+.div4 { grid-area: 3 / 1 / 6 / 2; }
+.div5 { grid-area: 2 / 3 / 3 / 4; }
+.div6 { grid-area: 2 / 4 / 3 / 5; }
+.div7 { grid-area: 2 / 5 / 3 / 6; }
+.div8 { grid-area: 2 / 6 / 3 / 7; }
+.div9 { grid-area: 2 / 7 / 3 / 8; }
+.div10 { grid-area: 2 / 8 / 3 / 9; }
+.div11 { grid-area: 8 / 2 / 9 / 3; }
+.div12 { grid-area: 7 / 2 / 8 / 3; }
+.div13 { grid-area: 6 / 2 / 7 / 3; }
+.div14 { grid-area: 5 / 2 / 6 / 3; }
+.div15 { grid-area: 4 / 2 / 5 / 3; }
+.div16 { grid-area: 3 / 2 / 4 / 3; }
+.div17 { grid-area: 3 / 3 / 4 / 4; }
+.div18 { grid-area: 3 / 4 / 4 / 5; }
+.div19 { grid-area: 3 / 5 / 4 / 6; }
+.div20 { grid-area: 4 / 3 / 5 / 4; }
+.div21 { grid-area: 4 / 4 / 5 / 5; }
+.div22 { grid-area: 4 / 5 / 5 / 6; }
+.div23 { grid-area: 5 / 3 / 6 / 4; }
+.div24 { grid-area: 5 / 4 / 6 / 5; }
+.div25 { grid-area: 5 / 5 / 6 / 6; }
+.div26 { grid-area: 6 / 3 / 7 / 4; }
+.div27 { grid-area: 6 / 4 / 7 / 5; }
+.div28 { grid-area: 6 / 5 / 7 / 6; }
+.div29 { grid-area: 7 / 3 / 8 / 4; }
+.div30 { grid-area: 7 / 4 / 8 / 5; }
+.div31 { grid-area: 7 / 5 / 8 / 6; }
+.div32 { grid-area: 8 / 3 / 9 / 4; }
+.div33 { grid-area: 8 / 4 / 9 / 5; }
+.div34 { grid-area: 8 / 5 / 9 / 6; }
+.div35 { grid-area: 3 / 6 / 4 / 7; }
+.div36 { grid-area: 3 / 7 / 4 / 8; }
+.div37 { grid-area: 3 / 8 / 4 / 9; }
+.div38 { grid-area: 4 / 6 / 5 / 7; }
+.div39 { grid-area: 4 / 7 / 5 / 8; }
+.div40 { grid-area: 4 / 8 / 5 / 9; }
+.div41 { grid-area: 5 / 6 / 6 / 7; }
+.div42 { grid-area: 5 / 7 / 6 / 8; }
+.div43 { grid-area: 5 / 8 / 6 / 9; }
+.div44 { grid-area: 6 / 6 / 7 / 7; }
+.div45 { grid-area: 6 / 7 / 7 / 8; }
+.div46 { grid-area: 6 / 8 / 7 / 9; }
+.div47 { grid-area: 7 / 6 / 8 / 7; }
+.div48 { grid-area: 7 / 7 / 8 / 8; }
+.div49 { grid-area: 7 / 8 / 8 / 9; }
+.div50 { grid-area: 8 / 6 / 9 / 7; }
+.div51 { grid-area: 8 / 7 / 9 / 8; }
+.div52 { grid-area: 8 / 8 / 9 / 9; }
+
+.space{
+	border:1px solid black;
+}
+
+.parent div{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.div3 , .div4{
+	transform: rotate(270deg);
+}
+
+@media only screen and (max-width: 600px) {
+	.locais, .armas{
+		display: block;
+		
+	}
+	.local,.arma{
+		width:90%;
+		height:auto;
+	}
+	
+}
+
+
+
+
+/* Estilo do título */
+.section h2 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Estilo do parágrafo */
+.section p {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Estilo do formulário */
+#palpiteForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilo dos labels */
+#palpiteForm label {
+    font-size: 1em;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+/* Estilo dos selects */
+#palpiteForm select {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #333;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+#palpiteForm select:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* Estilo do botão */
+#btnVerificar {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#btnVerificar:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo da div de resultado */
+.resultado {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #e9ecef;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
