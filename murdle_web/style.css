@@ -1,0 +1,190 @@
+/* ESTILO PRINCIPAL */
+        :root {
+            --paper: #f5f5f0;
+            --ink: #222;
+            --red: #c00;
+            --green: #090;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 29px,
+                rgba(0,0,0,0.1) 29px,
+                rgba(0,0,0,0.1) 30px
+            );
+        }
+
+        /* CABEÇALHO */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--ink);
+            padding-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        /* SEÇÃO DO CASO */
+        .case-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 5px;
+        }
+
+        /* CARTAS DE EVIDÊNCIA */
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .evidence-card {
+            border: 1px solid var(--ink);
+            padding: 15px;
+            border-radius: 5px;
+            background: white;
+        }
+
+        .evidence-icon {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* TABELA DEDUTIVA */
+        .deduction-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            margin: 30px 0;
+        }
+
+        .grid-header {
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            background: var(--ink);
+            color: white;
+        }
+
+        .grid-cell {
+            border: 1px solid var(--ink);
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            background: white;
+            transition: all 0.2s;
+        }
+
+        .grid-cell.checked {
+            background: var(--green);
+            color: white;
+        }
+
+        .grid-cell.excluded {
+            background: var(--red);
+            color: white;
+        }
+
+        /* FORMULÁRIO DE PALPITE */
+        .guess-form {
+            display: grid;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        select, button {
+            padding: 10px;
+            font-family: inherit;
+            border: 1px solid var(--ink);
+        }
+
+        button {
+            background: var(--ink);
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: var(--red);
+        }
+
+        /* MODAL DE RESULTADO */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            max-width: 500px;
+            text-align: center;
+            border-radius: 5px;
+        }
+ table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+    }
+
+    thead th {
+      background: #eaeaea;
+      text-align: center;
+      padding: 0.5rem;
+      font-weight: bold;
+    }
+
+    tbody td, thead th {
+      border: 1px solid #ccc;
+    }
+
+    tbody td {
+      text-align: center;
+      cursor: pointer;
+      padding: 0.5rem;
+      min-width: 40px;
+      height: 40px;
+      vertical-align: middle;
+    }
+
+    /* Estado visual para ✓, ✗ e vazio */
+    .cell-check {
+      background-color: #d0f0d0;
+      color: green;
+      font-weight: bold;
+    }
+
+    .cell-x {
+      background-color: #f0d0d0;
+      color: red;
+      font-weight: bold;
+    }
+
+#btnPular{
+	display:none;
+}

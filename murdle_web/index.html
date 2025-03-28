@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Murdle Web - O Jogo de Dedução</title>
+	<link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+	<header>
+		<h1>Murdle Web</h1>
+		<p>Resolva o mistério usando lógica e dedução</p>
+	</header>
+
+	<main>
+		<section class="case-section">
+			<h2 id="titulo">Caso #1: O Mistério do Vigário</h2>
+			<p id="enredo">O dedutivo Logicus deslocou-se até a exótica cidadezinha da dama Obsidian e imediatamente aprendeu uma nova palavra: 'vigário'. Ele não sabia o que significava, mas sabia como usá-la numa frase como esta: 'O vigário foi assassinado e vou descobrir quem fez isso.'</p>
+			<section class="tutorial">
+				<h2>Tutorial</h2>
+				<p>1. Leia as pistas abaixo. Elas indicarão quais combinações são possíveis ou impossíveis.</p>
+				<p>2. Clique nas células da tabela para alternar entre vazio, <strong>✓</strong> (possível) e <strong>✗</strong> (impossível).</p>
+				<p>3. Use essas marcações para deduzir o único suspeito, a arma e o local corretos.</p>
+				<p>4. Suspeitos só podem está em 1 lugar e ter 1 arma</p>
+				<p>5. Não existe suspeitos no mesmo local ou com mesma arma</p>
+				<p>6. Arma só podem está em 1 lugar, não exite armas no mesmo local</p>
+				<p>7. Suspeitos estão no mesmo local que suas armas</p>
+			</section>
+
+			<h3>Evidências</h3>
+			<!-- Suspeitos -->
+			<div class="evidence-grid">
+				<div class="evidence-card">
+					<div class="evidence-icon" id="S1_icone"></div>
+					<h4 id="suspeito1"></h4>
+					<p id="S1_atributos"></p>
+					<p><em id="S1_bio"></em></p>
+				</div>
+				<div class="evidence-card">
+					<div class="evidence-icon" id="S2_icone"></div>
+					<h4 id="suspeito2"></h4>
+					<p id="S2_atributos"></p>
+					<p><em id="S2_bio"></em></p>
+				</div>
+				<div class="evidence-card">
+					<div class="evidence-icon" id="S3_icone"></div>
+					<h4 id="suspeito3"></h4>
+					<p id="S3_atributos"></p>
+					<p><em id="S3_bio"></em></p>
+				</div>
+			</div>
+			<!-- Locais -->
+			<div class="evidence-grid">
+				<div class="evidence-card">
+					<div class="evidence-icon" id="L1_icone"></div>
+					<h4 id="local1"></h4>
+					<p id="L1_ambiente"></p>
+					<p><em id="L1_descricao"></em></p>
+				</div>
+				<div class="evidence-card">
+					<div class="evidence-icon" id="L2_icone"></div>
+					<h4 id="local2"></h4>
+					<p id="L2_ambiente"></p>
+					<p><em id="L2_descricao"></em></p>
+				</div>
+				<div class="evidence-card">
+					<div class="evidence-icon" id="L3_icone"></div>
+					<h4 id="local3"></h4>
+					<p id="L3_ambiente"></p>
+					<p><em id="L3_descricao"></em></p>
+				</div>
+			</div>
+			<!-- Armas -->
+			<div class="evidence-grid">
+				<div class="evidence-card">
+					<div class="evidence-icon" id="A1_icone"></div>
+					<h4 id="arma1"></h4>
+					<p id="A1_peso"></p>
+					<p><em id="A1_descricao"></em></p>
+				</div>
+				<div class="evidence-card">
+					<div class="evidence-icon" id="A2_icone"></div>
+					<h4 id="arma2"></h4>
+					<p id="A2_peso"></p>
+					<p><em id="A2_descricao"></em></p>
+				</div>
+				<div class="evidence-card">
+					<div class="evidence-icon" id="A3_icone"></div>
+					<h4 id="arma3"></h4>
+					<p id="A3_peso"></p>
+					<p><em id="A3_descricao"></em></p>
+				</div>
+			</div>
+
+			<section class="section">
+				<h2>Pistas</h2>
+				<div class="pistas" id="pistas">
+
+				</div>
+			</section>
+
+			<h3>Tabela Dedutiva</h3>
+			<section class="grid-container">
+				<h2>Suspeitos x Armas</h2>
+				<table id="grid-suspeitos-armas">
+					<thead>
+						<tr>
+							<th></th>
+							<th id="A1_icone_tb">Faca</th>
+							<th id="A2_icone_tb">Revólver</th>
+							<th id="A3_icone_tb">Cajado Preto</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- Supondo 3 suspeitos de exemplo -->
+						<tr>
+							<th id="S1_icone_tb">Dama Obscura</th>
+							<td data-row="S1" data-col="A1"></td>
+							<td data-row="S1" data-col="A2"></td>
+							<td data-row="S1" data-col="A3"></td>
+						</tr>
+						<tr>
+							<th id="S2_icone_tb">Maestro Elegante</th>
+							<td data-row="S2" data-col="A1"></td>
+							<td data-row="S2" data-col="A2"></td>
+							<td data-row="S2" data-col="A3"></td>
+						</tr>
+						<tr>
+							<th id="S3_icone_tb">Dra. Venenosa</th>
+							<td data-row="S3" data-col="A1"></td>
+							<td data-row="S3" data-col="A2"></td>
+							<td data-row="S3" data-col="A3"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h2>Suspeitos x Locais</h2>
+				<table id="grid-suspeitos-locais">
+					<thead>
+						<tr>
+							<th></th>
+							<th id="L1_icone_tb">Mansão</th>
+							<th id="L2_icone_tb">Capela</th>
+							<th id="L3_icone_tb">Ruínas Antigas</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th id="S1_icone_tb2">Dama Obscura</th>
+							<td data-row="S1" data-col="L1"></td>
+							<td data-row="S1" data-col="L2"></td>
+							<td data-row="S1" data-col="L3"></td>
+						</tr>
+						<tr>
+							<th id="S2_icone_tb2">Maestro Elegante</th>
+							<td data-row="S2" data-col="L1"></td>
+							<td data-row="S2" data-col="L2"></td>
+							<td data-row="S2" data-col="L3"></td>
+						</tr>
+						<tr>
+							<th id="S3_icone_tb2">Dra. Venenosa</th>
+							<td data-row="S3" data-col="L1"></td>
+							<td data-row="S3" data-col="L2"></td>
+							<td data-row="S3" data-col="L3"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h2>Armas x Locais</h2>
+				<table id="grid-armas-locais">
+					<thead>
+						<tr>
+							<th></th>
+							<th id="L1_icone_tb2">Mansão</th>
+							<th id="L2_icone_tb2">Capela</th>
+							<th id="L3_icone_tb2">Ruínas Antigas</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th id="A1_icone_tb2">Faca</th>
+							<td data-row="A1" data-col="L1"></td>
+							<td data-row="A1" data-col="L2"></td>
+							<td data-row="A1" data-col="L3"></td>
+						</tr>
+						<tr>
+							<th id="A2_icone_tb2">Revólver</th>
+							<td data-row="A2" data-col="L1"></td>
+							<td data-row="A2" data-col="L2"></td>
+							<td data-row="A2" data-col="L3"></td>
+						</tr>
+						<tr>
+							<th id="A3_icone_tb2">Cajado Preto</th>
+							<td data-row="A3" data-col="L1"></td>
+							<td data-row="A3" data-col="L2"></td>
+							<td data-row="A3" data-col="L3"></td>
+						</tr>
+					</tbody>
+				</table>
+				<button class="btn" id="reset-btn">Reiniciar Jogo</button>
+			</section>
+
+			<div class="guess-form">
+				<h3>Seu Palpite Final</h3>
+				<select id="suspect">
+					<option value="">-- Selecione --</option>
+					<option value="s1" id="suspeito1_op"></option>
+					<option value="s2" id="suspeito2_op"></option>
+					<option value="s3" id="suspeito3_op"></option>
+				</select>
+
+				<select id="weapon">
+					<option value="">-- Selecione --</option>
+					<option value="a1" id="arma1_op"></option>
+					<option value="a2" id="arma2_op"></option>
+					<option value="a3" id="arma3_op"></option>
+				</select>
+
+				<select id="location">
+					<option value="">-- Selecione --</option>
+					<option value="l1" id="local1_op"></option>
+					<option value="l2" id="local2_op"></option>
+					<option value="l3" id="local3_op"></option>
+				</select>
+
+				<button id="submit-guess">Submeter Palpite</button>
+			</div>
+
+		</section>
+	</main>
+
+	<div class="modal" id="result-modal">
+		<div class="modal-content">
+			<h2 id="result-title">Resultado</h2>
+			<p id="result-message"></p>
+			<button id="btnPular">Pular</button>
+			<button id="close-modal">Fechar</button>
+		</div>
+	</div>
+<script  src="./script.js"></script>
+</body>
+
+</html>
