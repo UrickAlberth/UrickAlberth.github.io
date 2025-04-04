@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JurisExtract PRO - Extração de Números de Processo</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+	<header>
+		<div class="container header-content">
+			<div class="logo">
+				<i class="fas fa-gavel"></i>
+				<div class="logo-text">
+					<h1>JurisExtract PRO</h1>
+					<p>Ferramenta profissional para extração de números de processo</p>
+				</div>
+			</div>
+			<div class="header-actions">
+				<button class="btn btn-secondary">
+					<i class="fas fa-question-circle"></i> Ajuda
+				</button>
+			</div>
+		</div>
+	</header>
+
+	<main class="container">
+		<section class="main-content">
+			<div class="tool-description">
+				<h2>Extraia números de processo de forma inteligente</h2>
+				<p>Cole qualquer texto contendo números de processo no formato padrão (NNNNNNN-NN.NNNN.N.NN.NNNN) e nosso sistema irá identificar, organizar e disponibilizar para cópia de forma prática.</p>
+			</div>
+
+			<div class="input-section">
+				<label for="inputText" class="input-label">Cole seu texto abaixo:</label>
+				<textarea id="inputText" class="input-textarea" placeholder="Exemplo: Processo nº 1234567-89.1234.5.67.8901 foi julgado em conjunto com o processo 9876543-21.4321.5.43.2109..."></textarea>
+			</div>
+
+			<div class="action-buttons">
+				<button class="btn btn-primary" onclick="extractProcesses()">
+					<i class="fas fa-search"></i> Extrair Processos
+				</button>
+				<button class="btn btn-secondary" onclick="clearAll()">
+					<i class="fas fa-broom"></i> Limpar Tudo
+				</button>
+				<button class="btn btn-secondary" onclick="pasteFromClipboard()">
+					<i class="fas fa-paste"></i> Colar do Clipboard
+				</button>
+			</div>
+
+			<div id="output" class="output-section">
+				<div class="results-header">
+					<h3 class="results-title">Processos Encontrados</h3>
+					<span id="resultsCount" class="results-count">0 itens</span>
+				</div>
+
+				<ul id="processList" class="process-list">
+					<!-- Itens serão inseridos aqui via JavaScript -->
+				</ul>
+
+				<button id="copyAllBtn" class="btn btn-primary copy-all-btn" onclick="copyAllProcesses()">
+					<i class="fas fa-copy"></i> Copiar Todos os Processos
+				</button>
+			</div>
+
+			<div id="emptyState" class="empty-state">
+				<i class="fas fa-file-alt"></i>
+				<h3>Nenhum processo encontrado</h3>
+				<p>Cole seu texto contendo números de processo no campo acima e clique em "Extrair Processos"</p>
+			</div>
+		</section>
+
+		<section class="features-section">
+			<div class="feature-card">
+				<div class="feature-icon">
+					<i class="fas fa-bolt"></i>
+				</div>
+				<h3 class="feature-title">Processamento Rápido</h3>
+				<p>Extraia milhares de números de processo em segundos, mesmo em documentos extensos.</p>
+			</div>
+
+			<div class="feature-card">
+				<div class="feature-icon">
+					<i class="fas fa-sort-numeric-down"></i>
+				</div>
+				<h3 class="feature-title">Organização Automática</h3>
+				<p>Números são ordenados automaticamente pelo dígito verificador para facilitar sua análise.</p>
+			</div>
+
+			<div class="feature-card">
+				<div class="feature-icon">
+					<i class="fas fa-clipboard-check"></i>
+				</div>
+				<h3 class="feature-title">Validação Inteligente</h3>
+				<p>Verificação automática de formatos válidos para garantir que apenas números corretos sejam extraídos.</p>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<div class="container footer-content">
+			<p>&copy; 2023 JurisExtract PRO - Todos os direitos reservados</p>
+			<div class="footer-links">
+				<a href="#"><i class="fas fa-shield-alt"></i> Privacidade</a>
+				<a href="#"><i class="fas fa-file-contract"></i> Termos</a>
+				<a href="#"><i class="fas fa-envelope"></i> Contato</a>
+			</div>
+		</div>
+	</footer>
+
+</body>
+
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
