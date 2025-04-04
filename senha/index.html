@@ -1,0 +1,26 @@
+
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivinhe o Número</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Adivinhe o Número</h1>
+        <p>Tente adivinhar o número de 4 dígitos. Cada dígito é único e varia de 0 a 9.</p>
+        <div class="inputs">
+            <input type="text" id="digit1" maxlength="1" class="digit-input" oninput="moveToNext(this, 'digit2')">
+            <input type="text" id="digit2" maxlength="1" class="digit-input" oninput="moveToNext(this, 'digit3')">
+            <input type="text" id="digit3" maxlength="1" class="digit-input" oninput="moveToNext(this, 'digit4')">
+            <input type="text" id="digit4" maxlength="1" class="digit-input" oninput="moveToNext(this, null)">
+        </div>
+        <button onclick="checkGuess()">Verificar</button>
+        <button onclick="restartGame()">Recomeçar</button>
+        <p id="result"></p>
+        <p id="attempts">Tentativas: 0</p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

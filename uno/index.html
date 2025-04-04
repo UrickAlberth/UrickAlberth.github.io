@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>UNO - Jogo contra 3 Máquinas</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="menu">
+		<button onclick="start()">COMEÇAR</button>
+		<div>
+			<button id="jogadas">Mostrar Jogadas</button>
+			<div id="jogadas-container"></div>
+		</div>
+	</div>
+	<div class="game-board">
+		<!-- Máquina 1 (Topo) -->
+		<div class="machine-cards top" id="machine2Cards">PC2</div>
+
+		<!-- Máquina 2 (Esquerda) -->
+		<div class="machine-cards left" id="machine3Cards">PC3</div>
+
+		<!-- Área central: Comprar carta e descarte -->
+		<div class="action-area">
+			<div class="card deck" id="drawCard">Comprar</div>
+			<div class="card blue" id="discardPile">1</div>
+			<div class="action" id="actionId"></div>
+		</div>
+
+		<!-- Máquina 3 (Direita) -->
+		<div class="machine-cards right" id="machine1Cards">PC1</div>
+
+		<!-- Jogador Humano (Base) -->
+		<div class="player-cards" id="playerCards">Player</div>
+	</div>
+	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+		< script src = "script.js" >
+	</script>
+</body>
+
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>

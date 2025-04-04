@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Controle de Combustível</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<main class="container">
+		<section class="fuel-box">
+			<h2>Nível do Tanque</h2>
+			<div id="fuelBar" class="fuel-bar">
+				<!-- 12 segmentos -->
+				<div class="segment" data-index="1"></div>
+				<div class="segment" data-index="2"></div>
+				<div class="segment" data-index="3"></div>
+				<div class="segment" data-index="4"></div>
+				<div class="segment" data-index="5"></div>
+				<div class="segment" data-index="6"></div>
+				<div class="segment" data-index="7"></div>
+				<div class="segment" data-index="8"></div>
+				<div class="segment" data-index="9"></div>
+				<div class="segment" data-index="10"></div>
+				<div class="segment" data-index="11"></div>
+				<div class="segment" data-index="12"></div>
+			</div>
+			<p class="fuel-level"><input type="number" id="currentFuel" step="0.1"> L
+			<p id="fuelLevelText">(0%)</p>
+			</p>
+			<div class="input-group">
+				<label>Gasolina R$</label>
+				<input type="number" id="gasPrice" value="6.2" step="0.01">
+				<label>Etanol R$</label>
+				<input type="number" id="ethanolPrice" value="4.6" step="0.01">
+			</div>
+			<div class="input-group">
+				<label>Km Abst</label>
+				<input type="number" id="lastKm">
+				<label>Km/l</label>
+				<input type="number" id="consumption" value="10" step="0.1">
+			</div>
+			<div class="results">
+				<p>Faltam: <br><span id="litersToFull">0</span> L </p>
+				<p>Valor (Gasolina): <br>R$ <span id="refuelValueGas">0</span></p>
+				<p>Valor (Etanol): <br>R$ <span id="refuelValueEth">0</span></p>
+				<p>Autonomia atual: <br><span id="autonomy">0</span> km</p>
+			</div>
+			<button id="saveData">SALVAR</button>
+		</section>
+		<br>
+		<hr>
+		<br>
+		<section>
+			<button onclick="exibirSection('abastecer')">ABASTECER</button>
+			<button onclick="exibirSection('viagem')">CALCULAR VIAGEM</button>
+		</section>
+	</main>
+
+	<main class="container">
+		<section class="abastecer" style="display:none;">
+			<h1>Registro de Abastecimento</h1>
+			<select id='tipo'>
+				<option>Gasolina</option>
+				<option>Etanol</option>
+			</select>
+			<select id="forma">
+				<option>Valor</option>
+				<option>Litros</option>
+			</select>
+				<input type="number" id="abts" value="10" step="0.1">
+				<input type="date" id="data">
+				<button onclick="abastecer()">Abastecer</button>		
+				<button onclick="loadRegistros()"> Ver registros</button>
+				<section class="registros" id="areaRegistros">
+					<div class="results">
+						<p>Km: <br><span>0</span></p>
+						<p>Litros: <span>0</span><br>Valor: R$ <span>0</span></p>
+						<p></p>
+						<p>Tipo: <br><span>0</span></p>
+						<p>Data: <br><span>0</span></p>
+					</div>	
+			</section>
+		</section>
+
+		<section class="viagem" style="display:none;">
+			<h2>Calcular Viagem</h2>
+			<div class="input-group">
+				<label>Distância de Ida (km)</label>
+				<input type="number" id="distanciaIda" step="0.1">
+			</div>
+			<div class="input-group">
+				<label>Distância de Volta (km)</label>
+				<input type="number" id="distanciaVolta" step="0.1">
+			</div>
+			<button onclick="calcularViagem()">Calcular Viagem</button>
+			<div class="results">
+				<p>Combustível necessário: <br><span id="combustivelNecessario">0</span> L</p>
+				<p>Custo (Gasolina): <br>R$ <span id="custoGasolina">0</span></p>
+				<p>Custo (Etanol): <br>R$ <span id="custoEtanol">0</span></p>
+			</div>
+		</section>
+	</main>
+</body>
+
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>

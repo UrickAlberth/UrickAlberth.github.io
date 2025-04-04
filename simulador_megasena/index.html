@@ -1,0 +1,32 @@
+
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulação Mega-Sena</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Simulação Mega-Sena</h1>
+    <div class="teclado">
+      <h2>Escolha seus 6 números da sorte:</h2>
+      <div id="numerosSelecionados" class="bolas2" ></div>
+      <div class="bolas">
+        <!-- Aqui serão exibidas as bolas de 1 a 60 -->
+      </div>
+    </div>
+    <button onclick="addBilhete()">Adicionar Bilhete</button>
+    <br>
+    <label class="titulo">Bilhetes</label>
+    <div class="bilhetes scroll">
+      
+    </div>
+    <button onclick="simularJogoMegaSena(100)">Iniciar Simulação</button>
+		<div id="contagem"></div>
+    <div class="resultados scroll">
+      <div id="resultados"></div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

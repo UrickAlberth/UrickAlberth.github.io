@@ -1,0 +1,158 @@
+/* Reset e estilo geral */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 20px;
+}
+
+.container {
+   max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+	text-align: center;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+/* Indicador do Tanque */
+.fuel-indicator {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.fuel-bar {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.fuel-bar .segment {
+  flex: 1;
+  height: 20px;
+  margin: 0 2px;
+  background-color: #ddd;
+  border-radius: 2px;
+  transition: background-color 0.3s;
+}
+
+/* Segmentos “cheios” terão cor diferente */
+.fuel-bar .segment.full {
+  background-color: #4caf50;
+}
+.status {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.input-group label {
+  font-size: 14px;
+}
+
+.input-group input ,#currentFuel{
+	width: 50px;
+  text-align: center;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: none;
+}
+#currentFuel{
+  width: 50px;
+}
+
+
+.results {
+	  font-size: 4vw;
+  	  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.results p {
+  margin: 10px 0;
+
+}
+
+.results span{
+	font-weight:bold;
+}
+
+button {
+  background: white;
+  border: 2px solid black;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #ddd;
+}
+
+/* Responsividade */
+@media (min-width: 600px) {
+.results {
+	  font-size: 2vw;
+	}
+}
+
+.registros{
+	height:165px;
+	overflow:auto;
+}
+
+.abastecer input,.abastecer select{
+	border: 1px solid black;
+	 border-radius: 8px;
+  padding: 5px;
+ text-align: center;
+}
+
+.viagem {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.viagem .input-group {
+  margin-bottom: 10px;
+}
+
+.viagem .results {
+  margin-top: 15px;
+}
