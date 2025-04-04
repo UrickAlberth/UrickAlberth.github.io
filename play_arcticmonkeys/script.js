@@ -1,64 +1,52 @@
 let musicas = [
-	{
-		Nome: "01. Do I Wanna Know?",
-		Link:
-			"https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/01.%20Do%20I%20Wanna%20Know%3F.mp3"
-	},
-	{
-		Nome: "02. R U Mine?",
-		Link:
-			"https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/02.%20R%20U%20Mine%3F.mp3"
-	},
-	{
-		Nome: "03. One For The Road",
-		Link:
-			"https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/03.%20One%20For%20The%20Road.mp3"
-	},
-	{
-		Nome: "04. Arabella",
-		Link:
-			"https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/04.%20Arabella.mp3"
-	},
-	{
-		Nome: "05. I Want It All",
-		Link:
-			"https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/05.%20I%20Want%20It%20All.mp3"
-	},
-	{
-		Nome: "06. 1 Party Anthem",
-		Link:
-			"https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/06.%20No.%201%20Party%20Anthem.mp3"
-	},
-	{
-		Nome: "07. Mad Sounds",
-		Link:
-			"https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/07.%20Mad%20Sounds.mp3"
-	},
-	{
-		Nome: "08. Fireside",
-		Link:
-			"https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/08.%20Fireside.mp3"
-	},
-	{
-		Nome: "09. Why'd You Only Call Me When You're High?",
-		Link:
-			"https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/09.%20Why'd%20You%20Only%20Call%20Me%20When%20You're%20High%3F.mp3"
-	},
-	{
-		Nome: "10. Snap Out Of It",
-		Link:
-			"https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/10.%20Snap%20Out%20Of%20It.mp3"
-	},
-	{
-		Nome: "11. Knee Socks",
-		Link:
-			"https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/11.%20Knee%20Socks.mp3"
-	},
-	{
-		Nome: "12. I Wanna Be Yours",
-		Link:
-			"https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/12.%20I%20Wanna%20Be%20Yours.mp3"
-	}
+    {
+        "Nome": "01. Do I Wanna Know?",
+        "Link": "https://ia800803.us.archive.org/24/items/artic-monkeys/01%20Do%20I%20Wanna%20Know-.mp3"
+    },
+    {
+        "Nome": "02. R U Mine?",
+        "Link": "https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/02.%20R%20U%20Mine%3F.mp3"
+    },
+    {
+        "Nome": "03. One For The Road",
+        "Link": "https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/03.%20One%20For%20The%20Road.mp3"
+    },
+    {
+        "Nome": "04. Arabella",
+        "Link": "https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/04.%20Arabella.mp3"
+    },
+    {
+        "Nome": "05. I Want It All",
+        "Link": "https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/05.%20I%20Want%20It%20All.mp3"
+    },
+    {
+        "Nome": "06. 1 Party Anthem",
+        "Link": "https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/06.%20No.%201%20Party%20Anthem.mp3"
+    },
+    {
+        "Nome": "07. Mad Sounds",
+        "Link": "https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/07.%20Mad%20Sounds.mp3"
+    },
+    {
+        "Nome": "08. Fireside",
+        "Link": "https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/08.%20Fireside.mp3"
+    },
+    {
+        "Nome": "09. Why'd You Only Call Me When You're High?",
+        "Link": "https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/09.%20Why'd%20You%20Only%20Call%20Me%20When%20You're%20High%3F.mp3"
+    },
+    {
+        "Nome": "10. Snap Out Of It",
+        "Link": "https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/10.%20Snap%20Out%20Of%20It.mp3"
+    },
+    {
+        "Nome": "11. Knee Socks",
+        "Link": "https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/11.%20Knee%20Socks.mp3"
+    },
+    {
+        "Nome": "12. I Wanna Be Yours",
+        "Link": "https://ia801300.us.archive.org/18/items/01.-do-i-wanna-know_202312/12.%20I%20Wanna%20Be%20Yours.mp3"
+    }
 ];
 
 function addPlayList() {
