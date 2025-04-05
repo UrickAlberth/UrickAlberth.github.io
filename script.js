@@ -319,13 +319,13 @@ function carregarProjetos(filtro = "all") {
     const projeto = projetos[key];
     if (filtro === "all" || projeto.categoria === filtro) {
       const li = document.createElement("li");
-      li.innerHTML = `
+       li.innerHTML = `
         <h3>${projeto.nome}</h3>
-        <p>${projeto.descricao}</p>
-        <a href="${projeto.projetoUrl}" target="_blank" class="project-link">
+	<a href="${projeto.projetoUrl}" target="_blank" class="project-link">
           Ver Projeto
           <img src="${projeto.imgUrl}" alt="Captura de tela do projeto ${projeto.nome}" loading="lazy">
         </a>
+        <p>${projeto.descricao}</p>        
       `;
       projetosList.appendChild(li);
 			contagem++;
