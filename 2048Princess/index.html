@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 Princesas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffd6e7 0%, #ffb6c1 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #8a2a5e;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #d63384;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #9c2b6d;
+            margin-bottom: 25px;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .score-container, .best-container {
+            background-color: #fff;
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .score-title, .best-title {
+            font-size: 1.1rem;
+            color: #d63384;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .score-value, .best-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #9c2b6d;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .new-game-btn {
+            background: linear-gradient(135deg, #d63384 0%, #9c2b6d 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(156, 43, 109, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .new-game-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(156, 43, 109, 0.4);
+        }
+
+        .game-instructions {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            width: 100%;
+            text-align: center;
+            font-size: 1rem;
+            color: #7a1f5a;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .game-board {
+            background-color: #f4b0c7;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 15px;
+            background-color: #f8a0bc;
+            border-radius: 10px;
+            padding: 15px;
+            position: relative;
+            aspect-ratio: 1/1;
+        }
+
+        .grid-cell {
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .tile {
+            position: absolute;
+            width: calc((100% - 75px) / 4);
+            height: calc((100% - 75px) / 4);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.8rem;
+            transition: all 0.2s ease;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .tile-2 { background-image: url('1.png'); background-color: #ffcce0; }
+        .tile-4 { background-image: url('2.png'); background-color: #ffb3d9; }
+        .tile-8 { background-image: url('3.png'); background-color: #ff99cc; }
+        .tile-16 { background-image: url('4.png'); background-color: #ff80bf; }
+        .tile-32 { background-image: url('5.png'); background-color: #ff66b3; }
+        .tile-64 { background-image: url('6.png'); background-color: #ff4da6; }
+        .tile-128 { background-image: url('7.png'); background-color: #ff3399; }
+        .tile-256 { background-image: url('8.png'); background-color: #ff1a8c; }
+        .tile-512 { background-image: url('9.png'); background-color: #ff0080; }
+        .tile-1024 { background-image: url('10.png'); background-color: #e60073; }
+        .tile-2048 { background-image: url('11.png'); background-color: #cc0066; }
+        .tile-super { background-image: url('12.png'); background-color: #b30059; }
+
+        .mobile-controls {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 10px;
+            width: 250px;
+            height: 250px;
+            margin: 20px auto;
+        }
+
+        .mobile-btn {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 15px;
+            font-size: 2rem;
+            color: #d63384;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .mobile-btn:active {
+            background-color: #ffb3d9;
+            transform: scale(0.95);
+        }
+
+        .up-btn { grid-column: 2; grid-row: 1; }
+        .left-btn { grid-column: 1; grid-row: 2; }
+        .right-btn { grid-column: 3; grid-row: 2; }
+        .down-btn { grid-column: 2; grid-row: 3; }
+
+        .game-message {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .message-title {
+            font-size: 3rem;
+            color: #d63384;
+            margin-bottom: 20px;
+        }
+
+        .message-subtitle {
+            font-size: 1.5rem;
+            color: #9c2b6d;
+            margin-bottom: 30px;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #d63384 0%, #9c2b6d 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(156, 43, 109, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #9c2b6d;
+            font-size: 0.9rem;
+            width: 100%;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+        }
+
+        .key-instructions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .key {
+            background-color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #d63384;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .game-header {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .mobile-controls {
+                display: grid;
+            }
+            
+            .key-instructions {
+                display: none;
+            }
+            
+            .tile {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .game-board {
+                padding: 10px;
+            }
+            
+            .grid-container {
+                gap: 10px;
+                padding: 10px;
+            }
+            
+            .tile {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>2048 Princesas</h1>
+            <p class="subtitle">Combine as peças com a mesma princesa para chegar à peça 2048!</p>
+        </header>
+        
+        <div class="game-header">
+            <div class="score-container">
+                <div class="score-title">PONTUAÇÃO</div>
+                <div class="score-value">0</div>
+            </div>
+            
+            <div class="controls">
+                <button class="new-game-btn">
+                    <i class="fas fa-plus-circle"></i> Novo Jogo
+                </button>
+            </div>
+            
+            <div class="best-container">
+                <div class="best-title">RECORDE</div>
+                <div class="best-value">0</div>
+            </div>
+        </div>
+        
+        <div class="game-instructions">
+            <p>Use as <strong>setas do teclado</strong> ou os <strong>botões na tela</strong> para mover as peças. Quando duas peças com a mesma princesa se tocam, elas se combinam em uma!</p>
+        </div>
+        
+        <div class="game-board">
+            <div class="grid-container">
+                <!-- Grid cells will be generated by JavaScript -->
+            </div>
+            
+            <div class="game-message" id="game-message">
+                <div class="message-title" id="message-title">Você Venceu!</div>
+                <div class="message-subtitle" id="message-subtitle">Você alcançou a peça 2048!</div>
+                <button class="restart-btn" id="restart-btn">Jogar Novamente</button>
+            </div>
+        </div>
+        
+        <div class="mobile-controls">
+            <button class="mobile-btn up-btn" id="up-btn"><i class="fas fa-arrow-up"></i></button>
+            <button class="mobile-btn left-btn" id="left-btn"><i class="fas fa-arrow-left"></i></button>
+            <button class="mobile-btn right-btn" id="right-btn"><i class="fas fa-arrow-right"></i></button>
+            <button class="mobile-btn down-btn" id="down-btn"><i class="fas fa-arrow-down"></i></button>
+        </div>
+        
+        <div class="key-instructions">
+            <div class="key"><i class="fas fa-arrow-up"></i> Cima</div>
+            <div class="key"><i class="fas fa-arrow-down"></i> Baixo</div>
+            <div class="key"><i class="fas fa-arrow-left"></i> Esquerda</div>
+            <div class="key"><i class="fas fa-arrow-right"></i> Direita</div>
+        </div>
+        
+        <footer>
+            <p>Jogo 2048 com tema de princesas | Use as setas do teclado ou os botões na tela para jogar</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Elementos do DOM
+            const gridContainer = document.querySelector('.grid-container');
+            const scoreDisplay = document.querySelector('.score-value');
+            const bestDisplay = document.querySelector('.best-value');
+            const newGameButton = document.querySelector('.new-game-btn');
+            const gameMessage = document.getElementById('game-message');
+            const messageTitle = document.getElementById('message-title');
+            const messageSubtitle = document.getElementById('message-subtitle');
+            const restartButton = document.getElementById('restart-btn');
+            
+            // Botões de controle para celular
+            const upButton = document.getElementById('up-btn');
+            const downButton = document.getElementById('down-btn');
+            const leftButton = document.getElementById('left-btn');
+            const rightButton = document.getElementById('right-btn');
+            
+            // Variáveis do jogo
+            let grid = [];
+            let score = 0;
+            let best = localStorage.getItem('2048-best') || 0;
+            let gameOver = false;
+            let won = false;
+            
+            // Inicializar o jogo
+            function initGame() {
+                // Criar grid vazio 4x4
+                grid = Array(4).fill().map(() => Array(4).fill(0));
+                
+                // Resetar variáveis
+                score = 0;
+                gameOver = false;
+                won = false;
+                
+                // Atualizar displays
+                updateDisplays();
+                
+                // Esconder mensagem de jogo
+                gameMessage.style.display = 'none';
+                
+                // Limpar o container do grid
+                gridContainer.innerHTML = '';
+                
+                // Criar células do grid
+                for (let row = 0; row < 4; row++) {
+                    for (let col = 0; col < 4; col++) {
+                        const cell = document.createElement('div');
+                        cell.classList.add('grid-cell');
+                        cell.dataset.row = row;
+                        cell.dataset.col = col;
+                        gridContainer.appendChild(cell);
+                    }
+                }
+                
+                // Adicionar duas peças iniciais
+                addRandomTile();
+                addRandomTile();
+                
+                // Renderizar o grid
+                renderGrid();
+            }
+            
+            // Adicionar uma peça aleatória (2 ou 4) em uma posição vazia
+            function addRandomTile() {
+                const emptyCells = [];
+                
+                // Encontrar todas as células vazias
+                for (let row = 0; row < 4; row++) {
+                    for (let col = 0; col < 4; col++) {
+                        if (grid[row][col] === 0) {
+                            emptyCells.push({row, col});
+                        }
+                    }
+                }
+                
+                // Se houver células vazias, adicionar uma peça aleatória
+                if (emptyCells.length > 0) {
+                    const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+                    // 90% de chance de ser 2, 10% de chance de ser 4
+                    grid[randomCell.row][randomCell.col] = Math.random() < 0.9 ? 2 : 4;
+                }
+            }
+            
+            // Renderizar o grid com animações
+            function renderGrid() {
+                // Remover todas as peças existentes
+                document.querySelectorAll('.tile').forEach(tile => tile.remove());
+                
+                // Adicionar as peças atuais
+                for (let row = 0; row < 4; row++) {
+                    for (let col = 0; col < 4; col++) {
+                        const value = grid[row][col];
+                        
+                        if (value !== 0) {
+                            const tile = document.createElement('div');
+                            tile.classList.add('tile');
+                            
+                            // Adicionar classe baseada no valor
+                            if (value <= 2048) {
+                                tile.classList.add(`tile-${value}`);
+                            } else {
+                                tile.classList.add('tile-super');
+                            }
+                            
+                            // Adicionar valor como texto
+                            tile.textContent = value;
+                            
+                            // Calcular posição
+                            const cellSize = (gridContainer.clientWidth - 75) / 4;
+                            tile.style.width = `${cellSize}px`;
+                            tile.style.height = `${cellSize}px`;
+                            tile.style.left = `${col * (cellSize + 15) + 15}px`;
+                            tile.style.top = `${row * (cellSize + 15) + 15}px`;
+                            
+                            // Adicionar ao grid
+                            gridContainer.appendChild(tile);
+                            
+                            // Animação de entrada para novas peças
+                            tile.style.opacity = '1';
+                            tile.style.transform = 'scale(1)';
+                            
+                            setTimeout(() => {
+                                tile.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                                tile.style.opacity = '1';
+                                tile.style.transform = 'scale(1)';
+                            }, 50);
+                        }
+                    }
+                }
+            }
+            
+            // Atualizar displays de pontuação
+            function updateDisplays() {
+                scoreDisplay.textContent = score;
+                bestDisplay.textContent = best;
+            }
+            
+            // Mover peças para a esquerda
+            function moveLeft() {
+                let moved = false;
+                
+                for (let row = 0; row < 4; row++) {
+                    // Remover zeros e combinar peças iguais
+                    let newRow = grid[row].filter(cell => cell !== 0);
+                    
+                    // Combinar peças adjacentes iguais
+                    for (let i = 0; i < newRow.length - 1; i++) {
+                        if (newRow[i] === newRow[i + 1]) {
+                            newRow[i] *= 2;
+                            score += newRow[i];
+                            
+                            // Verificar se o jogador venceu
+                            if (newRow[i] === 2048 && !won) {
+                                won = true;
+                                showGameMessage(true);
+                            }
+                            
+                            newRow.splice(i + 1, 1);
+                        }
+                    }
+                    
+                    // Preencher com zeros à direita
+                    while (newRow.length < 4) {
+                        newRow.push(0);
+                    }
+                    
+                    // Verificar se houve mudança
+                    if (JSON.stringify(grid[row]) !== JSON.stringify(newRow)) {
+                        moved = true;
+                        grid[row] = newRow;
+                    }
+                }
+                
+                return moved;
+            }
+            
+            // Mover peças para a direita (inverso da esquerda)
+            function moveRight() {
+                let moved = false;
+                
+                for (let row = 0; row < 4; row++) {
+                    // Remover zeros e inverter a linha
+                    let newRow = grid[row].filter(cell => cell !== 0);
+                    newRow.reverse();
+                    
+                    // Combinar peças adjacentes iguais
+                    for (let i = 0; i < newRow.length - 1; i++) {
+                        if (newRow[i] === newRow[i + 1]) {
+                            newRow[i] *= 2;
+                            score += newRow[i];
+                            
+                            // Verificar se o jogador venceu
+                            if (newRow[i] === 2048 && !won) {
+                                won = true;
+                                showGameMessage(true);
+                            }
+                            
+                            newRow.splice(i + 1, 1);
+                        }
+                    }
+                    
+                    // Preencher com zeros à esquerda
+                    while (newRow.length < 4) {
+                        newRow.push(0);
+                    }
+                    
+                    // Reverter de volta
+                    newRow.reverse();
+                    
+                    // Verificar se houve mudança
+                    if (JSON.stringify(grid[row]) !== JSON.stringify(newRow)) {
+                        moved = true;
+                        grid[row] = newRow;
+                    }
+                }
+                
+                return moved;
+            }
+            
+            // Mover peças para cima
+            function moveUp() {
+                let moved = false;
+                
+                // Transpor o grid para facilitar
+                const transposedGrid = grid[0].map((_, colIndex) => grid.map(row => row[colIndex]));
+                
+                for (let col = 0; col < 4; col++) {
+                    // Remover zeros e combinar peças iguais
+                    let newCol = transposedGrid[col].filter(cell => cell !== 0);
+                    
+                    // Combinar peças adjacentes iguais
+                    for (let i = 0; i < newCol.length - 1; i++) {
+                        if (newCol[i] === newCol[i + 1]) {
+                            newCol[i] *= 2;
+                            score += newCol[i];
+                            
+                            // Verificar se o jogador venceu
+                            if (newCol[i] === 2048 && !won) {
+                                won = true;
+                                showGameMessage(true);
+                            }
+                            
+                            newCol.splice(i + 1, 1);
+                        }
+                    }
+                    
+                    // Preencher com zeros abaixo
+                    while (newCol.length < 4) {
+                        newCol.push(0);
+                    }
+                    
+                    // Verificar se houve mudança
+                    if (JSON.stringify(transposedGrid[col]) !== JSON.stringify(newCol)) {
+                        moved = true;
+                        transposedGrid[col] = newCol;
+                    }
+                }
+                
+                // Transpor de volta
+                if (moved) {
+                    for (let row = 0; row < 4; row++) {
+                        for (let col = 0; col < 4; col++) {
+                            grid[row][col] = transposedGrid[col][row];
+                        }
+                    }
+                }
+                
+                return moved;
+            }
+            
+            // Mover peças para baixo
+            function moveDown() {
+                let moved = false;
+                
+                // Transpor o grid para facilitar
+                const transposedGrid = grid[0].map((_, colIndex) => grid.map(row => row[colIndex]));
+                
+                for (let col = 0; col < 4; col++) {
+                    // Remover zeros e inverter a coluna
+                    let newCol = transposedGrid[col].filter(cell => cell !== 0);
+                    newCol.reverse();
+                    
+                    // Combinar peças adjacentes iguais
+                    for (let i = 0; i < newCol.length - 1; i++) {
+                        if (newCol[i] === newCol[i + 1]) {
+                            newCol[i] *= 2;
+                            score += newCol[i];
+                            
+                            // Verificar se o jogador venceu
+                            if (newCol[i] === 2048 && !won) {
+                                won = true;
+                                showGameMessage(true);
+                            }
+                            
+                            newCol.splice(i + 1, 1);
+                        }
+                    }
+                    
+                    // Preencher com zeros acima
+                    while (newCol.length < 4) {
+                        newCol.push(0);
+                    }
+                    
+                    // Reverter de volta
+                    newCol.reverse();
+                    
+                    // Verificar se houve mudança
+                    if (JSON.stringify(transposedGrid[col]) !== JSON.stringify(newCol)) {
+                        moved = true;
+                        transposedGrid[col] = newCol;
+                    }
+                }
+                
+                // Transpor de volta
+                if (moved) {
+                    for (let row = 0; row < 4; row++) {
+                        for (let col = 0; col < 4; col++) {
+                            grid[row][col] = transposedGrid[col][row];
+                        }
+                    }
+                }
+                
+                return moved;
+            }
+            
+            // Verificar se há movimentos possíveis
+            function canMove() {
+                // Verificar se há células vazias
+                for (let row = 0; row < 4; row++) {
+                    for (let col = 0; col < 4; col++) {
+                        if (grid[row][col] === 0) {
+                            return true;
+                        }
+                    }
+                }
+                
+                // Verificar se há peças adjacentes iguais
+                for (let row = 0; row < 4; row++) {
+                    for (let col = 0; col < 4; col++) {
+                        const current = grid[row][col];
+                        
+                        // Verificar à direita
+                        if (col < 3 && grid[row][col + 1] === current) {
+                            return true;
+                        }
+                        
+                        // Verificar abaixo
+                        if (row < 3 && grid[row + 1][col] === current) {
+                            return true;
+                        }
+                    }
+                }
+                
+                return false;
+            }
+            
+            // Mostrar mensagem de fim de jogo
+            function showGameMessage(isWin) {
+                if (isWin) {
+                    messageTitle.textContent = 'Você Venceu!';
+                    messageSubtitle.textContent = 'Você alcançou a peça 2048!';
+                } else {
+                    messageTitle.textContent = 'Fim de Jogo!';
+                    messageSubtitle.textContent = 'Não há mais movimentos possíveis.';
+                }
+                
+                gameMessage.style.display = 'flex';
+            }
+            
+            // Atualizar recorde
+            function updateBest() {
+                if (score > best) {
+                    best = score;
+                    localStorage.setItem('2048-best', best);
+                }
+            }
+            
+            // Processar movimento
+            function processMove(moved) {
+                if (moved) {
+                    // Adicionar nova peça
+                    addRandomTile();
+                    
+                    // Atualizar displays
+                    updateDisplays();
+                    updateBest();
+                    
+                    // Renderizar o grid
+                    renderGrid();
+                    
+                    // Verificar se o jogo acabou
+                    if (!canMove() && !gameOver) {
+                        gameOver = true;
+                        setTimeout(() => showGameMessage(false), 500);
+                    }
+                }
+            }
+            
+            // Event listeners para teclado
+            document.addEventListener('keydown', (e) => {
+                if (gameOver && !won) return;
+                
+                let moved = false;
+                
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        moved = moveLeft();
+                        break;
+                    case 'ArrowRight':
+                        moved = moveRight();
+                        break;
+                    case 'ArrowUp':
+                        moved = moveUp();
+                        break;
+                    case 'ArrowDown':
+                        moved = moveDown();
+                        break;
+                    default:
+                        return;
+                }
+                
+                processMove(moved);
+            });
+            
+            // Event listeners para botões de controle móvel
+            upButton.addEventListener('click', () => {
+                if (gameOver && !won) return;
+                const moved = moveUp();
+                processMove(moved);
+            });
+            
+            downButton.addEventListener('click', () => {
+                if (gameOver && !won) return;
+                const moved = moveDown();
+                processMove(moved);
+            });
+            
+            leftButton.addEventListener('click', () => {
+                if (gameOver && !won) return;
+                const moved = moveLeft();
+                processMove(moved);
+            });
+            
+            rightButton.addEventListener('click', () => {
+                if (gameOver && !won) return;
+                const moved = moveRight();
+                processMove(moved);
+            });
+            
+            // Event listeners para botões de controle
+            newGameButton.addEventListener('click', initGame);
+            restartButton.addEventListener('click', initGame);
+            
+            // Inicializar o jogo
+            initGame();
+        });
+    </script>
+</body>
+</html>
