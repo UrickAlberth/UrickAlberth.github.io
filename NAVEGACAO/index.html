@@ -1,0 +1,1051 @@
+
+<html lang="pt-BR" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sistema de Navegação Veicular 3D</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <style>
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+    .arrow-marker {
+      font-size: 24px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      z-index: 1000 !important;
+    }
+    .vehicle-icon {
+      filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.8));
+      z-index: 1000 !important;
+    }
+    .suggestion-item {
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .suggestion-item:hover {
+      background-color: #f3f4f6;
+    }
+    .dark .suggestion-item:hover {
+      background-color: #4b5563;
+    }
+    #view3dBtn.active {
+      background-color: #10b981 !important;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+    }
+    #compass {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-size: 24px;
+    }
+    #speedometer {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 10px;
+      z-index: 1000;
+      font-family: monospace;
+      font-size: 18px;
+      min-width: 120px;
+      text-align: center;
+    }
+    .control-panel {
+      position: absolute;
+      bottom: 90px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 10px;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .control-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 2px;
+      background: white;
+      border: 1px solid #e5e7eb;
+    }
+    .control-btn:hover {
+      background: #f3f4f6;
+    }
+    .map-3d {
+      transform: perspective(1000px) rotateX(60deg) scale(1.2);
+      transform-origin: center center;
+      transition: transform 0.5s ease;
+    }
+    .map-2d {
+      transform: none;
+      transition: transform 0.5s ease;
+    }
+    .route-line {
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .next-turn {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      z-index: 1000;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .distance-to-turn {
+      position: absolute;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(59, 130, 246, 0.9);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      z-index: 1000;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body class="h-full flex bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+
+  <!-- Sidebar -->
+  <aside class="w-80 p-4 bg-white dark:bg-gray-800 shadow-lg z-10 overflow-y-auto">
+    <h1 class="text-xl font-bold mb-4">🚗 Navegação Veicular 3D</h1>
+
+    <!-- Origem -->
+    <label class="block mb-2 text-sm font-semibold">Origem</label>
+    <input
+      id="origin"
+      type="text"
+      placeholder="Digite a origem"
+      class="w-full p-2 rounded border dark:bg-gray-700"
+    />
+    <ul id="origin-suggestions" class="bg-white dark:bg-gray-700 mt-1 rounded max-h-40 overflow-y-auto"></ul>
+
+    <!-- Destino -->
+    <label class="block mt-4 mb-2 text-sm font-semibold">Destino</label>
+    <input
+      id="destination"
+      type="text"
+      placeholder="Digite o destino"
+      class="w-full p-2 rounded border dark:bg-gray-700"
+    />
+    <ul id="destination-suggestions" class="bg-white dark:bg-gray-700 mt-1 rounded max-h-40 overflow-y-auto"></ul>
+
+    <!-- Botões -->
+    <div class="flex gap-2 mt-4">
+      <button
+        id="routeBtn"
+        class="flex-1 bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+      >
+        Traçar Rota
+      </button>
+
+      <button
+        id="myLocationBtn"
+        class="flex-1 bg-green-600 text-white p-2 rounded hover:bg-green-700"
+      >
+        Minha Localização
+      </button>
+    </div>
+
+    <!-- Reiniciar e Recentralizar -->
+    <div class="flex gap-2 mt-2">
+      <button id="resetMapBtn" class="flex-1 bg-red-500 text-white p-2 rounded hover:bg-red-600">Reiniciar</button>
+      <button id="recenterMapBtn" class="flex-1 bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600">Recentralizar</button>
+    </div>
+
+    <!-- Botões de Navegação -->
+    <div class="flex gap-2 mt-2">
+      <button id="startNavBtn" class="flex-1 bg-green-600 text-white p-2 rounded">
+        ▶️ Iniciar Viagem
+      </button>
+      <button id="view3dBtn" class="flex-1 bg-gray-600 text-white p-2 rounded">
+        🗺️ Visualização 3D
+      </button>
+    </div>
+
+    <!-- Informações -->
+    <div class="mt-4 text-sm space-y-2">
+      <p><strong>Distância:</strong> <span id="distance">-</span></p>
+      <p><strong>Tempo Estimado:</strong> <span id="eta">-</span></p>
+      <p><strong>Velocidade Atual:</strong> <span id="currentSpeed">0 km/h</span></p>
+      <p><strong>Direção:</strong> <span id="currentHeading">-</span></p>
+      <p><strong>Próxima Curva:</strong> <span id="nextTurn">-</span></p>
+      <p><strong>Distância até:</strong> <span id="distToTurn">-</span></p>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Locais Salvos -->
+    <h2 class="font-bold mb-2">📍 Locais Salvos</h2>
+    <button id="savePlaceBtn" class="bg-purple-600 text-white p-2 rounded w-full mb-2">
+      Salvar Local Atual
+    </button>
+
+    <ul id="savedPlaces" class="mt-2 text-sm space-y-1"></ul>
+  </aside>
+
+  <!-- Mapa -->
+  <main class="flex-1 relative">
+    <div id="map"></div>
+    
+    <!-- Próxima curva -->
+    <div id="nextTurnIndicator" class="next-turn" style="display: none;">
+      <span id="nextTurnIcon">→</span>
+      <span id="nextTurnText">Em 500m, vire à direita</span>
+    </div>
+    
+    <!-- Distância até curva -->
+    <div id="distanceToTurn" class="distance-to-turn" style="display: none;">
+      <span id="turnDistance">500m</span>
+    </div>
+    
+    <!-- Controles -->
+    <div id="controlPanel" class="control-panel" style="display: none;">
+      <div class="flex flex-col items-center">
+        <button class="control-btn" onclick="adjustZoom(1)" title="Zoom In">➕</button>
+        <button class="control-btn" onclick="adjustZoom(-1)" title="Zoom Out">➖</button>
+        <div class="h-2"></div>
+        <button class="control-btn" onclick="adjustTilt(10)" title="Aumentar Inclinação">📐 +</button>
+        <div class="text-xs mt-1">Inclinação</div>
+        <button class="control-btn" onclick="adjustTilt(-10)" title="Diminuir Inclinação">📐 -</button>
+      </div>
+    </div>
+    
+    <!-- Bússola -->
+    <div id="compass" style="display: none;">↑</div>
+    
+    <!-- Velocímetro -->
+    <div id="speedometer" style="display: none;">
+      0 km/h
+    </div>
+  </main>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- App JS -->
+  <script>
+    // ===============================
+    // CONFIGURAÇÃO DO MAPA
+    // ===============================
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const map = L.map('map', {
+      zoomControl: false, // Removemos o controle padrão para criar um customizado
+      attributionControl: true,
+      preferCanvas: true
+    }).setView([-23.5505, -46.6333], 16);
+
+    // Camadas de mapa
+    const lightTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19
+    });
+
+    // Camada escura para contraste melhor
+    const darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19
+    });
+
+    // Iniciar com camada clara
+    lightTiles.addTo(map);
+
+    // Adicionar controle de zoom customizado
+    L.control.zoom({
+      position: 'topright'
+    }).addTo(map);
+
+    // Variáveis de estado
+    let is3DView = false;
+    let currentTilt = 60;
+    let lastPosition = null;
+    let currentSpeed = 0;
+    let currentHeading = 0;
+    let routeInstructions = [];
+    let nextTurnIndex = 0;
+
+    // ===============================
+    // VARIÁVEIS GLOBAIS
+    // ===============================
+    let originCoords = null;
+    let destinationCoords = null;
+    let routeLayer = null;
+    let routeOutlineLayer = null;
+    let vehicleMarker = null;
+    let watchId = null;
+    let routeCoords = [];
+    let currentLocationMarker = null;
+    let isNavigationActive = false;
+
+    // ===============================
+    // FUNÇÕES DE VISUALIZAÇÃO 3D
+    // ===============================
+    function enable3DView() {
+      is3DView = true;
+      document.getElementById('view3dBtn').classList.add('active');
+      document.getElementById('view3dBtn').innerHTML = '🌍 Modo 3D Ativo';
+      
+      // Aplicar transformação 3D CSS
+      const mapContainer = map.getContainer();
+      mapContainer.classList.remove('map-2d');
+      mapContainer.classList.add('map-3d');
+      
+      // Ajustar zoom para visão 3D
+      map.setZoom(17);
+      
+      // Mostrar controles
+      document.getElementById('controlPanel').style.display = 'block';
+      document.getElementById('compass').style.display = 'flex';
+      document.getElementById('speedometer').style.display = 'block';
+      
+      // Usar camada escura para melhor contraste em 3D
+      map.removeLayer(lightTiles);
+      darkTiles.addTo(map);
+      
+      // Aplicar inclinação inicial
+      apply3DTransform();
+    }
+
+    function disable3DView() {
+      is3DView = false;
+      document.getElementById('view3dBtn').classList.remove('active');
+      document.getElementById('view3dBtn').innerHTML = '🗺️ Visualização 3D';
+      
+      // Remover transformação 3D
+      const mapContainer = map.getContainer();
+      mapContainer.classList.remove('map-3d');
+      mapContainer.classList.add('map-2d');
+      
+      // Esconder controles
+      document.getElementById('controlPanel').style.display = 'none';
+      document.getElementById('compass').style.display = 'none';
+      document.getElementById('speedometer').style.display = 'none';
+      document.getElementById('nextTurnIndicator').style.display = 'none';
+      document.getElementById('distanceToTurn').style.display = 'none';
+      
+      // Voltar para camada clara
+      map.removeLayer(darkTiles);
+      lightTiles.addTo(map);
+    }
+
+    function apply3DTransform() {
+      if (!is3DView) return;
+      const mapContainer = map.getContainer();
+      currentTilt = Math.max(30, Math.min(80, currentTilt));
+
+      const zoom = map.getZoom();
+      const scale = 1 + Math.max(0, (zoom - 12) / 18); // suave escalonamento conforme zoom
+
+      mapContainer.style.transformOrigin = '50% 60%';
+      mapContainer.style.transform = `perspective(1200px) rotateX(${currentTilt}deg) scale(${scale})`;
+      mapContainer.style.filter = 'drop-shadow(0 20px 30px rgba(0,0,0,0.25))';
+
+      updateCompass();
+    }
+
+    function adjustTilt(degrees) {
+      currentTilt += degrees;
+      apply3DTransform();
+    }
+
+    function adjustZoom(delta) {
+      map.setZoom(map.getZoom() + delta);
+      apply3DTransform();
+    }
+
+    function updateCompass() {
+      const compass = document.getElementById('compass');
+      const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+      const index = Math.round(currentHeading / 45) % 8;
+      compass.textContent = directions[index];
+      compass.style.transform = `rotate(${currentHeading}deg)`;
+    }
+
+    function updateSpeedometer(speed) {
+      const speedometer = document.getElementById('speedometer');
+      speedometer.textContent = `${Math.round(speed)} km/h`;
+      document.getElementById('currentSpeed').textContent = `${Math.round(speed)} km/h`;
+      
+      // Mudar cor baseada na velocidade
+      if (speed > 100) {
+        speedometer.style.background = 'rgba(239, 68, 68, 0.9)';
+      } else if (speed > 60) {
+        speedometer.style.background = 'rgba(234, 179, 8, 0.9)';
+      } else {
+        speedometer.style.background = 'rgba(34, 197, 94, 0.9)';
+      }
+    }
+
+    // ===============================
+    // AUTOCOMPLETE (Nominatim)
+    // ===============================
+    async function searchAddress(query, listElement, callback, isOrigin = false) {
+      if (query.length < 3) {
+        listElement.innerHTML = '';
+        return;
+      }
+
+      try {
+        // Restringir busca ao Brasil e retornar resultados em pt-BR
+        const url = `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&accept-language=pt-BR&countrycodes=br&q=${encodeURIComponent(query)}&limit=6`;
+        const res = await fetch(url, { headers: { 'User-Agent': 'Projeto-Local/1.0 (contato@exemplo.com)' } });
+        const data = await res.json();
+
+        listElement.innerHTML = '';
+
+        data.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item.display_name;
+          li.className = 'suggestion-item';
+
+          li.onclick = () => {
+            const coords = {
+              lat: parseFloat(item.lat),
+              lon: parseFloat(item.lon)
+            };
+            
+            callback(coords);
+            listElement.innerHTML = '';
+            
+            const displayName = item.display_name.length > 60 
+              ? item.display_name.substring(0, 60) + '...' 
+              : item.display_name;
+            
+            if (isOrigin) {
+              document.getElementById('origin').value = displayName;
+            } else {
+              document.getElementById('destination').value = displayName;
+            }
+          };
+
+          listElement.appendChild(li);
+        });
+      } catch (error) {
+        console.error('Erro na busca:', error);
+      }
+    }
+
+    // ===============================
+    // INPUTS E SUGESTÕES
+    // ===============================
+    const originInput = document.getElementById('origin');
+    const destinationInput = document.getElementById('destination');
+    const originSuggestions = document.getElementById('origin-suggestions');
+    const destinationSuggestions = document.getElementById('destination-suggestions');
+
+    // Debounce helper to reduce requests while typing
+    function debounce(fn, wait) {
+      let timeout;
+      return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => fn.apply(this, args), wait);
+      };
+    }
+
+    const originHandler = debounce(() => {
+      searchAddress(originInput.value, originSuggestions, coords => {
+        originCoords = coords;
+        if (currentLocationMarker) map.removeLayer(currentLocationMarker);
+        currentLocationMarker = L.marker([coords.lat, coords.lon], {
+          icon: L.divIcon({
+            html: '<div style="background: #3b82f6; color: white; padding: 5px; border-radius: 50%;">📍</div>',
+            className: 'custom-icon',
+            iconSize: [30, 30]
+          })
+        })
+          .addTo(map)
+          .bindPopup('📍 Origem')
+          .openPopup();
+      }, true);
+    }, 350);
+
+    const destinationHandler = debounce(() => {
+      searchAddress(destinationInput.value, destinationSuggestions, coords => {
+        destinationCoords = coords;
+        L.marker([coords.lat, coords.lon], {
+          icon: L.divIcon({
+            html: '<div style="background: #ef4444; color: white; padding: 5px; border-radius: 50%;">🎯</div>',
+            className: 'custom-icon',
+            iconSize: [30, 30]
+          })
+        })
+          .addTo(map)
+          .bindPopup('🎯 Destino')
+          .openPopup();
+      }, false);
+    }, 350);
+
+    originInput.addEventListener('input', originHandler);
+    destinationInput.addEventListener('input', destinationHandler);
+
+    // ===============================
+    // TRAÇAR ROTA (OSRM com instruções)
+    // ===============================
+    async function drawRoute() {
+      if (!originCoords || !destinationCoords) {
+        alert('Selecione origem e destino');
+        return;
+      }
+
+      try {
+        const url = `https://router.project-osrm.org/route/v1/driving/${originCoords.lon},${originCoords.lat};${destinationCoords.lon},${destinationCoords.lat}?overview=full&geometries=geojson&steps=true`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (!data.routes || data.routes.length === 0) {
+          alert('Não foi possível traçar a rota');
+          return;
+        }
+
+        const route = data.routes[0];
+        routeInstructions = route.legs[0].steps || [];
+        nextTurnIndex = 0;
+
+        // Extrair coordenadas para navegação
+        routeCoords = route.geometry.coordinates.map(coord => [coord[1], coord[0]]);
+
+        // Limpar rota anterior
+        if (routeLayer) map.removeLayer(routeLayer);
+        if (routeOutlineLayer) map.removeLayer(routeOutlineLayer);
+
+        // Desenhar nova rota com estilo para direção
+        routeLayer = L.geoJSON(route.geometry, {
+          style: { 
+            color: '#3b82f6', 
+            weight: 6, 
+            opacity: 0.9,
+            className: 'route-line'
+          }
+        }).addTo(map);
+
+        // Adicionar borda para melhor visibilidade
+        routeOutlineLayer = L.geoJSON(route.geometry, {
+          style: { 
+            color: '#ffffff', 
+            weight: 9, 
+            opacity: 0.3
+          }
+        }).addTo(map);
+
+        // Ajustar visualização para mostrar rota completa
+        const bounds = routeLayer.getBounds();
+        map.fitBounds(bounds, { padding: [50, 50] });
+
+        // Atualizar informações
+        document.getElementById('distance').textContent =
+          (route.distance / 1000).toFixed(2) + ' km';
+
+        document.getElementById('eta').textContent =
+          Math.round(route.duration / 60) + ' min';
+
+        // Atualizar próxima curva
+        updateNextTurn();
+
+      } catch (error) {
+        console.error('Erro ao traçar rota:', error);
+        alert('Erro ao traçar rota');
+      }
+    }
+
+    // ===============================
+    // FUNÇÕES DE NAVEGAÇÃO
+    // ===============================
+    function calculateHeading(from, to) {
+      const lat1 = from.lat * Math.PI / 180;
+      const lon1 = from.lon * Math.PI / 180;
+      const lat2 = to.lat * Math.PI / 180;
+      const lon2 = to.lon * Math.PI / 180;
+
+      const y = Math.sin(lon2 - lon1) * Math.cos(lat2);
+      const x = Math.cos(lat1) * Math.sin(lat2) -
+                Math.sin(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1);
+      
+      let heading = Math.atan2(y, x) * 180 / Math.PI;
+      return (heading + 360) % 360;
+    }
+
+    function calculateSpeed(from, to, timeDiff) {
+      if (!from || !to || timeDiff === 0) return 0;
+      
+      const R = 6371e3;
+      const lat1 = from.lat * Math.PI / 180;
+      const lat2 = to.lat * Math.PI / 180;
+      const dLat = (to.lat - from.lat) * Math.PI / 180;
+      const dLon = (to.lon - from.lon) * Math.PI / 180;
+
+      const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1) * Math.cos(lat2) *
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      const distance = R * c;
+      
+      const speedMps = distance / timeDiff;
+      return Math.max(0, speedMps * 3.6);
+    }
+
+
+    function distanceMeters(from, to) {
+      if (!from || !to) return null;
+      const R = 6371e3;
+      const lat1 = from.lat * Math.PI / 180;
+      const lat2 = to.lat * Math.PI / 180;
+      const dLat = (to.lat - from.lat) * Math.PI / 180;
+      const dLon = (to.lon - from.lon) * Math.PI / 180;
+
+      const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1) * Math.cos(lat2) *
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      return R * c;
+    }
+
+    function getDistanceToNextTurn(currentPos) {
+      if (!currentPos) return null;
+      if (!routeInstructions.length || nextTurnIndex >= routeInstructions.length) return null;
+      const nextTurn = routeInstructions[nextTurnIndex];
+      const maneuver = nextTurn.maneuver || {};
+      if (!maneuver.location) return null;
+      const maneuverPos = { lat: maneuver.location[1], lon: maneuver.location[0] };
+      return distanceMeters(currentPos, maneuverPos);
+    }
+
+    function getTurnIcon(maneuver) {
+      if (!maneuver) return '→';
+      
+      const maneuverType = maneuver.type || '';
+      const modifier = maneuver.modifier || '';
+      
+      if (maneuverType.includes('depart') || maneuverType.includes('arrive')) {
+        return '📍';
+      } else if (modifier.includes('left')) {
+        return '↰';
+      } else if (modifier.includes('right')) {
+        return '↱';
+      } else if (modifier.includes('sharp left')) {
+        return '↙';
+      } else if (modifier.includes('sharp right')) {
+        return '↘';
+      } else if (modifier.includes('slight left')) {
+        return '↖';
+      } else if (modifier.includes('slight right')) {
+        return '↗';
+      } else if (maneuverType.includes('roundabout')) {
+        return '↻';
+      } else if (maneuverType.includes('merge')) {
+        return '⇗';
+      } else {
+        return '→';
+      }
+    }
+
+    function updateNextTurn(currentPos = null) {
+      if (!routeInstructions.length || nextTurnIndex >= routeInstructions.length) {
+        document.getElementById('nextTurn').textContent = '-';
+        document.getElementById('distToTurn').textContent = '-';
+        return;
+      }
+
+      const nextTurn = routeInstructions[nextTurnIndex];
+      const realtimeDistance = getDistanceToNextTurn(currentPos);
+      const distance = realtimeDistance !== null ? realtimeDistance : (nextTurn.distance || 0);
+      const maneuver = nextTurn.maneuver || {};
+      
+      document.getElementById('nextTurn').textContent = 
+        `Em ${(distance/1000).toFixed(1)}km: ${maneuver.type || 'Siga em frente'}`;
+      document.getElementById('distToTurn').textContent = `${Math.round(distance)}m`;
+      
+      // Atualizar indicador no mapa se estiver em navegação
+      if (isNavigationActive && is3DView) {
+        const icon = getTurnIcon(maneuver);
+        document.getElementById('nextTurnIcon').textContent = icon;
+        document.getElementById('nextTurnText').textContent = 
+          `Em ${Math.round(distance)}m: ${maneuver.type || 'Continue'}`;
+        document.getElementById('turnDistance').textContent = `${Math.round(distance)}m`;
+        
+        document.getElementById('nextTurnIndicator').style.display = 'flex';
+        document.getElementById('distanceToTurn').style.display = 'block';
+      }
+    }
+
+    // ===============================
+    // NAVEGAÇÃO EM TEMPO REAL
+    // ===============================
+    document.getElementById('startNavBtn').onclick = () => {
+      if (!routeCoords.length) {
+        alert("Trace uma rota primeiro");
+        return;
+      }
+
+      if (isNavigationActive) {
+        // Parar navegação
+        navigator.geolocation.clearWatch(watchId);
+        watchId = null;
+        isNavigationActive = false;
+        document.getElementById('startNavBtn').innerHTML = '▶️ Iniciar Viagem';
+        
+        if (vehicleMarker) {
+          map.removeLayer(vehicleMarker);
+          vehicleMarker = null;
+        }
+        
+                lastPosition = null;
+        currentSpeed = 0;
+        nextTurnIndex = 0;
+        updateSpeedometer(0);
+        updateNextTurn();
+
+        disable3DView();
+      } else {
+        // Iniciar navegação
+        isNavigationActive = true;
+        document.getElementById('startNavBtn').innerHTML = '⏸️ Parar Viagem';
+        
+        // Ativar visualização 3D automaticamente
+        enable3DView();
+        
+        watchId = navigator.geolocation.watchPosition(
+          position => {
+            const latlng = [position.coords.latitude, position.coords.longitude];
+            const currentPos = {
+              lat: position.coords.latitude,
+              lon: position.coords.longitude,
+              timestamp: Date.now()
+            };
+            
+            // Calcular velocidade e direção
+            if (lastPosition) {
+              const timeDiff = (currentPos.timestamp - lastPosition.timestamp) / 1000;
+              currentSpeed = calculateSpeed(lastPosition, currentPos, timeDiff);
+              currentHeading = calculateHeading(lastPosition, currentPos);
+
+              // Verificar se estamos próximos da próxima curva
+              const distanceToTurn = getDistanceToNextTurn(currentPos);
+              if (distanceToTurn !== null && distanceToTurn < 30) { // 30 metros
+                nextTurnIndex++;
+                updateNextTurn(currentPos);
+              }
+            } else if (position.coords.speed !== null) {
+              currentSpeed = position.coords.speed * 3.6;
+              currentHeading = position.coords.heading || currentHeading;
+            }
+            
+            lastPosition = currentPos;
+            
+            // Atualizar interface
+            updateSpeedometer(currentSpeed);
+            document.getElementById('currentHeading').textContent = `${Math.round(currentHeading)}°`;
+            
+            // Centralizar mapa na posição atual com suavização
+            map.setView(latlng, 17, {
+              animate: true,
+              duration: 0.5
+            });
+            
+            // Remover marcador anterior
+            if (vehicleMarker) map.removeLayer(vehicleMarker);
+            
+            // Criar marcador de veículo
+            vehicleMarker = L.marker(latlng, {
+              icon: L.divIcon({
+                html: `
+                  <div style="
+                    width: 40px;
+                    height: 40px;
+                    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+                    border-radius: 50%;
+                    border: 3px solid white;
+                    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 20px;
+                    transform: rotate(${currentHeading}deg);
+                  ">
+                    🚗
+                  </div>
+                `,
+                className: 'vehicle-icon',
+                iconSize: [40, 40],
+                iconAnchor: [20, 20]
+              })
+            }).addTo(map);
+            
+            // Atualizar bússola
+            updateCompass();
+            
+            // Atualizar próxima curva
+            updateNextTurn(currentPos);
+            
+          },
+          error => {
+            console.error('Erro na geolocalização:', error);
+            if (error.code === error.PERMISSION_DENIED) {
+              alert('Permissão de localização negada. Ative a localização para usar a navegação.');
+            } else {
+              alert('Erro ao obter localização. Verifique as permissões do navegador.');
+            }
+          },
+          { 
+            enableHighAccuracy: true, 
+            maximumAge: 1000, 
+            timeout: 5000 
+          }
+        );
+      }
+    };
+
+    // ===============================
+    // MINHA LOCALIZAÇÃO
+    // ===============================
+    document.getElementById('myLocationBtn').onclick = () => {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const coords = [position.coords.latitude, position.coords.longitude];
+          map.setView(coords, 16);
+
+          if (currentLocationMarker) map.removeLayer(currentLocationMarker);
+
+          currentLocationMarker = L.marker(coords, {
+            icon: L.divIcon({
+              html: '<div style="background: #10b981; color: white; padding: 8px; border-radius: 50%;">📍</div>',
+              className: 'custom-icon',
+              iconSize: [40, 40]
+            })
+          })
+            .addTo(map)
+            .bindPopup('<b>Sua Localização Atual</b>')
+            .openPopup();
+
+          originCoords = {
+            lat: coords[0],
+            lon: coords[1]
+          };
+
+          originInput.value = 'Minha Localização';
+        },
+        error => {
+          console.error('Erro ao obter localização:', error);
+          alert('Não foi possível obter sua localização. Verifique as permissões.');
+        },
+        { enableHighAccuracy: true }
+      );
+    };
+
+    // ===============================
+    // FUNÇÕES: Reiniciar e Recentralizar
+    // ===============================
+
+    function resetAll() {
+      // Parar navegação se estiver ativa
+      if (isNavigationActive && watchId) {
+        navigator.geolocation.clearWatch(watchId);
+        watchId = null;
+        isNavigationActive = false;
+        document.getElementById('startNavBtn').innerHTML = '▶️ Iniciar Viagem';
+      }
+
+      // Remover camadas e marcadores
+      if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
+      if (routeOutlineLayer) { map.removeLayer(routeOutlineLayer); routeOutlineLayer = null; }
+      if (vehicleMarker) { map.removeLayer(vehicleMarker); vehicleMarker = null; }
+      if (currentLocationMarker) { map.removeLayer(currentLocationMarker); currentLocationMarker = null; }
+
+      // Limpar inputs e variáveis de rota
+      originInput.value = '';
+      destinationInput.value = '';
+      originSuggestions.innerHTML = '';
+      destinationSuggestions.innerHTML = '';
+      originCoords = null;
+      destinationCoords = null;
+      routeCoords = [];
+      routeInstructions = [];
+      nextTurnIndex = 0;
+
+      // Reset visual
+      disable3DView();
+      map.setView([-23.5505, -46.6333], 16);
+      document.getElementById('distance').textContent = '-';
+      document.getElementById('eta').textContent = '-';
+      document.getElementById('currentSpeed').textContent = '0 km/h';
+      document.getElementById('currentHeading').textContent = '-';
+    }
+
+    function recenterMap() {
+      if (lastPosition) {
+        map.setView([lastPosition.lat, lastPosition.lon], 16);
+      } else if (originCoords) {
+        map.setView([originCoords.lat, originCoords.lon], 16);
+      } else {
+        map.setView([-23.5505, -46.6333], 16);
+      }
+    }
+
+    // Attach buttons
+    document.getElementById('resetMapBtn').onclick = resetAll;
+    document.getElementById('recenterMapBtn').onclick = recenterMap;
+
+    // ===============================
+    // SALVAR LOCAIS (LocalStorage)
+    // ===============================
+    const savedPlacesEl = document.getElementById('savedPlaces');
+
+    function loadPlaces() {
+      savedPlacesEl.innerHTML = '';
+      const places = JSON.parse(localStorage.getItem('places') || '[]');
+
+      if (places.length === 0) {
+        savedPlacesEl.innerHTML = '<li class="text-gray-500 italic p-2">Nenhum local salvo</li>';
+        return;
+      }
+
+      places.forEach((place, index) => {
+        const li = document.createElement('li');
+        li.className = 'flex justify-between items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer';
+        
+        li.innerHTML = `
+          <span class="truncate">📍 ${place.name}</span>
+          <button class="text-red-500 hover:text-red-700 text-sm px-2" data-index="${index}">×</button>
+        `;
+
+        li.querySelector('span').onclick = () => {
+          destinationCoords = place.coords;
+          destinationInput.value = place.name;
+          drawRoute();
+        };
+
+        li.querySelector('button').onclick = (e) => {
+          e.stopPropagation();
+          removePlace(index);
+        };
+
+        savedPlacesEl.appendChild(li);
+      });
+    }
+
+    function removePlace(index) {
+      const places = JSON.parse(localStorage.getItem('places') || '[]');
+      places.splice(index, 1);
+      localStorage.setItem('places', JSON.stringify(places));
+      loadPlaces();
+    }
+
+    document.getElementById('savePlaceBtn').onclick = () => {
+      if (!originCoords) {
+        alert('Obtenha sua localização primeiro ou selecione uma origem');
+        return;
+      }
+
+      const name = prompt("Nome do local:");
+      if (!name || name.trim() === '') return;
+
+      const places = JSON.parse(localStorage.getItem('places') || '[]');
+      places.push({ 
+        name: name.trim(), 
+        coords: originCoords,
+        timestamp: new Date().toISOString()
+      });
+      localStorage.setItem('places', JSON.stringify(places));
+
+      loadPlaces();
+    };
+
+    // ===============================
+    // BOTÃO DE VISUALIZAÇÃO 3D
+    // ===============================
+    document.getElementById('view3dBtn').onclick = () => {
+      if (is3DView) {
+        disable3DView();
+      } else {
+        enable3DView();
+      }
+    };
+
+    // ===============================
+    // BOTÃO DE TRAÇAR ROTA
+    // ===============================
+    document.getElementById('routeBtn').onclick = drawRoute;
+
+    // ===============================
+    // INICIALIZAÇÃO
+    // ===============================
+    // Tentar obter localização automaticamente
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          originCoords = {
+            lat: position.coords.latitude,
+            lon: position.coords.longitude
+          };
+          originInput.value = 'Localização Atual';
+          map.setView([position.coords.latitude, position.coords.longitude], 15);
+        },
+        error => {
+          console.log('Localização automática não disponível:', error);
+        }
+      );
+    }
+
+    // Carregar locais salvos
+    loadPlaces();
+
+    // Fechar sugestões ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (!originInput.contains(e.target) && !originSuggestions.contains(e.target)) {
+        originSuggestions.innerHTML = '';
+      }
+      if (!destinationInput.contains(e.target) && !destinationSuggestions.contains(e.target)) {
+        destinationSuggestions.innerHTML = '';
+      }
+    });
+
+    // Adicionar atalhos de teclado
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '+' || e.key === '=') {
+        adjustZoom(1);
+      } else if (e.key === '-' || e.key === '_') {
+        adjustZoom(-1);
+      } else if (e.key === 'Escape' && isNavigationActive) {
+        document.getElementById('startNavBtn').click();
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
